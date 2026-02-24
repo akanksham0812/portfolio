@@ -463,7 +463,7 @@ function TopNav() {
     <header className="top-nav">
       <div className="top-nav-inner">
         <button className="brand-button" onClick={() => navigate("/")}>
-          AKANKSHA MAHANGERE
+          AKANKSHA MAHANGARE
         </button>
         <nav className="top-links" aria-label="Main navigation">
           <button onClick={() => goTo("work")}>Work</button>
@@ -620,7 +620,7 @@ function HomePage() {
           <h2>Design with intent.</h2>
         </div>
         <div className="about-grid">
-          <SafeImage image={aboutContent.image} alt="Akanksha Mahangere portrait" />
+          <SafeImage image={aboutContent.image} alt="AKANKSHA MAHANGARE portrait" />
           <div>
             <p>{aboutContent.intro}</p>
             <p>{aboutContent.details}</p>
@@ -838,7 +838,7 @@ function ResumePage() {
   return (
     <section className="resume-page">
       <p className="resume-kicker">Resume</p>
-      <h1>Akanksha Mahangere</h1>
+      <h1>AKANKSHA MAHANGARE</h1>
       <p className="resume-summary">
         Creative designer focused on product interfaces, brand-aligned visual systems, and conversion-ready web
         experiences.

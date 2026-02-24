@@ -84,20 +84,23 @@ export const heroObjects = [
 ];
 
 export const brandNames = [
-  "PHILIPS",
-  "Electrolux",
-  "MARS",
-  "verizon",
-  "P&G",
-  "PEPSICO",
-  "MERCK",
-  "DURACELL",
+  "Color Theory",
+  "Design Consistency",
+  "Design Thinking Process",
+  "User Personas",
+  "User Journey Mapping",
+  "Information Architecture",
+  "Wireframing",
+  "Prototyping",
+  "Responsive Design",
+  "Figma",
+  "UX Research",
 ];
 
 export const aboutContent = {
   image: image("assets/about/profile.jpg", "https://framerusercontent.com/images/2dGq2Dc8iLPprcwKMo8TRfce7A.jpg"),
   intro:
-    "I am Akanksha Mahangere, a creative designer crafting web and product experiences with bold visual direction and practical product thinking.",
+    "I am AKANKSHA MAHANGARE, a creative designer crafting web and product experiences with bold visual direction and practical product thinking.",
   details:
     "My work sits at the intersection of interface design, storytelling, and business clarity. I design fast, iterate with intent, and focus on details that improve how people actually use products.",
 };
