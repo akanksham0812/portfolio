@@ -18,6 +18,8 @@ npm run build
 npm run preview
 ```
 
+
+
 ## Why images were broken
 
 The original Framer image URLs can fail on some deployments. This project now expects local assets in `public/assets`.
