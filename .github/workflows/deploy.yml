@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_OPS_PROJECT_PASSWORD: ${{ vars.VITE_OPS_PROJECT_PASSWORD }}
+          VITE_OPS_PROJECT_PASSWORD: ${{ secrets.VITE_OPS_PROJECT_PASSWORD || vars.VITE_OPS_PROJECT_PASSWORD }}
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

@@ -49,7 +49,10 @@ git commit -m "Add local image assets"
 - Protected case study password comes from `VITE_OPS_PROJECT_PASSWORD`.
 - Local dev fallback (when running `npm run dev`) is `qwerty`.
 
-Set GitHub repository variable:
-1. Open `Settings -> Secrets and variables -> Actions -> Variables`.
-2. Create variable `VITE_OPS_PROJECT_PASSWORD`.
+Set GitHub repository secret (recommended):
+1. Open `Settings -> Secrets and variables -> Actions -> Secrets`.
+2. Create secret `VITE_OPS_PROJECT_PASSWORD`.
 3. Set your desired password value.
+
+Alternative:
+- You can also set a repository variable with the same name under `Actions -> Variables`.
