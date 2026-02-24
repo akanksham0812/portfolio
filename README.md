@@ -41,3 +41,13 @@ git commit -m "Add local image assets"
 2. In GitHub, open `Settings -> Pages`.
 3. Under `Build and deployment`, set `Source` to `GitHub Actions`.
 4. Push to `main` branch. The workflow at `.github/workflows/deploy.yml` will deploy automatically.
+
+## Password-Protected Project
+
+- Protected case study password comes from `VITE_OPS_PROJECT_PASSWORD`.
+- Local dev fallback (when running `npm run dev`) is `qwerty`.
+
+Set GitHub repository variable:
+1. Open `Settings -> Secrets and variables -> Actions -> Variables`.
+2. Create variable `VITE_OPS_PROJECT_PASSWORD`.
+3. Set your desired password value.

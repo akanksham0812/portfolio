@@ -12,6 +12,44 @@ const withBase = (path) => {
   return `${BASE_URL}${path.replace(/^\/+/, "")}`;
 };
 const RESUME_PDF_PATH = withBase("assets/resume/Akanksha-Mahangere-Resume.pdf");
+const DEFAULT_LOCAL_PASSWORD = "qwerty";
+const OPERATIONS_CASE_PASSWORD =
+  (import.meta.env.VITE_OPS_PROJECT_PASSWORD || "").trim() ||
+  (import.meta.env.DEV ? DEFAULT_LOCAL_PASSWORD : "");
+const PROJECT_PASSWORDS = {
+  "operations-dasboard": OPERATIONS_CASE_PASSWORD,
+};
+const PROJECT_UNLOCK_PREFIX = "unlocked-project:";
+
+const isProjectProtected = (slug) => Boolean(PROJECT_PASSWORDS[slug]);
+
+const getProjectUnlockState = (slug) => {
+  if (!isProjectProtected(slug)) {
+    return true;
+  }
+
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  try {
+    return window.sessionStorage.getItem(`${PROJECT_UNLOCK_PREFIX}${slug}`) === "1";
+  } catch {
+    return false;
+  }
+};
+
+const saveProjectUnlockState = (slug) => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.sessionStorage.setItem(`${PROJECT_UNLOCK_PREFIX}${slug}`, "1");
+  } catch {
+    // Ignore storage failures and keep the in-memory unlock.
+  }
+};
 
 const resolveImage = (image) => {
   if (typeof image === "string") {
@@ -230,6 +268,7 @@ function HomePage() {
 
 function ProjectCard({ project }) {
   const [transformStyle, setTransformStyle] = useState("perspective(1000px) rotateX(0deg) rotateY(0deg)");
+  const isProtected = isProjectProtected(project.slug);
 
   const onMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -256,10 +295,11 @@ function ProjectCard({ project }) {
       <div className="project-info">
         <p>
           {project.category} · {project.year}
+          {isProtected ? " · Protected" : ""}
         </p>
         <h3>{project.title}</h3>
         <div className="project-cta">
-          <span>Open case study</span>
+          <span>{isProtected ? "Enter password" : "Open case study"}</span>
           <span aria-hidden="true">→</span>
         </div>
       </div>
@@ -270,12 +310,68 @@ function ProjectCard({ project }) {
 function CaseStudyPage({ slug }) {
   const navigate = useNavigate();
   const project = projects.find((entry) => entry.slug === slug);
+  const requiredPassword = PROJECT_PASSWORDS[slug];
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [isUnlocked, setIsUnlocked] = useState(() => getProjectUnlockState(slug));
+
+  useEffect(() => {
+    setIsUnlocked(getProjectUnlockState(slug));
+    setPasswordInput("");
+    setPasswordError("");
+  }, [slug]);
+
+  const handleUnlock = (event) => {
+    event.preventDefault();
+
+    if (!requiredPassword) {
+      return;
+    }
+
+    if (passwordInput.trim() === requiredPassword) {
+      saveProjectUnlockState(slug);
+      setIsUnlocked(true);
+      setPasswordError("");
+      return;
+    }
+
+    setPasswordError("Incorrect password. Try again.");
+  };
 
   if (!project) {
     return <Navigate to="/" replace />;
   }
 
   const nextProject = projects.find((entry) => entry.slug !== slug);
+
+  if (requiredPassword && !isUnlocked) {
+    return (
+      <article className="case-page">
+        <button className="back-pill" onClick={() => navigate("/?section=work")}>
+          Back to Work
+        </button>
+        <p className="case-meta">Private Case Study</p>
+        <h1>{project.shortTitle}</h1>
+        <p className="case-summary">This project is password protected. Enter the password to continue.</p>
+
+        <form className="unlock-form" onSubmit={handleUnlock}>
+          <label htmlFor={`unlock-${slug}`}>Password</label>
+          <div className="unlock-row">
+            <input
+              id={`unlock-${slug}`}
+              type="password"
+              value={passwordInput}
+              onChange={(event) => setPasswordInput(event.target.value)}
+              placeholder="Enter password"
+              autoComplete="off"
+            />
+            <button type="submit">Unlock</button>
+          </div>
+          {passwordError ? <p className="unlock-error">{passwordError}</p> : null}
+        </form>
+      </article>
+    );
+  }
 
   return (
     <article className="case-page">
