@@ -56,3 +56,29 @@ Set GitHub repository secret (recommended):
 
 Alternative:
 - You can also set a repository variable with the same name under `Actions -> Variables`.
+
+## Project Template System
+
+Projects are now config-driven.
+
+- Template helper: `src/projects/template/caseStudy.template.js`
+- Per-project files: `src/projects/data/*.project.js`
+- Project registry + access config: `src/projects/projects.config.js`
+- Runtime compiler for routes/password flags: `src/projects/runtime.js`
+
+### Add a new project
+
+1. Create `src/projects/data/<your-project>.project.js` using `createCaseStudyProject(...)`.
+2. Add the new entry in `src/projects/projects.config.js`:
+   - `slug`
+   - `routeAliases` (optional)
+   - `template`
+   - `access.passwordProtected` and optional `envKey`, `devFallbackPassword`
+   - `data`
+3. Add local images under `public/assets/projects/`.
+4. Run:
+
+```bash
+npm run fetch:assets
+npm run build
+```

@@ -2,7 +2,8 @@ import { access, mkdir, writeFile } from "node:fs/promises";
 import { constants } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { aboutContent, heroObjects, projects } from "../src/siteData.js";
+import { aboutContent, heroObjects } from "../src/siteData.js";
+import { projectConfigs } from "../src/projects/projects.config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(__dirname, "..");
@@ -35,11 +36,12 @@ for (const item of heroObjects) {
   addAsset(item.src, `hero:${item.id}`);
 }
 
-for (const project of projects) {
-  addAsset(project.cover, `${project.slug}:cover`);
-  addAsset(project.hero, `${project.slug}:hero`);
+for (const config of projectConfigs) {
+  const project = config.data;
+  addAsset(project.cover, `${config.slug}:cover`);
+  addAsset(project.hero, `${config.slug}:hero`);
   for (const [index, image] of project.gallery.entries()) {
-    addAsset(image, `${project.slug}:gallery:${index}`);
+    addAsset(image, `${config.slug}:gallery:${index}`);
   }
 }
 

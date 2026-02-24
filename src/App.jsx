@@ -1,9 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { HashRouter, Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { aboutContent, brandNames, heroObjects, projects, resumeBlocks } from "./siteData";
+import { aboutContent, brandNames, heroObjects, resumeBlocks } from "./siteData";
+import {
+  getProjectBySlug,
+  getProjectPassword,
+  isProjectPasswordProtected,
+  projectRoutes,
+  projects,
+} from "./projects/runtime";
 
 const filters = ["All", "Product Design", "UX Case Study"];
-const HERO_IMAGE_SCALE = 0.78;
+const HERO_IMAGE_SCALE = 0.58;
 const BASE_URL = import.meta.env.BASE_URL || "/";
 const withBase = (path) => {
   if (!path || /^https?:\/\//.test(path) || path.startsWith("data:")) {
@@ -12,10 +19,6 @@ const withBase = (path) => {
   return `${BASE_URL}${path.replace(/^\/+/, "")}`;
 };
 const RESUME_PDF_PATH = withBase("assets/resume/Akanksha-Mahangere-Resume.pdf");
-const DEFAULT_LOCAL_PASSWORD = "qwerty";
-const OPERATIONS_CASE_PASSWORD =
-  (import.meta.env.VITE_OPS_PROJECT_PASSWORD || "").trim() ||
-  (import.meta.env.DEV ? DEFAULT_LOCAL_PASSWORD : "");
 const CONTACT_EMAIL = "akanksha.ux8@gmail.com";
 const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 const LINKEDIN_URL = "https://www.linkedin.com/in/akankshamahangare/";
@@ -26,15 +29,10 @@ const CONTACT_TICKER_ITEMS = [
   "Design that survives handoff",
 ];
 const CONTACT_BALL_RADII = [22, 24, 22, 34, 22, 24, 22];
-const PROJECT_PASSWORDS = {
-  "operations-dasboard": OPERATIONS_CASE_PASSWORD,
-};
 const PROJECT_UNLOCK_PREFIX = "unlocked-project:";
 
-const isProjectProtected = (slug) => Boolean(PROJECT_PASSWORDS[slug]);
-
 const getProjectUnlockState = (slug) => {
-  if (!isProjectProtected(slug)) {
+  if (!isProjectPasswordProtected(slug)) {
     return true;
   }
 
@@ -499,6 +497,24 @@ function HomePage() {
     }
     return projects.filter((project) => project.category === activeFilter);
   }, [activeFilter]);
+  const ringObjects = useMemo(() => {
+    const centerX = 50;
+    const centerY = 53;
+    const radiusX = 33;
+    const radiusY = 29;
+
+    return heroObjects.map((item, index) => {
+      const angle = (-110 + (360 / heroObjects.length) * index) * (Math.PI / 180);
+      return {
+        ...item,
+        ringX: centerX + Math.cos(angle) * radiusX,
+        ringY: centerY + Math.sin(angle) * radiusY,
+        drift: 10 + (index % 3) * 2,
+        driftDuration: 9 + index * 0.5,
+        driftDelay: -index * 0.7,
+      };
+    });
+  }, []);
 
   const handleCanvasMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -512,27 +528,36 @@ function HomePage() {
   return (
     <>
       <section className="hero" onMouseMove={handleCanvasMove} onMouseLeave={handleCanvasLeave}>
-        {heroObjects.map((item, index) => {
-          const tx = mouse.x * item.depth;
-          const ty = mouse.y * item.depth;
-          const rotation = item.rotate + mouse.x * 3;
+        {ringObjects.map((item, index) => {
+            const tx = mouse.x * item.depth * 0.42;
+            const ty = mouse.y * item.depth * 0.42;
+            const rotation = item.rotate + mouse.x * 1.8;
 
-          return (
-            <SafeImage
-              key={item.id}
-              image={item.src}
-              className={`hero-object hero-object-${item.id}`}
-              alt={item.alt}
-              style={{
-                left: `${item.x}%`,
-                top: `${item.y}%`,
-                width: `${Math.round(item.w * HERO_IMAGE_SCALE)}px`,
-                transform: `translate3d(calc(-50% + ${tx}px), calc(-50% + ${ty}px), 0) rotate(${rotation}deg)`,
-                animationDelay: `${index * 0.13}s`,
-              }}
-            />
-          );
-        })}
+            return (
+              <div
+                key={item.id}
+                className={`hero-ring-item hero-ring-item-${item.id}`}
+                style={{
+                  left: `${item.ringX}%`,
+                  top: `${item.ringY}%`,
+                  "--drift-size": `${item.drift}px`,
+                  "--drift-duration": `${item.driftDuration}s`,
+                  "--drift-delay": `${item.driftDelay}s`,
+                }}
+              >
+                <SafeImage
+                  image={item.src}
+                  className={`hero-object hero-object-${item.id}`}
+                  alt={item.alt}
+                  style={{
+                    width: `${Math.round(item.w * HERO_IMAGE_SCALE)}px`,
+                    transform: `translate3d(calc(-50% + ${tx}px), calc(-50% + ${ty}px), 0) rotate(${rotation}deg)`,
+                    animationDelay: `${index * 0.13}s`,
+                  }}
+                />
+              </div>
+            );
+          })}
 
         <div className="hero-title-wrap">
           <p className="hero-left-lines">
@@ -644,7 +669,7 @@ function HomePage() {
 
 function ProjectCard({ project }) {
   const [transformStyle, setTransformStyle] = useState("perspective(1000px) rotateX(0deg) rotateY(0deg)");
-  const isProtected = isProjectProtected(project.slug);
+  const isProtected = isProjectPasswordProtected(project.slug);
 
   const onMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -685,8 +710,9 @@ function ProjectCard({ project }) {
 
 function CaseStudyPage({ slug }) {
   const navigate = useNavigate();
-  const project = projects.find((entry) => entry.slug === slug);
-  const requiredPassword = PROJECT_PASSWORDS[slug];
+  const project = getProjectBySlug(slug);
+  const requiredPassword = getProjectPassword(slug);
+  const isProtected = isProjectPasswordProtected(slug);
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isUnlocked, setIsUnlocked] = useState(() => getProjectUnlockState(slug));
@@ -700,7 +726,12 @@ function CaseStudyPage({ slug }) {
   const handleUnlock = (event) => {
     event.preventDefault();
 
+    if (!isProtected) {
+      return;
+    }
+
     if (!requiredPassword) {
+      setPasswordError("Password is not configured for this build yet.");
       return;
     }
 
@@ -720,7 +751,7 @@ function CaseStudyPage({ slug }) {
 
   const nextProject = projects.find((entry) => entry.slug !== slug);
 
-  if (requiredPassword && !isUnlocked) {
+  if (isProtected && !isUnlocked) {
     return (
       <article className="case-page">
         <button className="back-pill" onClick={() => navigate("/?section=work")}>
@@ -847,9 +878,13 @@ function Layout() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/operations-dasboard" element={<CaseStudyPage slug="operations-dasboard" />} />
-          <Route path="/operations-dashboard" element={<CaseStudyPage slug="operations-dasboard" />} />
-          <Route path="/pl-case-study" element={<CaseStudyPage slug="pl-case-study" />} />
+          {projectRoutes.map((route) => (
+            <Route
+              key={route.path}
+              path={`/${route.path}`}
+              element={<CaseStudyPage slug={route.canonicalSlug} />}
+            />
+          ))}
           <Route path="/resume" element={<ResumePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

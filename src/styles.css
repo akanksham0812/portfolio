@@ -115,7 +115,10 @@ main {
 
 .hero-object {
   position: absolute;
+  left: 0;
+  top: 0;
   z-index: 2;
+  max-width: none;
   transform-origin: center;
   pointer-events: none;
   user-select: none;
@@ -127,6 +130,14 @@ main {
 .hero .img-fallback.hero-object {
   border-radius: 18px;
   opacity: 0.46;
+}
+
+.hero-ring-item {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  animation: hero-circle-drift var(--drift-duration, 10s) ease-in-out infinite;
+  animation-delay: var(--drift-delay, 0s);
 }
 
 .hero-title-wrap {
@@ -749,6 +760,24 @@ main {
   background: #101010;
   color: #f3f3f3;
   border-color: #101010;
+}
+
+@keyframes hero-circle-drift {
+  0% {
+    transform: translate(var(--drift-size), 0);
+  }
+  25% {
+    transform: translate(0, var(--drift-size));
+  }
+  50% {
+    transform: translate(calc(var(--drift-size) * -1), 0);
+  }
+  75% {
+    transform: translate(0, calc(var(--drift-size) * -1));
+  }
+  100% {
+    transform: translate(var(--drift-size), 0);
+  }
 }
 
 @keyframes float {
