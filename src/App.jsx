@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { HashRouter, Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { aboutContent, brandNames, heroObjects, projects, resumeBlocks } from "./siteData";
 
@@ -16,6 +16,16 @@ const DEFAULT_LOCAL_PASSWORD = "qwerty";
 const OPERATIONS_CASE_PASSWORD =
   (import.meta.env.VITE_OPS_PROJECT_PASSWORD || "").trim() ||
   (import.meta.env.DEV ? DEFAULT_LOCAL_PASSWORD : "");
+const CONTACT_EMAIL = "akanksha.ux8@gmail.com";
+const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
+const LINKEDIN_URL = "https://www.linkedin.com/in/akankshamahangare/";
+const CONTACT_TICKER_ITEMS = [
+  "I annotate before I animate",
+  "Less guesswork, more user clarity",
+  "I turn feedback into flow",
+  "Design that survives handoff",
+];
+const CONTACT_BALL_RADII = [22, 24, 22, 34, 22, 24, 22];
 const PROJECT_PASSWORDS = {
   "operations-dasboard": OPERATIONS_CASE_PASSWORD,
 };
@@ -104,6 +114,343 @@ function SafeImage({ image, alt, className, style, loading = "lazy" }) {
       decoding="async"
       onError={handleError}
     />
+  );
+}
+
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+function InteractiveBallField() {
+  const canvasRef = useRef(null);
+  const frameRef = useRef(0);
+  const stateRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    if (!canvas) {
+      return undefined;
+    }
+
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) {
+      return undefined;
+    }
+
+    const state = {
+      width: 0,
+      height: 0,
+      balls: [],
+      cueIndex: 3,
+      pointer: {
+        active: false,
+        x: 0,
+        y: 0,
+        lastX: 0,
+        lastY: 0,
+      },
+    };
+    stateRef.current = state;
+
+    const initializeBalls = () => {
+      const spacing = 11;
+      const totalWidth =
+        CONTACT_BALL_RADII.reduce((sum, radius) => sum + radius * 2, 0) + spacing * (CONTACT_BALL_RADII.length - 1);
+      const startX = (state.width - totalWidth) / 2;
+      const baseline = state.height - 42;
+
+      let cursor = startX;
+      state.balls = CONTACT_BALL_RADII.map((radius, index) => {
+        cursor += radius;
+        const ball = {
+          x: cursor,
+          y: baseline - (index === state.cueIndex ? 34 : 0),
+          vx: 0,
+          vy: 0,
+          r: radius,
+        };
+        cursor += radius + spacing;
+        return ball;
+      });
+    };
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const width = Math.max(1, rect.width);
+      const height = Math.max(1, rect.height);
+
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      state.width = width;
+      state.height = height;
+      initializeBalls();
+    };
+
+    const drawBall = (ball, isCue) => {
+      const gradient = ctx.createRadialGradient(
+        ball.x - ball.r * 0.35,
+        ball.y - ball.r * 0.35,
+        ball.r * 0.2,
+        ball.x,
+        ball.y,
+        ball.r,
+      );
+      gradient.addColorStop(0, isCue ? "#ffb54e" : "#ff9430");
+      gradient.addColorStop(1, isCue ? "#d9501d" : "#e65620");
+
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = "#311306";
+      ctx.lineWidth = Math.max(1.3, ball.r * 0.08);
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.r * 0.98, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.lineWidth = Math.max(1, ball.r * 0.06);
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.r * 0.96, Math.PI * 0.17, Math.PI * 1.83);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.r * 0.96, Math.PI * 1.17, Math.PI * 0.83, true);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(ball.x - ball.r * 0.48, ball.y, ball.r * 0.8, -Math.PI * 0.35, Math.PI * 0.35);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(ball.x + ball.r * 0.48, ball.y, ball.r * 0.8, Math.PI * 0.65, Math.PI * 1.35);
+      ctx.stroke();
+
+      if (isCue) {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.18)";
+        ctx.beginPath();
+        ctx.arc(ball.x - ball.r * 0.28, ball.y - ball.r * 0.36, ball.r * 0.17, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+
+    const getPoint = (event) => {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top,
+      };
+    };
+
+    const onPointerDown = (event) => {
+      const point = getPoint(event);
+      const cueBall = state.balls[state.cueIndex];
+
+      if (!cueBall) {
+        return;
+      }
+
+      const dx = point.x - cueBall.x;
+      const dy = point.y - cueBall.y;
+
+      if (Math.hypot(dx, dy) > cueBall.r + 16) {
+        return;
+      }
+
+      state.pointer.active = true;
+      state.pointer.x = point.x;
+      state.pointer.y = point.y;
+      state.pointer.lastX = point.x;
+      state.pointer.lastY = point.y;
+      setIsDragging(true);
+      canvas.setPointerCapture(event.pointerId);
+    };
+
+    const onPointerMove = (event) => {
+      if (!state.pointer.active) {
+        return;
+      }
+
+      const point = getPoint(event);
+      state.pointer.x = point.x;
+      state.pointer.y = point.y;
+    };
+
+    const releasePointer = () => {
+      state.pointer.active = false;
+      setIsDragging(false);
+    };
+
+    const physicsStep = () => {
+      const gravity = 0.22;
+      const damping = 0.993;
+      const wallBounce = 0.86;
+      const floor = state.height - 2;
+      const cueBall = state.balls[state.cueIndex];
+
+      if (cueBall && state.pointer.active) {
+        const clampedX = clamp(state.pointer.x, cueBall.r, state.width - cueBall.r);
+        const clampedY = clamp(state.pointer.y, cueBall.r, state.height - cueBall.r);
+        cueBall.vx = (clampedX - state.pointer.lastX) * 0.44;
+        cueBall.vy = (clampedY - state.pointer.lastY) * 0.44;
+        cueBall.x = clampedX;
+        cueBall.y = clampedY;
+        state.pointer.lastX = clampedX;
+        state.pointer.lastY = clampedY;
+      }
+
+      for (let index = 0; index < state.balls.length; index += 1) {
+        const ball = state.balls[index];
+        const isDraggedCue = state.pointer.active && index === state.cueIndex;
+
+        if (isDraggedCue) {
+          continue;
+        }
+
+        ball.vy += gravity;
+        ball.vx *= damping;
+        ball.vy *= damping;
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+
+        if (ball.x - ball.r < 0) {
+          ball.x = ball.r;
+          ball.vx *= -wallBounce;
+        } else if (ball.x + ball.r > state.width) {
+          ball.x = state.width - ball.r;
+          ball.vx *= -wallBounce;
+        }
+
+        if (ball.y - ball.r < 0) {
+          ball.y = ball.r;
+          ball.vy *= -wallBounce;
+        } else if (ball.y + ball.r > floor) {
+          ball.y = floor - ball.r;
+          ball.vy *= -wallBounce;
+          ball.vx *= 0.985;
+        }
+      }
+
+      for (let i = 0; i < state.balls.length; i += 1) {
+        for (let j = i + 1; j < state.balls.length; j += 1) {
+          const a = state.balls[i];
+          const b = state.balls[j];
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          let distance = Math.hypot(dx, dy);
+          const minDistance = a.r + b.r;
+
+          if (distance >= minDistance) {
+            continue;
+          }
+
+          if (distance === 0) {
+            distance = 0.0001;
+          }
+
+          const nx = dx / distance;
+          const ny = dy / distance;
+          const overlap = minDistance - distance;
+
+          let moveA = 0.5;
+          let moveB = 0.5;
+
+          if (state.pointer.active && i === state.cueIndex) {
+            moveA = 0;
+            moveB = 1;
+          } else if (state.pointer.active && j === state.cueIndex) {
+            moveA = 1;
+            moveB = 0;
+          }
+
+          a.x -= nx * overlap * moveA;
+          a.y -= ny * overlap * moveA;
+          b.x += nx * overlap * moveB;
+          b.y += ny * overlap * moveB;
+
+          const relativeVX = b.vx - a.vx;
+          const relativeVY = b.vy - a.vy;
+          const velocityAlongNormal = relativeVX * nx + relativeVY * ny;
+
+          if (velocityAlongNormal > 0) {
+            continue;
+          }
+
+          const restitution = 0.88;
+          let inverseMassA = 1 / (a.r * a.r);
+          let inverseMassB = 1 / (b.r * b.r);
+
+          if (state.pointer.active && i === state.cueIndex) {
+            inverseMassA = 0;
+          }
+          if (state.pointer.active && j === state.cueIndex) {
+            inverseMassB = 0;
+          }
+
+          const denominator = inverseMassA + inverseMassB || 1;
+          const impulse = (-(1 + restitution) * velocityAlongNormal) / denominator;
+          const impulseX = impulse * nx;
+          const impulseY = impulse * ny;
+
+          a.vx -= impulseX * inverseMassA;
+          a.vy -= impulseY * inverseMassA;
+          b.vx += impulseX * inverseMassB;
+          b.vy += impulseY * inverseMassB;
+        }
+      }
+    };
+
+    const render = () => {
+      ctx.clearRect(0, 0, state.width, state.height);
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, state.height - 2);
+      ctx.lineTo(state.width, state.height - 2);
+      ctx.stroke();
+
+      state.balls.forEach((ball, index) => {
+        drawBall(ball, index === state.cueIndex);
+      });
+    };
+
+    const tick = () => {
+      physicsStep();
+      render();
+      frameRef.current = window.requestAnimationFrame(tick);
+    };
+
+    resize();
+    tick();
+    window.addEventListener("resize", resize);
+    canvas.addEventListener("pointerdown", onPointerDown);
+    canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("pointerup", releasePointer);
+    canvas.addEventListener("pointercancel", releasePointer);
+    canvas.addEventListener("pointerleave", releasePointer);
+
+    return () => {
+      window.cancelAnimationFrame(frameRef.current);
+      window.removeEventListener("resize", resize);
+      canvas.removeEventListener("pointerdown", onPointerDown);
+      canvas.removeEventListener("pointermove", onPointerMove);
+      canvas.removeEventListener("pointerup", releasePointer);
+      canvas.removeEventListener("pointercancel", releasePointer);
+      canvas.removeEventListener("pointerleave", releasePointer);
+    };
+  }, []);
+
+  return (
+    <div className="contact-ball-field">
+      <canvas
+        ref={canvasRef}
+        className={`contact-ball-canvas${isDragging ? " is-dragging" : ""}`}
+        aria-label="Interactive contact ball field"
+      />
+      <p className="contact-ball-hint">Drag the center ball to nudge the lineup.</p>
+    </div>
   );
 }
 
@@ -253,13 +600,42 @@ function HomePage() {
             <p>{aboutContent.intro}</p>
             <p>{aboutContent.details}</p>
             <div className="about-actions">
-              <Link to="/resume">View Resume</Link>
-              <a href={RESUME_PDF_PATH} download>
+              <Link className="primary-action" to="/resume">
+                View Resume
+              </Link>
+              <a className="secondary-action" href={RESUME_PDF_PATH} download>
                 Download PDF
               </a>
-              <a href="mailto:hello@itsbd.design">Say Hello</a>
+              <a className="secondary-action" href={CONTACT_MAILTO}>
+                Email Me
+              </a>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="contact-section" id="contact">
+        <div className="contact-ticker">
+          <div className="contact-ticker-track">
+            {[...CONTACT_TICKER_ITEMS, ...CONTACT_TICKER_ITEMS].map((item, index) => (
+              <span key={`${item}-${index}`}>{item}</span>
+            ))}
+          </div>
+        </div>
+
+        <div className="contact-panel">
+          <p className="contact-kicker">Open for UX and Product Design work</p>
+          <h2>My prototypes are smoother than last-minute requirement changes.</h2>
+          <p className="contact-copy">
+            Send your rough brief. I will turn it into clean user flows, usable UI, and handoff-ready design.
+          </p>
+          <div className="contact-actions">
+            <a href={CONTACT_MAILTO}>Email Akanksha</a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+          </div>
+          <InteractiveBallField />
         </div>
       </section>
     </>
@@ -454,7 +830,10 @@ function ResumePage() {
         <a href={RESUME_PDF_PATH} download>
           Download Resume PDF
         </a>
-        <a href="mailto:hello@itsbd.design">Contact</a>
+        <a href={CONTACT_MAILTO}>Contact</a>
+        <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
+          LinkedIn
+        </a>
         <Link to="/?section=work">View Work</Link>
       </div>
     </section>
@@ -475,7 +854,12 @@ function Layout() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      <footer className="site-footer">Designed and developed in React.</footer>
+      <footer className="site-footer">
+        <p>Crafted with love and logic.</p>
+        <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
+          LinkedIn
+        </a>
+      </footer>
     </div>
   );
 }
