@@ -3,6 +3,71 @@ import { HashRouter, Link, Navigate, Route, Routes, useLocation, useNavigate } f
 import { aboutContent, brandNames, heroObjects, projects, resumeBlocks } from "./siteData";
 
 const filters = ["All", "Product Design", "UX Case Study"];
+const HERO_IMAGE_SCALE = 0.78;
+const BASE_URL = import.meta.env.BASE_URL || "/";
+const withBase = (path) => {
+  if (!path || /^https?:\/\//.test(path) || path.startsWith("data:")) {
+    return path;
+  }
+  return `${BASE_URL}${path.replace(/^\/+/, "")}`;
+};
+const RESUME_PDF_PATH = withBase("assets/resume/Akanksha-Mahangere-Resume.pdf");
+
+const resolveImage = (image) => {
+  if (typeof image === "string") {
+    return { primary: withBase(image), fallback: null };
+  }
+
+  if (!image || typeof image !== "object") {
+    return { primary: "", fallback: null };
+  }
+
+  const local = withBase(image.local || "");
+  const remote = image.remote || "";
+  const primary = local || remote;
+  const fallback = image.remote && image.remote !== primary ? image.remote : null;
+
+  return { primary, fallback };
+};
+
+function SafeImage({ image, alt, className, style, loading = "lazy" }) {
+  const { primary, fallback } = useMemo(() => resolveImage(image), [image]);
+  const [src, setSrc] = useState(primary);
+  const [fallbackUsed, setFallbackUsed] = useState(false);
+  const [hasFailed, setHasFailed] = useState(false);
+
+  useEffect(() => {
+    setSrc(primary);
+    setFallbackUsed(false);
+    setHasFailed(false);
+  }, [primary, fallback]);
+
+  const handleError = () => {
+    if (!fallbackUsed && fallback) {
+      setSrc(fallback);
+      setFallbackUsed(true);
+      return;
+    }
+
+    setHasFailed(true);
+  };
+
+  if (!src || hasFailed) {
+    return <div className={`img-fallback ${className || ""}`.trim()} style={style} aria-label={alt} role="img" />;
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      style={style}
+      loading={loading}
+      decoding="async"
+      onError={handleError}
+    />
+  );
+}
 
 function TopNav() {
   const navigate = useNavigate();
@@ -15,7 +80,7 @@ function TopNav() {
     <header className="top-nav">
       <div className="top-nav-inner">
         <button className="brand-button" onClick={() => navigate("/")}>
-          BHAVYA DHARMANI
+          AKANKSHA MAHANGERE
         </button>
         <nav className="top-links" aria-label="Main navigation">
           <button onClick={() => goTo("work")}>Work</button>
@@ -68,16 +133,15 @@ function HomePage() {
           const rotation = item.rotate + mouse.x * 3;
 
           return (
-            <img
+            <SafeImage
               key={item.id}
+              image={item.src}
               className={`hero-object hero-object-${item.id}`}
-              src={item.src}
               alt={item.alt}
-              loading="lazy"
               style={{
                 left: `${item.x}%`,
                 top: `${item.y}%`,
-                width: `${item.w}px`,
+                width: `${Math.round(item.w * HERO_IMAGE_SCALE)}px`,
                 transform: `translate3d(calc(-50% + ${tx}px), calc(-50% + ${ty}px), 0) rotate(${rotation}deg)`,
                 animationDelay: `${index * 0.13}s`,
               }}
@@ -106,10 +170,12 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="brand-strip">
-          {brandNames.map((name) => (
-            <span key={name}>{name}</span>
-          ))}
+        <div className="brand-strip" aria-label="Client logos">
+          <div className="brand-track">
+            {[...brandNames, ...brandNames].map((name, index) => (
+              <span key={`${name}-${index}`}>{name}</span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -144,12 +210,15 @@ function HomePage() {
           <h2>Design with intent.</h2>
         </div>
         <div className="about-grid">
-          <img src={aboutContent.image} alt="Bhavya Dharmani portrait" loading="lazy" />
+          <SafeImage image={aboutContent.image} alt="Akanksha Mahangere portrait" />
           <div>
             <p>{aboutContent.intro}</p>
             <p>{aboutContent.details}</p>
             <div className="about-actions">
               <Link to="/resume">View Resume</Link>
+              <a href={RESUME_PDF_PATH} download>
+                Download PDF
+              </a>
               <a href="mailto:hello@itsbd.design">Say Hello</a>
             </div>
           </div>
@@ -182,7 +251,7 @@ function ProjectCard({ project }) {
       style={{ transform: transformStyle }}
     >
       <div className="project-image-wrap">
-        <img src={project.cover} alt={project.shortTitle} loading="lazy" />
+        <SafeImage image={project.cover} alt={project.shortTitle} />
       </div>
       <div className="project-info">
         <p>
@@ -220,7 +289,7 @@ function CaseStudyPage({ slug }) {
       <p className="case-summary">{project.summary}</p>
 
       <div className="case-main-image">
-        <img src={project.hero} alt={project.shortTitle} loading="lazy" />
+        <SafeImage image={project.hero} alt={project.shortTitle} />
       </div>
 
       <div className="case-columns">
@@ -244,8 +313,12 @@ function CaseStudyPage({ slug }) {
       </section>
 
       <section className="gallery-grid">
-        {project.gallery.map((image) => (
-          <img key={image} src={image} alt={`${project.shortTitle} visual`} loading="lazy" />
+        {project.gallery.map((image, index) => (
+          <SafeImage
+            key={`${project.slug}-gallery-${index}`}
+            image={image}
+            alt={`${project.shortTitle} visual ${index + 1}`}
+          />
         ))}
       </section>
 
@@ -262,7 +335,7 @@ function ResumePage() {
   return (
     <section className="resume-page">
       <p className="resume-kicker">Resume</p>
-      <h1>Bhavya Dharmani</h1>
+      <h1>Akanksha Mahangere</h1>
       <p className="resume-summary">
         Creative designer focused on product interfaces, brand-aligned visual systems, and conversion-ready web
         experiences.
@@ -282,6 +355,9 @@ function ResumePage() {
       </div>
 
       <div className="resume-actions">
+        <a href={RESUME_PDF_PATH} download>
+          Download Resume PDF
+        </a>
         <a href="mailto:hello@itsbd.design">Contact</a>
         <Link to="/?section=work">View Work</Link>
       </div>
