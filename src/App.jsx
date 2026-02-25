@@ -11,7 +11,7 @@ import {
 } from "./projects/runtime";
 
 const filters = ["All", "Product Design", "UX Case Study"];
-const HERO_IMAGE_SCALE = 1;
+const HERO_IMAGE_SCALE = 0.7;
 const BASE_URL = import.meta.env.BASE_URL || "/";
 const withBase = (path) => {
   if (!path || /^https?:\/\//.test(path) || path.startsWith("data:")) {
