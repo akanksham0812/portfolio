@@ -13,16 +13,6 @@ import {
 const filters = ["All", "Product Design", "UX Case Study"];
 const HERO_IMAGE_SCALE = 0.7;
 const HERO_OBJECT_BASE_WIDTH = 220;
-const COMPACT_HERO_POSITIONS = {
-  vinyl: { x: 16, y: 28 },
-  polaroid: { x: 44, y: 17 },
-  palette: { x: 66, y: 19 },
-  disc: { x: 80, y: 38 },
-  cap: { x: 18, y: 58 },
-  cassette: { x: 82, y: 58 },
-  ball: { x: 18, y: 84 },
-  sign: { x: 50, y: 92 },
-};
 const BASE_URL = import.meta.env.BASE_URL || "/";
 const withBase = (path) => {
   if (!path || /^https?:\/\//.test(path) || path.startsWith("data:")) {
@@ -128,6 +118,7 @@ function SafeImage({ image, alt, className, style, loading = "lazy" }) {
 }
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+const lerp = (start, end, progress) => start + (end - start) * progress;
 
 function InteractiveBallField() {
   const canvasRef = useRef(null);
@@ -522,56 +513,29 @@ function HomePage() {
   }, [activeFilter]);
   const heroLayout = useMemo(() => {
     const desktopObjectWidth = Math.round(HERO_OBJECT_BASE_WIDTH * HERO_IMAGE_SCALE);
-
-    if (viewportWidth <= 700) {
-      return {
-        centerX: 50,
-        centerY: 46,
-        radiusX: 23,
-        radiusY: 19,
-        driftScale: 0.55,
-        parallaxScale: 0.55,
-        objectWidth: Math.round(desktopObjectWidth * 0.68),
-        positions: COMPACT_HERO_POSITIONS,
-      };
-    }
-
-    if (viewportWidth <= 920) {
-      return {
-        centerX: 50,
-        centerY: 49,
-        radiusX: 28,
-        radiusY: 23,
-        driftScale: 0.76,
-        parallaxScale: 0.72,
-        objectWidth: Math.round(desktopObjectWidth * 0.82),
-        positions: null,
-      };
-    }
+    const sizeProgress = clamp((920 - viewportWidth) / 560, 0, 1);
 
     return {
       centerX: 50,
-      centerY: 53,
-      radiusX: 33,
-      radiusY: 29,
-      driftScale: 1,
-      parallaxScale: 1,
-      objectWidth: desktopObjectWidth,
-      positions: null,
+      centerY: lerp(53, 50, sizeProgress),
+      radiusX: lerp(33, 37, sizeProgress),
+      radiusY: lerp(29, 33, sizeProgress),
+      driftScale: lerp(1, 0.56, sizeProgress),
+      parallaxScale: lerp(1, 0.58, sizeProgress),
+      objectWidth: Math.round(desktopObjectWidth * lerp(1, 0.52, sizeProgress)),
     };
   }, [viewportWidth]);
 
   const ringObjects = useMemo(() => {
-    const { centerX, centerY, radiusX, radiusY, driftScale, positions } = heroLayout;
+    const { centerX, centerY, radiusX, radiusY, driftScale } = heroLayout;
 
     return heroObjects.map((item, index) => {
-      const compactPosition = positions?.[item.id];
       const angle = (-110 + (360 / heroObjects.length) * index) * (Math.PI / 180);
 
       return {
         ...item,
-        ringX: compactPosition ? compactPosition.x : centerX + Math.cos(angle) * radiusX,
-        ringY: compactPosition ? compactPosition.y : centerY + Math.sin(angle) * radiusY,
+        ringX: centerX + Math.cos(angle) * radiusX,
+        ringY: centerY + Math.sin(angle) * radiusY,
         drift: (10 + (index % 3) * 2) * driftScale,
         driftDuration: 9 + index * 0.5,
         driftDelay: -index * 0.7,
