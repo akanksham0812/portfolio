@@ -481,11 +481,13 @@ main {
 
 .contact-ball-field {
   margin-top: clamp(2rem, 5vw, 3.3rem);
+  width: min(100%, 820px);
+  margin-inline: auto;
 }
 
 .contact-spline {
   width: 100%;
-  height: clamp(140px, 19vw, 220px);
+  height: clamp(170px, 24vw, 260px);
   display: block;
   border-radius: 22px;
   border: 1px solid #2a2a2a;
@@ -818,12 +820,6 @@ main {
   }
 }
 
-@media (max-width: 1120px) {
-  .hero-object {
-    width: calc(100% * 0.12);
-  }
-}
-
 @media (max-width: 920px) {
   .hero {
     min-height: calc(100svh - 72px);
@@ -839,12 +835,6 @@ main {
   .hero-left-lines,
   .hero-right-lines {
     text-align: center;
-  }
-
-  .hero-object-polaroid,
-  .hero-object-palette,
-  .hero-object-cassette {
-    display: none;
   }
 
   .project-grid,
@@ -890,12 +880,6 @@ main {
     min-height: 610px;
   }
 
-  .hero-object-vinyl,
-  .hero-object-ball,
-  .hero-object-sign {
-    display: none;
-  }
-
   .hero-title-wrap {
     width: calc(100% - 1.4rem);
   }
@@ -924,8 +908,12 @@ main {
     height: 164px;
   }
 
+  .contact-ball-field {
+    width: 100%;
+  }
+
   .contact-spline {
-    height: 148px;
+    height: clamp(150px, 52vw, 220px);
   }
 
   .contact-ball-hint {

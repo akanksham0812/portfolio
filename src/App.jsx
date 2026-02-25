@@ -12,6 +12,7 @@ import {
 
 const filters = ["All", "Product Design", "UX Case Study"];
 const HERO_IMAGE_SCALE = 0.7;
+const HERO_OBJECT_BASE_WIDTH = 220;
 const BASE_URL = import.meta.env.BASE_URL || "/";
 const withBase = (path) => {
   if (!path || /^https?:\/\//.test(path) || path.startsWith("data:")) {
@@ -480,6 +481,7 @@ function HomePage() {
   const location = useLocation();
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [activeFilter, setActiveFilter] = useState("All");
+  const [viewportWidth, setViewportWidth] = useState(() => (typeof window === "undefined" ? 1280 : window.innerWidth));
 
   useEffect(() => {
     const section = new URLSearchParams(location.search).get("section");
@@ -492,17 +494,62 @@ function HomePage() {
     });
   }, [location.search]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+
+    const syncViewportWidth = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", syncViewportWidth);
+    return () => window.removeEventListener("resize", syncViewportWidth);
+  }, []);
+
   const visibleProjects = useMemo(() => {
     if (activeFilter === "All") {
       return projects;
     }
     return projects.filter((project) => project.category === activeFilter);
   }, [activeFilter]);
+  const heroLayout = useMemo(() => {
+    const desktopObjectWidth = Math.round(HERO_OBJECT_BASE_WIDTH * HERO_IMAGE_SCALE);
+
+    if (viewportWidth <= 700) {
+      return {
+        centerX: 50,
+        centerY: 46,
+        radiusX: 23,
+        radiusY: 19,
+        driftScale: 0.55,
+        parallaxScale: 0.55,
+        objectWidth: Math.round(desktopObjectWidth * 0.68),
+      };
+    }
+
+    if (viewportWidth <= 920) {
+      return {
+        centerX: 50,
+        centerY: 49,
+        radiusX: 28,
+        radiusY: 23,
+        driftScale: 0.76,
+        parallaxScale: 0.72,
+        objectWidth: Math.round(desktopObjectWidth * 0.82),
+      };
+    }
+
+    return {
+      centerX: 50,
+      centerY: 53,
+      radiusX: 33,
+      radiusY: 29,
+      driftScale: 1,
+      parallaxScale: 1,
+      objectWidth: desktopObjectWidth,
+    };
+  }, [viewportWidth]);
+
   const ringObjects = useMemo(() => {
-    const centerX = 50;
-    const centerY = 53;
-    const radiusX = 33;
-    const radiusY = 29;
+    const { centerX, centerY, radiusX, radiusY, driftScale } = heroLayout;
 
     return heroObjects.map((item, index) => {
       const angle = (-110 + (360 / heroObjects.length) * index) * (Math.PI / 180);
@@ -510,12 +557,12 @@ function HomePage() {
         ...item,
         ringX: centerX + Math.cos(angle) * radiusX,
         ringY: centerY + Math.sin(angle) * radiusY,
-        drift: 10 + (index % 3) * 2,
+        drift: (10 + (index % 3) * 2) * driftScale,
         driftDuration: 9 + index * 0.5,
         driftDelay: -index * 0.7,
       };
     });
-  }, []);
+  }, [heroLayout]);
 
   const handleCanvasMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -530,8 +577,8 @@ function HomePage() {
     <>
       <section className="hero" onMouseMove={handleCanvasMove} onMouseLeave={handleCanvasLeave}>
         {ringObjects.map((item, index) => {
-            const tx = mouse.x * item.depth * 0.42;
-            const ty = mouse.y * item.depth * 0.42;
+            const tx = mouse.x * item.depth * heroLayout.parallaxScale * 0.42;
+            const ty = mouse.y * item.depth * heroLayout.parallaxScale * 0.42;
             const rotation = item.rotate + mouse.x * 1.8;
 
             return (
@@ -551,7 +598,7 @@ function HomePage() {
                   className={`hero-object hero-object-${item.id}`}
                   alt={item.alt}
                   style={{
-                    width: `${Math.round(item.w * HERO_IMAGE_SCALE)}px`,
+                    width: `${heroLayout.objectWidth}px`,
                     transform: `translate3d(calc(-50% + ${tx}px), calc(-50% + ${ty}px), 0) rotate(${rotation}deg)`,
                     animationDelay: `${index * 0.13}s`,
                   }}
