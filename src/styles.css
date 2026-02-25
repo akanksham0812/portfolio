@@ -483,6 +483,16 @@ main {
   margin-top: clamp(2rem, 5vw, 3.3rem);
 }
 
+.contact-spline {
+  width: 100%;
+  height: clamp(140px, 19vw, 220px);
+  display: block;
+  border-radius: 22px;
+  border: 1px solid #2a2a2a;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.06), transparent 60%), #0e0e0e;
+}
+
 .contact-ball-canvas {
   width: 100%;
   height: clamp(160px, 22vw, 248px);
@@ -912,6 +922,10 @@ main {
 
   .contact-ball-canvas {
     height: 164px;
+  }
+
+  .contact-spline {
+    height: 148px;
   }
 
   .contact-ball-hint {

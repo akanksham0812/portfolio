@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { HashRouter, Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import Spline from "@splinetool/react-spline";
 import { aboutContent, brandNames, heroObjects, resumeBlocks } from "./siteData";
 import {
   getProjectBySlug,
@@ -568,8 +569,8 @@ function HomePage() {
             GRAPHIC DESIGN
           </p>
           <h1>
-            <span>Creative</span>
-            <span>Designer</span>
+            <span>Design</span>
+            <span>Thinker</span>
           </h1>
           <p className="hero-right-lines">
             TURNING IDEAS INTO POWERFUL
@@ -660,7 +661,12 @@ function HomePage() {
               LinkedIn
             </a>
           </div>
-          <InteractiveBallField />
+          <div className="contact-ball-field">
+            <Spline
+              className="contact-spline"
+              scene="https://prod.spline.design/ChcZUJkocrFOVMgi/scene.splinecode"
+            />
+          </div>
         </div>
       </section>
     </>
