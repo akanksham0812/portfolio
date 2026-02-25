@@ -13,6 +13,16 @@ import {
 const filters = ["All", "Product Design", "UX Case Study"];
 const HERO_IMAGE_SCALE = 0.7;
 const HERO_OBJECT_BASE_WIDTH = 220;
+const COMPACT_HERO_POSITIONS = {
+  vinyl: { x: 16, y: 28 },
+  polaroid: { x: 44, y: 17 },
+  palette: { x: 66, y: 19 },
+  disc: { x: 80, y: 38 },
+  cap: { x: 18, y: 58 },
+  cassette: { x: 82, y: 58 },
+  ball: { x: 18, y: 84 },
+  sign: { x: 50, y: 92 },
+};
 const BASE_URL = import.meta.env.BASE_URL || "/";
 const withBase = (path) => {
   if (!path || /^https?:\/\//.test(path) || path.startsWith("data:")) {
@@ -522,6 +532,7 @@ function HomePage() {
         driftScale: 0.55,
         parallaxScale: 0.55,
         objectWidth: Math.round(desktopObjectWidth * 0.68),
+        positions: COMPACT_HERO_POSITIONS,
       };
     }
 
@@ -534,6 +545,7 @@ function HomePage() {
         driftScale: 0.76,
         parallaxScale: 0.72,
         objectWidth: Math.round(desktopObjectWidth * 0.82),
+        positions: null,
       };
     }
 
@@ -545,18 +557,21 @@ function HomePage() {
       driftScale: 1,
       parallaxScale: 1,
       objectWidth: desktopObjectWidth,
+      positions: null,
     };
   }, [viewportWidth]);
 
   const ringObjects = useMemo(() => {
-    const { centerX, centerY, radiusX, radiusY, driftScale } = heroLayout;
+    const { centerX, centerY, radiusX, radiusY, driftScale, positions } = heroLayout;
 
     return heroObjects.map((item, index) => {
+      const compactPosition = positions?.[item.id];
       const angle = (-110 + (360 / heroObjects.length) * index) * (Math.PI / 180);
+
       return {
         ...item,
-        ringX: centerX + Math.cos(angle) * radiusX,
-        ringY: centerY + Math.sin(angle) * radiusY,
+        ringX: compactPosition ? compactPosition.x : centerX + Math.cos(angle) * radiusX,
+        ringY: compactPosition ? compactPosition.y : centerY + Math.sin(angle) * radiusY,
         drift: (10 + (index % 3) * 2) * driftScale,
         driftDuration: 9 + index * 0.5,
         driftDelay: -index * 0.7,
@@ -745,16 +760,19 @@ function ProjectCard({ project }) {
     >
       <div className="project-image-wrap">
         <SafeImage image={project.cover} alt={project.shortTitle} />
-      </div>
-      <div className="project-info">
-        <p>
-          {project.category} · {project.year}
-          {isProtected ? " · Protected" : ""}
-        </p>
-        <h3>{project.title}</h3>
-        <div className="project-cta">
-          <span>{isProtected ? "Enter password" : "Open case study"}</span>
-          <span aria-hidden="true">→</span>
+        <div className="project-overlay">
+          <div className="project-tags">
+            <span className="project-tag">{project.category}</span>
+            <span className="project-tag">{project.year}</span>
+            {isProtected ? <span className="project-tag">Protected</span> : null}
+          </div>
+          <div className="project-info">
+            <h3>{project.title}</h3>
+            <div className="project-cta">
+              <span>{isProtected ? "Enter password" : "Open case study"}</span>
+              <span aria-hidden="true">→</span>
+            </div>
+          </div>
         </div>
       </div>
     </Link>

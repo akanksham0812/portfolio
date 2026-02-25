@@ -276,12 +276,12 @@ main {
 }
 
 .project-card {
-  border-radius: 26px;
+  border-radius: 0;
   overflow: hidden;
   text-decoration: none;
-  color: inherit;
+  color: #f5f5f5;
   border: 1px solid #d0d0d0;
-  background: var(--surface);
+  background: #101010;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.25s ease, border-color 0.25s ease;
   will-change: transform;
@@ -293,9 +293,10 @@ main {
 }
 
 .project-image-wrap {
+  position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: #e8e8e8;
+  background: #151515;
 }
 
 .project-image-wrap img,
@@ -312,37 +313,75 @@ main {
   transform: scale(1.035);
 }
 
-.project-info {
-  padding: 1.15rem 1.2rem 1.3rem;
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.08rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.14) 32%,
+    rgba(0, 0, 0, 0.68) 100%
+  );
+  pointer-events: none;
 }
 
-.project-info p {
-  margin: 0;
-  color: #686868;
-  font-size: 0.84rem;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.52rem;
+}
+
+.project-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #f5f5f5;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: rgba(238, 238, 238, 0.24);
+  backdrop-filter: blur(2px);
+}
+
+.project-info {
+  max-width: 92%;
 }
 
 .project-info h3 {
-  margin: 0.56rem 0 0;
-  font-size: clamp(1.06rem, 1.4vw, 1.45rem);
-  line-height: 1.3;
+  margin: 0;
+  color: #f7f7f7;
+  letter-spacing: -0.02em;
+  line-height: 1.14;
+  font-size: clamp(1.45rem, 2.45vw, 2.2rem);
+  text-wrap: balance;
 }
 
 .project-cta {
-  margin-top: 0.85rem;
+  margin-top: 0.7rem;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.82rem;
+  width: max-content;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #4f4f4f;
+  color: #efefef;
+  padding: 0.44rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.34);
 }
 
 .project-card:hover .project-cta {
-  color: #161616;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.8);
 }
 
 .about-grid {
@@ -876,16 +915,41 @@ main {
   }
 
   .hero {
-    min-height: calc(100svh - 64px);
-    min-height: 610px;
+    min-height: max(760px, calc(100svh - 64px));
   }
 
   .hero-title-wrap {
-    width: calc(100% - 1.4rem);
+    width: min(430px, calc(100% - 1.4rem));
+    top: 56%;
+  }
+
+  .hero-title-wrap h1 {
+    font-size: clamp(3.5rem, 18vw, 5.6rem);
+  }
+
+  .hero-left-lines,
+  .hero-right-lines {
+    position: absolute;
+    font-size: clamp(0.62rem, 2.3vw, 0.74rem);
+    line-height: 1.24;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-right-lines {
+    left: 50%;
+    top: -74px;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
+  .hero-left-lines {
+    right: 6%;
+    bottom: -60px;
+    text-align: left;
   }
 
   .brand-strip {
-    min-height: 90px;
+    display: none;
   }
 
   .brand-track {
@@ -898,6 +962,33 @@ main {
   .resume-page {
     width: calc(100% - 1.2rem);
     padding: 3.6rem 0;
+  }
+
+  .project-image-wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-overlay {
+    padding: 0.82rem;
+  }
+
+  .project-tag {
+    font-size: 0.72rem;
+    padding: 0.38rem 0.66rem;
+  }
+
+  .project-info {
+    max-width: 96%;
+  }
+
+  .project-info h3 {
+    font-size: clamp(1.28rem, 7.2vw, 1.85rem);
+  }
+
+  .project-cta {
+    margin-top: 0.58rem;
+    font-size: 0.72rem;
+    padding: 0.38rem 0.68rem;
   }
 
   .contact-panel {
