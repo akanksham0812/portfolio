@@ -23,16 +23,9 @@ export function UlioUsecasePage({ project }) {
           </div>
 
           <div className="ulio-hero-grid">
-            <h1 className="ulio-hero-copy" aria-hidden="true">
-              {(data.hero?.lines || []).map((line) => (
-                <span key={line}>{line}</span>
-              ))}
-            </h1>
-            {data.assets?.heroMockup || project.hero ? (
-              <div className="ulio-hero-mockup">
-                <SafeImage image={data.assets?.heroMockup || project.hero} alt="Ulio mobile mockup" loading="eager" />
-              </div>
-            ) : null}
+            <div className="ulio-hero-mockup-only">
+              <SafeImage image={data.assets?.heroMockup || project.hero} alt="Ulio mobile mockup" loading="eager" />
+            </div>
           </div>
 
           <div className="ulio-hero-icons" aria-hidden="true">

@@ -4,6 +4,7 @@ import { createCaseStudyProject } from "../template/caseStudy.template.js";
 const ulioUsecaseAssets = {
   hero: imageAsset("assets/projects/ulio-usecase/modile_index1.png", ""),
   cover: imageAsset("assets/projects/ulio-usecase/modile_index1.png", ""),
+  uiMockup: imageAsset("assets/projects/ulio-usecase/vendor-management-system-shot-61.png", ""),
   medal: imageAsset("assets/projects/ulio-usecase/medal.png", ""),
   calendar: imageAsset("assets/projects/ulio-usecase/calendar.png", ""),
   flower: imageAsset("assets/projects/ulio-usecase/flower.png", ""),
@@ -88,7 +89,7 @@ export const ulioCaseStudyProject = createCaseStudyProject({
     uiShowcase: {
       headline: "UNDERSTAND.\nLEARN.\nINSPIRE.\nOUTSHINE.",
       subheadline: "UNDERSTAND.\nLEARN.\nINSPIRE.\nOUTSHINE.",
-      mockup: null,
+      mockup: ulioUsecaseAssets.uiMockup,
     },
     footer: {
       preface: "I could tell you more, but then I'd have to redact you. 🤫",
