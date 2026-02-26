@@ -895,6 +895,9 @@ main {
   .hero-ring-item {
     transition: none;
   }
+  .case-story-image {
+    animation: none;
+  }
 }
 
 @media (max-width: 920px) {
@@ -1404,9 +1407,47 @@ main {
   color: var(--text);
 }
 
+.cs-root--image {
+  background: #111111;
+  color: #f2f2f2;
+}
+
 .cs-page {
   color: var(--text);
   padding-bottom: 6rem;
+}
+
+.cs-page--image {
+  width: min(560px, 96vw);
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+.cs-image-stack {
+  margin-top: 1.8rem;
+}
+
+.case-story-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
+  animation: ulio-reveal 0.9s ease both;
+}
+
+.case-story-image + .case-story-image {
+  margin-top: 1.2rem;
+}
+
+@keyframes ulio-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Back button */
@@ -1917,4 +1958,521 @@ main {
 .cs-next,
 .cs-section {
   width: 100%;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   ULIO USECASE — REAL COMPONENT
+══════════════════════════════════════════════════════════════════ */
+
+.ulio-usecase {
+  background: #0a0a0a;
+  color: #f6f6f6;
+  font-family: "Poppins", "Space Grotesk", sans-serif;
+  min-height: 100vh;
+  padding-bottom: 6rem;
+}
+
+.ulio-usecase-inner {
+  width: min(1180px, 94vw);
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+.ulio-section-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  color: #8d8d8d;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  margin: 2.5rem 0 1.2rem;
+}
+
+.ulio-section-header span:nth-child(2) {
+  color: #bdbdbd;
+}
+
+.ulio-hero {
+  background: #d93e2e;
+  border-radius: 20px;
+  padding: 2.3rem 2.6rem 2.8rem;
+  margin-top: 1.6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ulio-hero-pill {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  color: #111;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.ulio-hero-pill-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.ulio-hero-pill-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #d93e2e;
+  color: #fff;
+  display: inline-grid;
+  place-items: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.ulio-hero-pill-title {
+  text-align: center;
+  font-weight: 600;
+}
+
+.ulio-hero-pill-index {
+  color: #777;
+  font-weight: 500;
+}
+
+.ulio-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
+  margin-top: 2.2rem;
+  align-items: center;
+}
+
+.ulio-hero-copy {
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.ulio-hero-copy span {
+  display: block;
+}
+
+.ulio-hero-mockup {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 26px;
+  padding: 1.2rem;
+}
+
+.ulio-hero-mockup img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 22px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.ulio-hero-icons {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ulio-hero-icon {
+  position: absolute;
+  font-size: 1.3rem;
+}
+
+.ulio-hero-icon.is-medal {
+  width: 42px;
+  height: 42px;
+  left: 1.6rem;
+  top: 5.3rem;
+  object-fit: contain;
+}
+
+.ulio-hero-icon.is-plane {
+  left: 2rem;
+  bottom: 5.2rem;
+}
+
+.ulio-hero-icon.is-bag {
+  left: 2.4rem;
+  bottom: 2.8rem;
+}
+
+.ulio-hero-icon.is-flower {
+  right: 3rem;
+  top: 6.4rem;
+}
+
+.ulio-about {
+  margin-top: 2.5rem;
+  background: #0f0f0f;
+  border-radius: 18px;
+  padding: 2.4rem;
+  border: 1px solid #1f1f1f;
+}
+
+.ulio-about-body {
+  margin: 1.2rem auto 1.8rem;
+  max-width: 64ch;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #d9d9d9;
+  text-align: center;
+}
+
+.ulio-about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.ulio-chip {
+  background: #1c1c1c;
+  color: #f0f0f0;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+}
+
+.ulio-chip--about.ulio-chip--1 { background: #e8d7ff; color: #2c109f; }
+.ulio-chip--about.ulio-chip--2 { background: #d9f7c6; color: #20451a; }
+.ulio-chip--about.ulio-chip--3 { background: #cbefff; color: #0f4a6c; }
+.ulio-chip--about.ulio-chip--4 { background: #d9e0ff; color: #2c2c5d; }
+
+.ulio-chip--brand {
+  background: rgba(255, 255, 255, 0.9);
+  color: #2c2c2c;
+}
+
+.ulio-brand-cards {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.6rem;
+}
+
+.ulio-brand-card {
+  border-radius: 20px;
+  padding: 2.2rem;
+  position: relative;
+  min-height: 220px;
+}
+
+.ulio-brand-card--red {
+  background: #d93e2e;
+  color: #fff;
+}
+
+.ulio-brand-card--dark {
+  background: #0f0f0f;
+  border: 1px solid #1b1b1b;
+  color: #fff;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.ulio-brand-card h2 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.ulio-brand-underline {
+  display: block;
+  width: 34px;
+  height: 4px;
+  background: #ffffff;
+  margin-top: 0.6rem;
+  border-radius: 999px;
+}
+
+.ulio-brand-card--dark .ulio-brand-underline {
+  background: #bfe8f0;
+}
+
+.ulio-brand-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.6rem;
+}
+
+.ulio-brand-grid {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+}
+
+.ulio-brand-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.ulio-brand-dot.is-red { background: #d93e2e; }
+.ulio-brand-dot.is-blue { background: #106ca6; }
+.ulio-brand-dot.is-teal { background: #33aca5; }
+.ulio-brand-dot.is-purple { background: #2c109f; }
+
+.ulio-research {
+  margin-top: 2.6rem;
+}
+
+.ulio-research h2 {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.ulio-research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.ulio-research-card {
+  background: #101010;
+  border: 1px solid #1e1e1e;
+  border-radius: 16px;
+  padding: 1.6rem;
+  color: #d6d6d6;
+}
+
+.ulio-research-card h3 {
+  margin-top: 0;
+  color: #ffffff;
+}
+
+.ulio-research-card ul {
+  margin: 0.8rem 0 0;
+  padding-left: 1.1rem;
+  color: #bdbdbd;
+}
+
+.ulio-research-card li {
+  margin-bottom: 0.6rem;
+}
+
+.ulio-pain {
+  margin-top: 2.8rem;
+}
+
+.ulio-pain-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.ulio-pain-divider {
+  width: 1px;
+  background: #2a2a2a;
+  height: 100%;
+}
+
+.ulio-badge {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: #2a2a2a;
+  color: #f2f2f2;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.ulio-badge.is-warn {
+  color: #ff7a63;
+  border: 1px solid rgba(255, 122, 99, 0.4);
+}
+
+.ulio-pain-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #d7d7d7;
+}
+
+.ulio-pain-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.ulio-pain-list span {
+  font-size: 1rem;
+}
+
+.ulio-typography {
+  background: #f6f6f6;
+  color: #111;
+  margin-top: 3rem;
+  border-radius: 20px;
+  padding: 2.5rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.ulio-typography-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.ulio-typography-hero {
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 700;
+  color: #d93e2e;
+}
+
+.ulio-typography-copy h3 {
+  margin: 0.5rem 0 0.4rem;
+  font-size: 1.6rem;
+}
+
+.ulio-typography-copy span {
+  color: #666;
+}
+
+.ulio-palette {
+  margin-top: 2.2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.2rem;
+}
+
+.ulio-swatch {
+  background: #111;
+  color: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  display: grid;
+  place-items: center;
+  gap: 0.6rem;
+}
+
+.ulio-swatch-inner {
+  width: 74px;
+  height: 74px;
+  border-radius: 16px;
+  border: 6px solid #fff;
+}
+
+.ulio-ui {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  margin-top: 3rem;
+  align-items: center;
+}
+
+.ulio-ui-copy h2,
+.ulio-ui-copy h3 {
+  white-space: pre-line;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.ulio-ui-copy h2 {
+  font-size: 2.6rem;
+  color: #ff6b4e;
+  margin: 0 0 1.2rem;
+}
+
+.ulio-ui-copy h3 {
+  font-size: 2.2rem;
+  margin: 0;
+  color: #444;
+}
+
+.ulio-ui-mockup img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 26px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.ulio-footer {
+  margin-top: 3rem;
+  background: #d93e2e;
+  color: #fff;
+  border-radius: 18px;
+  padding: 2.6rem;
+  text-align: center;
+}
+
+.ulio-footer p {
+  margin: 0 0 0.8rem;
+  font-size: 0.95rem;
+}
+
+.ulio-footer h2 {
+  margin: 0;
+  font-size: 2rem;
+  white-space: pre-line;
+}
+
+@media (max-width: 900px) {
+  .ulio-hero-grid,
+  .ulio-ui {
+    grid-template-columns: 1fr;
+  }
+
+  .ulio-pain-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ulio-pain-divider {
+    display: none;
+  }
+
+  .ulio-typography-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ulio-hero-icons {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .ulio-hero {
+    padding: 1.6rem;
+  }
+
+  .ulio-hero-pill {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .ulio-hero-copy {
+    font-size: 1.8rem;
+  }
+
+  .ulio-ui-copy h2,
+  .ulio-ui-copy h3 {
+    font-size: 1.6rem;
+  }
 }

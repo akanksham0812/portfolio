@@ -1,5 +1,6 @@
 import { operationsDasboardProject } from "./data/operations-dasboard.project.js";
 import { plCaseStudyProject } from "./data/pl-case-study.project.js";
+import { ulioCaseStudyProject } from "./data/ulio-case-study.project.js";
 
 export const projectConfigs = [
   {
@@ -21,5 +22,14 @@ export const projectConfigs = [
       passwordProtected: false,
     },
     data: plCaseStudyProject,
+  },
+  {
+    slug: "ulio-case-study",
+    routeAliases: ["ulio"],
+    template: "ulio-usecase",
+    access: {
+      passwordProtected: false,
+    },
+    data: ulioCaseStudyProject,
   },
 ];

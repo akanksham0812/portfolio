@@ -9,17 +9,13 @@ import {
   projectRoutes,
   projects,
 } from "./projects/runtime";
+import SafeImage from "./components/SafeImage";
+import { withBase } from "./utils/assetPaths";
+import { UlioUsecasePage } from "./projects/template/ulioUsecase";
 
 const filters = ["All", "Product Design", "UX Case Study"];
 const HERO_IMAGE_SCALE = 0.7;
 const HERO_OBJECT_BASE_WIDTH = 220;
-const BASE_URL = import.meta.env.BASE_URL || "/";
-const withBase = (path) => {
-  if (!path || /^https?:\/\//.test(path) || path.startsWith("data:")) {
-    return path;
-  }
-  return `${BASE_URL}${path.replace(/^\/+/, "")}`;
-};
 const RESUME_PDF_PATH = withBase("assets/resume/Akanksha-Mahangere-Resume.pdf");
 const CONTACT_EMAIL = "akanksha.ux8@gmail.com";
 const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
@@ -60,62 +56,6 @@ const saveProjectUnlockState = (slug) => {
     // Ignore storage failures and keep the in-memory unlock.
   }
 };
-
-const resolveImage = (image) => {
-  if (typeof image === "string") {
-    return { primary: withBase(image), fallback: null };
-  }
-
-  if (!image || typeof image !== "object") {
-    return { primary: "", fallback: null };
-  }
-
-  const local = withBase(image.local || "");
-  const remote = image.remote || "";
-  const primary = local || remote;
-  const fallback = image.remote && image.remote !== primary ? image.remote : null;
-
-  return { primary, fallback };
-};
-
-function SafeImage({ image, alt, className, style, loading = "lazy" }) {
-  const { primary, fallback } = useMemo(() => resolveImage(image), [image]);
-  const [src, setSrc] = useState(primary);
-  const [fallbackUsed, setFallbackUsed] = useState(false);
-  const [hasFailed, setHasFailed] = useState(false);
-
-  useEffect(() => {
-    setSrc(primary);
-    setFallbackUsed(false);
-    setHasFailed(false);
-  }, [primary, fallback]);
-
-  const handleError = () => {
-    if (!fallbackUsed && fallback) {
-      setSrc(fallback);
-      setFallbackUsed(true);
-      return;
-    }
-
-    setHasFailed(true);
-  };
-
-  if (!src || hasFailed) {
-    return <div className={`img-fallback ${className || ""}`.trim()} style={style} aria-label={alt} role="img" />;
-  }
-
-  return (
-    <img
-      src={src}
-      alt={alt}
-      className={className}
-      style={style}
-      loading={loading}
-      decoding="async"
-      onError={handleError}
-    />
-  );
-}
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const lerp = (start, end, progress) => start + (end - start) * progress;
@@ -807,6 +747,36 @@ function CaseStudyPage({ slug }) {
           {passwordError ? <p className="unlock-error">{passwordError}</p> : null}
         </form>
       </article>
+    );
+  }
+
+  if (project.template === "ulio-usecase") {
+    return <UlioUsecasePage project={project} />;
+  }
+
+  if (project.template === "image-case-study") {
+    const images = project.gallery?.length ? project.gallery : project.hero ? [project.hero] : [];
+
+    return (
+      <div className="cs-root cs-root--image">
+        <article className="case-page cs-page cs-page--image">
+          <button className="cs-back" onClick={() => navigate("/?section=work")}>
+            <span className="cs-back-arrow">←</span> All Work
+          </button>
+          <div className="cs-image-stack">
+            {images.map((image, index) => (
+              <SafeImage
+                key={`${project.slug}-story-${index}`}
+                image={image}
+                alt={`${project.shortTitle} case study visual ${index + 1}`}
+                className="case-story-image"
+                style={{ animationDelay: `${index * 0.12}s` }}
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            ))}
+          </div>
+        </article>
+      </div>
     );
   }
 
