@@ -2,10 +2,11 @@ import { imageAsset } from "../imageAsset.js";
 import { createCaseStudyProject } from "../template/caseStudy.template.js";
 
 const ulioUsecaseAssets = {
-  cover: imageAsset("assets/projects/ulio-usecase/vendor-management-system-section.png", ""),
-  heroMockup: imageAsset("assets/projects/ulio-usecase/vendor-management-system-shot-61.png", ""),
-  uiCollage: imageAsset("assets/projects/ulio-usecase/vendor-management-system-shot-61.png", ""),
-  medal: imageAsset("assets/projects/ulio-usecase/vendor-management-system-medal.png", ""),
+  hero: imageAsset("assets/projects/ulio-usecase/modile_index1.png", ""),
+  cover: imageAsset("assets/projects/ulio-usecase/modile_index1.png", ""),
+  medal: imageAsset("assets/projects/ulio-usecase/medal.png", ""),
+  calendar: imageAsset("assets/projects/ulio-usecase/calendar.png", ""),
+  flower: imageAsset("assets/projects/ulio-usecase/flower.png", ""),
 };
 
 export const ulioCaseStudyProject = createCaseStudyProject({
@@ -16,13 +17,13 @@ export const ulioCaseStudyProject = createCaseStudyProject({
   summary:
     "A mobile-first product case study showcasing brand, research, and UI decisions for Ulio.",
   cover: ulioUsecaseAssets.cover,
-  hero: ulioUsecaseAssets.heroMockup,
+  hero: ulioUsecaseAssets.hero,
   usecase: {
     hero: {
       kicker: "Ulio",
       title: "Career Mobile App Design",
       index: "01/11",
-      lines: ["Understand.", "Learn.", "Inspire.", "Outshine."],
+      // lines: ["Understand.", "Learn.", "Inspire.", "Outshine."],
     },
     about: {
       label: "About Ulio",
@@ -87,15 +88,17 @@ export const ulioCaseStudyProject = createCaseStudyProject({
     uiShowcase: {
       headline: "UNDERSTAND.\nLEARN.\nINSPIRE.\nOUTSHINE.",
       subheadline: "UNDERSTAND.\nLEARN.\nINSPIRE.\nOUTSHINE.",
-      mockup: ulioUsecaseAssets.uiCollage,
+      mockup: null,
     },
     footer: {
       preface: "I could tell you more, but then I'd have to redact you. 🤫",
       thanks: "Thank you for\nscrolling through!",
     },
     assets: {
-      heroMockup: ulioUsecaseAssets.heroMockup,
+      heroMockup: ulioUsecaseAssets.hero,
       medal: ulioUsecaseAssets.medal,
+      calendar: ulioUsecaseAssets.calendar,
+      flower: ulioUsecaseAssets.flower,
     },
   },
 });

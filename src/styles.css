@@ -1996,9 +1996,9 @@ main {
 
 .ulio-hero {
   background: #d93e2e;
-  border-radius: 20px;
-  padding: 2.3rem 2.6rem 2.8rem;
-  margin-top: 1.6rem;
+  border-radius: 28px;
+  padding: 2.2rem 2.6rem 0.1rem;
+  margin-top: 1rem;
   position: relative;
   overflow: hidden;
 }
@@ -2015,6 +2015,8 @@ main {
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: none;
+  width: min(100%, 900px);
+  margin: 0 auto;
 }
 
 .ulio-hero-pill-brand {
@@ -2047,19 +2049,26 @@ main {
 }
 
 .ulio-hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 2rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
   margin-top: 2.2rem;
-  align-items: center;
+  min-height: 420px;
 }
 
 .ulio-hero-copy {
-  font-size: clamp(2rem, 4vw, 3.1rem);
+  position: absolute;
+  left: 18%;
+  top: 52%;
+  transform: translateY(-50%);
+  font-size: clamp(2rem, 4.8vw, 3.4rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.05;
   text-transform: uppercase;
   letter-spacing: 0.01em;
+  color: rgba(255, 220, 214, 0.34);
+  z-index: 1;
+  margin: 0;
 }
 
 .ulio-hero-copy span {
@@ -2067,17 +2076,19 @@ main {
 }
 
 .ulio-hero-mockup {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 26px;
-  padding: 1.2rem;
+  position: relative;
+  z-index: 2;
+  width: min(550px, 80vw);
+  padding: 0;
 }
 
 .ulio-hero-mockup img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 22px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 26px;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 26px 48px rgba(0, 0, 0, 0.28));
 }
 
 .ulio-hero-icons {
@@ -2089,29 +2100,41 @@ main {
 .ulio-hero-icon {
   position: absolute;
   font-size: 1.3rem;
+  z-index: 2;
+  animation: float var(--float-duration, 9s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
 }
 
 .ulio-hero-icon.is-medal {
-  width: 42px;
-  height: 42px;
-  left: 1.6rem;
-  top: 5.3rem;
+  width: 48px;
+  height: 48px;
+  left: 2.1rem;
+  top: 8.4rem;
   object-fit: contain;
+  display: block;
+  --float-duration: 8.5s;
 }
 
-.ulio-hero-icon.is-plane {
-  left: 2rem;
-  bottom: 5.2rem;
-}
-
-.ulio-hero-icon.is-bag {
+.ulio-hero-icon.is-calendar {
+  width: 56px;
+  height: 56px;
   left: 2.4rem;
-  bottom: 2.8rem;
+  bottom: 2.5rem;
+  object-fit: contain;
+  display: block;
+  --float-duration: 9.5s;
+  --float-delay: -2s;
 }
 
 .ulio-hero-icon.is-flower {
-  right: 3rem;
-  top: 6.4rem;
+  width: 60px;
+  height: 60px;
+  right: 3.6rem;
+  bottom: 2.5rem;
+  object-fit: contain;
+  display: block;
+  --float-duration: 10s;
+  --float-delay: -1.4s;
 }
 
 .ulio-about {
@@ -2387,6 +2410,10 @@ main {
   align-items: center;
 }
 
+.ulio-ui.is-single {
+  grid-template-columns: 1fr;
+}
+
 .ulio-ui-copy h2,
 .ulio-ui-copy h3 {
   white-space: pre-line;
@@ -2453,7 +2480,15 @@ main {
   }
 
   .ulio-hero-icons {
-    display: none;
+    opacity: 0.7;
+  }
+
+  .ulio-hero-grid {
+    min-height: 500px;
+  }
+
+  .ulio-hero-copy {
+    left: 12%;
   }
 }
 
@@ -2468,7 +2503,8 @@ main {
   }
 
   .ulio-hero-copy {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    left: 6%;
   }
 
   .ulio-ui-copy h2,

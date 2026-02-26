@@ -23,23 +23,28 @@ export function UlioUsecasePage({ project }) {
           </div>
 
           <div className="ulio-hero-grid">
-            <div className="ulio-hero-copy">
+            <h1 className="ulio-hero-copy" aria-hidden="true">
               {(data.hero?.lines || []).map((line) => (
                 <span key={line}>{line}</span>
               ))}
-            </div>
-            <div className="ulio-hero-mockup">
-              <SafeImage image={data.assets?.heroMockup || project.hero} alt="Ulio mobile mockups" loading="eager" />
-            </div>
+            </h1>
+            {data.assets?.heroMockup || project.hero ? (
+              <div className="ulio-hero-mockup">
+                <SafeImage image={data.assets?.heroMockup || project.hero} alt="Ulio mobile mockup" loading="eager" />
+              </div>
+            ) : null}
           </div>
 
           <div className="ulio-hero-icons" aria-hidden="true">
             {data.assets?.medal ? (
               <SafeImage image={data.assets.medal} alt="" className="ulio-hero-icon is-medal" />
             ) : null}
-            <span className="ulio-hero-icon is-plane">✈️</span>
-            <span className="ulio-hero-icon is-bag">👜</span>
-            <span className="ulio-hero-icon is-flower">🌸</span>
+            {data.assets?.calendar ? (
+              <SafeImage image={data.assets.calendar} alt="" className="ulio-hero-icon is-calendar" />
+            ) : null}
+            {data.assets?.flower ? (
+              <SafeImage image={data.assets.flower} alt="" className="ulio-hero-icon is-flower" />
+            ) : null}
           </div>
         </section>
 
@@ -152,14 +157,16 @@ export function UlioUsecasePage({ project }) {
           </div>
         </section>
 
-        <section className="ulio-ui">
+        <section className={`ulio-ui ${data.uiShowcase?.mockup ? "" : "is-single"}`.trim()}>
           <div className="ulio-ui-copy">
             <h2>{data.uiShowcase?.headline}</h2>
             <h3>{data.uiShowcase?.subheadline}</h3>
           </div>
-          <div className="ulio-ui-mockup">
-            <SafeImage image={data.uiShowcase?.mockup} alt="Ulio UI mockups" />
-          </div>
+          {data.uiShowcase?.mockup ? (
+            <div className="ulio-ui-mockup">
+              <SafeImage image={data.uiShowcase?.mockup} alt="Ulio UI mockups" />
+            </div>
+          ) : null}
         </section>
 
         <section className="ulio-footer">

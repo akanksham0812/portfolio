@@ -28,7 +28,9 @@ export const projectConfigs = [
     routeAliases: ["ulio"],
     template: "ulio-usecase",
     access: {
-      passwordProtected: false,
+      passwordProtected: true,
+      envKey: "VITE_ULIO_PROJECT_PASSWORD",
+      devFallbackPassword: "ulio",
     },
     data: ulioCaseStudyProject,
   },
