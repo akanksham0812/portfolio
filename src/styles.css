@@ -2101,6 +2101,9 @@ main {
   filter: drop-shadow(0 26px 48px rgba(0, 0, 0, 0.28));
 }
 
+.ulio-hero-mockup-only img {
+    transform: translateX(60px);
+}
 .ulio-hero-icons {
   position: absolute;
   inset: 0;

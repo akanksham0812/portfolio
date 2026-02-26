@@ -62,7 +62,7 @@ export function UlioUsecasePage({ project }) {
               {data.hero?.kicker || project.shortTitle}
             </span>
             <span className="ulio-hero-pill-title">{data.hero?.title}</span>
-            <span className="ulio-hero-pill-index">{data.hero?.index}</span>
+            {/* <span className="ulio-hero-pill-index">{data.hero?.index}</span> */}
           </div>
 
           <div className="ulio-hero-grid">

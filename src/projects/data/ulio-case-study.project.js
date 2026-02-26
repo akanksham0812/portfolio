@@ -3,7 +3,7 @@ import { createCaseStudyProject } from "../template/caseStudy.template.js";
 
 const ulioUsecaseAssets = {
   hero: imageAsset("assets/projects/ulio-usecase/modile_index1.png", ""),
-  cover: imageAsset("assets/projects/ulio-usecase/modile_index1.png", ""),
+  cover: imageAsset("assets/projects/ulio-usecase/vendor-management-system-section.png", ""),
   uiMockup: imageAsset("assets/projects/ulio-usecase/screens.svg", ""),
   medal: imageAsset("assets/projects/ulio-usecase/medal.png", ""),
   calendar: imageAsset("assets/projects/ulio-usecase/calendar.png", ""),
