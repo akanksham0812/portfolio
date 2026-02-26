@@ -29,8 +29,8 @@ export const projectConfigs = [
     template: "ulio-usecase",
     access: {
       passwordProtected: true,
-      envKey: "VITE_ULIO_PROJECT_PASSWORD",
-      devFallbackPassword: "ulio",
+      envKey: "VITE_OPS_PROJECT_PASSWORD",
+      devFallbackPassword: "qwerty",
     },
     data: ulioCaseStudyProject,
   },
