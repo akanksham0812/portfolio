@@ -4,10 +4,21 @@ import { createCaseStudyProject } from "../template/caseStudy.template.js";
 const ulioUsecaseAssets = {
   hero: imageAsset("assets/projects/ulio-usecase/modile_index1.png", ""),
   cover: imageAsset("assets/projects/ulio-usecase/modile_index1.png", ""),
-  uiMockup: imageAsset("assets/projects/ulio-usecase/vendor-management-system-shot-61.png", ""),
+  uiMockup: imageAsset("assets/projects/ulio-usecase/screens.svg", ""),
   medal: imageAsset("assets/projects/ulio-usecase/medal.png", ""),
   calendar: imageAsset("assets/projects/ulio-usecase/calendar.png", ""),
   flower: imageAsset("assets/projects/ulio-usecase/flower.png", ""),
+  iconRed: imageAsset("assets/projects/ulio-usecase/red.svg", ""),
+  iconBlue: imageAsset("assets/projects/ulio-usecase/blue.svg", ""),
+  iconTeal: imageAsset("assets/projects/ulio-usecase/teal.svg", ""),
+  iconPurple: imageAsset("assets/projects/ulio-usecase/purp.svg", ""),
+  whiteLogo: imageAsset("assets/projects/ulio-usecase/ulio-white-logo.svg", ""),
+  paletteRed: imageAsset("assets/projects/ulio-usecase/1 Red Background.svg", ""),
+  paletteBlue: imageAsset("assets/projects/ulio-usecase/2 Blue Background.svg", ""),
+  paletteTeal: imageAsset("assets/projects/ulio-usecase/3 teal Background.svg", ""),
+  paletteDarkBlue: imageAsset("assets/projects/ulio-usecase/4 Dark Blue Background.svg", ""),
+  palettePeach: imageAsset("assets/projects/ulio-usecase/5 Peach Background.svg", ""),
+  paletteWhite: imageAsset("assets/projects/ulio-usecase/6 white Background.svg", ""),
 };
 
 export const ulioCaseStudyProject = createCaseStudyProject({
@@ -35,6 +46,13 @@ export const ulioCaseStudyProject = createCaseStudyProject({
     },
     brandCards: {
       leftTags: ["AI Counselor", "Resume Builder", "Career Forecast"],
+      whiteLogo: ulioUsecaseAssets.whiteLogo,
+      icons: {
+        red: ulioUsecaseAssets.iconRed,
+        blue: ulioUsecaseAssets.iconBlue,
+        teal: ulioUsecaseAssets.iconTeal,
+        purple: ulioUsecaseAssets.iconPurple,
+      },
     },
     research: {
       title: "User Research & Analysis",
@@ -79,12 +97,12 @@ export const ulioCaseStudyProject = createCaseStudyProject({
       weights: ["Regular", "Medium", "Semibold", "Bold"],
     },
     palette: [
-      { hex: "#D93E2E" },
-      { hex: "#106CA6" },
-      { hex: "#33ACA5" },
-      { hex: "#2C109F" },
-      { hex: "#FCE8E8" },
-      { hex: "#FFFFFF" },
+      { image: ulioUsecaseAssets.paletteRed },
+      { image: ulioUsecaseAssets.paletteBlue },
+      { image: ulioUsecaseAssets.paletteTeal },
+      { image: ulioUsecaseAssets.paletteDarkBlue },
+      { image: ulioUsecaseAssets.palettePeach },
+      { image: ulioUsecaseAssets.paletteWhite },
     ],
     uiShowcase: {
       headline: "UNDERSTAND.\nLEARN.\nINSPIRE.\nOUTSHINE.",

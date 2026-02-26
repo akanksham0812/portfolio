@@ -865,10 +865,10 @@ main {
 @keyframes float {
   0%,
   100% {
-    margin-top: 0;
+    transform: translateY(0);
   }
   50% {
-    margin-top: -9px;
+    transform: translateY(-9px);
   }
 }
 
@@ -2053,6 +2053,8 @@ main {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  width: 100%;
   margin-top: 2.2rem;
   min-height: 420px;
 }
@@ -2065,13 +2067,22 @@ main {
   display: block;
 }
 
+.ulio-hero-mockup-only {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
 .ulio-hero-mockup-only img {
-  width: min(760px, 92vw);
+  width: 100%;
+  max-width: 760px;
   height: auto;
   display: block;
   mix-blend-mode: normal;
   filter: none;
   border-radius: 20px;
+  margin: 0 auto;
 }
 
 .ulio-hero-mockup {
@@ -2098,40 +2109,32 @@ main {
 
 .ulio-hero-icon {
   position: absolute;
-  font-size: 1.3rem;
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  display: block;
   z-index: 2;
   animation: float var(--float-duration, 9s) ease-in-out infinite;
   animation-delay: var(--float-delay, 0s);
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.18));
 }
 
 .ulio-hero-icon.is-medal {
-  width: 48px;
-  height: 48px;
-  left: 2.1rem;
-  top: 8.4rem;
-  object-fit: contain;
-  display: block;
+  right: 3.5rem;
+  top: 2.5rem;
   --float-duration: 8.5s;
 }
 
 .ulio-hero-icon.is-calendar {
-  width: 56px;
-  height: 56px;
-  left: 2.4rem;
-  bottom: 2.5rem;
-  object-fit: contain;
-  display: block;
+  left: 3rem;
+  bottom: 3.5rem;
   --float-duration: 9.5s;
   --float-delay: -2s;
 }
 
 .ulio-hero-icon.is-flower {
-  width: 60px;
-  height: 60px;
-  right: 3.6rem;
-  bottom: 2.5rem;
-  object-fit: contain;
-  display: block;
+  right: 3.5rem;
+  bottom: 3.5rem;
   --float-duration: 10s;
   --float-delay: -1.4s;
 }
@@ -2174,37 +2177,59 @@ main {
 .ulio-chip--about.ulio-chip--3 { background: #cbefff; color: #0f4a6c; }
 .ulio-chip--about.ulio-chip--4 { background: #d9e0ff; color: #2c2c5d; }
 
+.ulio-cursor {
+  display: inline-block;
+  font-weight: 300;
+  margin-left: 1px;
+  animation: blink-cursor 0.7s step-end infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
 .ulio-chip--brand {
   background: rgba(255, 255, 255, 0.9);
   color: #2c2c2c;
 }
 
-.ulio-brand-cards {
+.ulio-brand-cards-wrap {
   margin-top: 2rem;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 1.4rem;
+}
+
+.ulio-brand-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.6rem;
+  gap: 1.4rem;
 }
 
 .ulio-brand-card {
   border-radius: 20px;
   padding: 2.2rem;
   position: relative;
-  min-height: 220px;
+  min-height: 360px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .ulio-brand-card--red {
   background: #d93e2e;
   color: #fff;
+  isolation: isolate;
 }
 
 .ulio-brand-card--dark {
   background: #0f0f0f;
   border: 1px solid #1b1b1b;
   color: #fff;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cline x1='0' y1='0' x2='40' y2='0' stroke='white' stroke-opacity='0.15' stroke-width='1' stroke-dasharray='2,5'/%3E%3Cline x1='0' y1='0' x2='0' y2='40' stroke='white' stroke-opacity='0.15' stroke-width='1' stroke-dasharray='2,5'/%3E%3Ccircle cx='0' cy='0' r='1.5' fill='white' fill-opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
 }
 
 .ulio-brand-card h2 {
@@ -2225,37 +2250,99 @@ main {
   background: #bfe8f0;
 }
 
+/* Red card — floating tags */
 .ulio-brand-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 1.6rem;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
+.ulio-chip--brand {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  pointer-events: all;
+  font-weight: 500;
+  white-space: nowrap;
+  transform-origin: center center;
+  animation: float var(--chip-duration, 9s) ease-in-out infinite;
+  animation-delay: var(--chip-delay, 0s);
+}
+
+.ulio-chip--brand-1 {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a1a;
+  top: 20%;
+  left: 10%;
+  rotate: -10deg;
+  --chip-duration: 8s;
+}
+
+.ulio-chip--brand-2 {
+  background: #d9f7c6;
+  color: #20451a;
+  top: 20%;
+  right: 8%;
+  rotate: 10deg;
+  --chip-duration: 9.5s;
+  --chip-delay: -2s;
+}
+
+.ulio-chip--brand-3 {
+  background: #e8d7ff;
+  color: #2c109f;
+  top: calc(50% + 96px);
+  left: 50%;
+  translate: -50% 0;
+  rotate: 0deg;
+  --chip-duration: 10.5s;
+  --chip-delay: -1.3s;
+}
+
+/* Dark card — 4 U icons at corners */
 .ulio-brand-grid {
   position: absolute;
-  top: 22px;
-  right: 22px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.6rem;
+  inset: 0;
+  pointer-events: none;
 }
 
 .ulio-brand-dot {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  display: grid;
-  place-items: center;
-  color: #fff;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+  animation: float var(--dot-duration, 8s) ease-in-out infinite;
+  animation-delay: var(--dot-delay, 0s);
 }
 
-.ulio-brand-dot.is-red { background: #d93e2e; }
-.ulio-brand-dot.is-blue { background: #106ca6; }
-.ulio-brand-dot.is-teal { background: #33aca5; }
-.ulio-brand-dot.is-purple { background: #2c109f; }
+.ulio-brand-dot.is-red    { top: 62px;    left: 62px;  --dot-duration: 8s;              }
+.ulio-brand-dot.is-blue   { top: 62px;    right: 62px; --dot-duration: 9s;   --dot-delay: -2s;  }
+.ulio-brand-dot.is-teal   { bottom: 62px; left: 62px;  --dot-duration: 10s;  --dot-delay: -1s;  }
+.ulio-brand-dot.is-purple { bottom: 62px; right: 62px; --dot-duration: 7.5s; --dot-delay: -3s;  }
+
+.ulio-brand-logo-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ulio-brand-logo-img {
+  width: min(175px, 62%);
+  height: auto;
+  display: block;
+}
+
+.ulio-brand-title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
 .ulio-research {
   margin-top: 2.6rem;
@@ -2346,10 +2433,17 @@ main {
   font-size: 1rem;
 }
 
+.ulio-section-title {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  margin-top: 2.6rem;
+}
+
 .ulio-typography {
   background: #f6f6f6;
   color: #111;
-  margin-top: 3rem;
+  margin-top: 1rem;
   border-radius: 20px;
   padding: 2.5rem;
   font-family: "Poppins", sans-serif;
@@ -2378,66 +2472,90 @@ main {
 }
 
 .ulio-palette {
-  margin-top: 2.2rem;
+  margin-top: 2.5rem;
+  background: #111;
+  border-radius: 20px;
+  padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: repeat(3, 150px);
+  gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
+  overflow: visible;
 }
 
 .ulio-swatch {
-  background: #111;
-  color: #fff;
-  border-radius: 16px;
-  padding: 1rem;
-  display: grid;
-  place-items: center;
-  gap: 0.6rem;
+  aspect-ratio: 1;
+  display: flex;
+  position: relative;
+  animation: float-swatch 3.2s ease-in-out infinite;
 }
 
-.ulio-swatch-inner {
-  width: 74px;
-  height: 74px;
-  border-radius: 16px;
-  border: 6px solid #fff;
+.ulio-swatch:nth-child(1) { animation-delay: 0s; }
+.ulio-swatch:nth-child(2) { animation-delay: 0.4s; transform: scale(1.3); z-index: 4; }
+.ulio-swatch:nth-child(3) { animation-delay: 0.8s; }
+.ulio-swatch:nth-child(4) { animation-delay: 1.2s; }
+.ulio-swatch:nth-child(5) { animation-delay: 1.6s; transform: scale(1.3); z-index: 5; }
+.ulio-swatch:nth-child(6) { animation-delay: 2.0s; }
+
+@keyframes float-swatch {
+  0%, 100% { translate: 0 0; }
+  50%       { translate: 0 -10px; }
+}
+
+.ulio-swatch-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .ulio-ui {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
   margin-top: 3rem;
-  align-items: center;
+  background: #0d0d0d;
+  border-radius: 24px;
+  padding: 0.5rem 0 0.5rem 2rem;
+  overflow: hidden;
 }
 
-.ulio-ui.is-single {
-  grid-template-columns: 1fr;
+.ulio-ui-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8rem;
 }
 
-.ulio-ui-copy h2,
-.ulio-ui-copy h3 {
+.ulio-ui-text {
   white-space: pre-line;
   text-transform: uppercase;
   line-height: 1.1;
-}
-
-.ulio-ui-copy h2 {
-  font-size: 2.6rem;
-  color: #ff6b4e;
-  margin: 0 0 1.2rem;
-}
-
-.ulio-ui-copy h3 {
-  font-size: 2.2rem;
+  font-size: clamp(1.4rem, 2.2vw, 2.4rem);
+  font-weight: 700;
   margin: 0;
-  color: #444;
+  letter-spacing: 0.01em;
+}
+
+.ulio-ui-text--1 { color: #D93E2E; }
+.ulio-ui-text--2 { color: #555; }
+.ulio-ui-text--3 { color: #2a2a2a; }
+
+.ulio-ui-mockup {
+  overflow: hidden;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
 }
 
 .ulio-ui-mockup img {
   width: 100%;
-  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
   display: block;
-  border-radius: 26px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
 .ulio-footer {
@@ -2479,7 +2597,27 @@ main {
   }
 
   .ulio-hero-icons {
-    opacity: 0.7;
+    opacity: 0.85;
+  }
+
+  .ulio-hero-icon {
+    width: 68px;
+    height: 68px;
+  }
+
+  .ulio-hero-icon.is-medal {
+    right: 1.5rem;
+    top: 1.5rem;
+  }
+
+  .ulio-hero-icon.is-calendar {
+    left: 1.5rem;
+    bottom: 2rem;
+  }
+
+  .ulio-hero-icon.is-flower {
+    right: 1.5rem;
+    bottom: 2rem;
   }
 
   .ulio-hero-grid {
@@ -2506,8 +2644,7 @@ main {
     left: 6%;
   }
 
-  .ulio-ui-copy h2,
-  .ulio-ui-copy h3 {
-    font-size: 1.6rem;
+  .ulio-ui-text {
+    font-size: 1.4rem;
   }
 }
