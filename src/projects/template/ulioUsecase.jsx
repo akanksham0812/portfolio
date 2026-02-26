@@ -188,12 +188,7 @@ export function UlioUsecasePage({ project }) {
           </div>
         </section>
 
-        <section className="ulio-ui">
-          <div className="ulio-ui-copy">
-            <p className="ulio-ui-text ulio-ui-text--1">{data.uiShowcase?.headline}</p>
-            <p className="ulio-ui-text ulio-ui-text--2">{data.uiShowcase?.headline}</p>
-            <p className="ulio-ui-text ulio-ui-text--3">{data.uiShowcase?.headline}</p>
-          </div>
+        <section className="ulio-ui is-single">
           {data.uiShowcase?.mockup ? (
             <div className="ulio-ui-mockup">
               <SafeImage image={data.uiShowcase?.mockup} alt="Ulio UI mockups" />

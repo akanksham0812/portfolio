@@ -15,7 +15,6 @@ import { UlioUsecasePage } from "./projects/template/ulioUsecase";
 
 const filters = ["All", "Product Design", "UX Case Study"];
 const HERO_IMAGE_SCALE = 0.7;
-const HERO_OBJECT_BASE_WIDTH = 220;
 const RESUME_PDF_PATH = withBase("assets/resume/Akanksha-Mahangere-Resume.pdf");
 const CONTACT_EMAIL = "akanksha.ux8@gmail.com";
 const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
@@ -452,35 +451,28 @@ function HomePage() {
     return projects.filter((project) => project.category === activeFilter);
   }, [activeFilter]);
   const heroLayout = useMemo(() => {
-    const desktopObjectWidth = Math.round(HERO_OBJECT_BASE_WIDTH * HERO_IMAGE_SCALE);
     const sizeProgress = clamp((920 - viewportWidth) / 560, 0, 1);
+    const scale = HERO_IMAGE_SCALE * lerp(1, 0.52, sizeProgress);
 
     return {
-      centerX: 50,
-      centerY: lerp(53, 50, sizeProgress),
-      radiusX: lerp(33, 37, sizeProgress),
-      radiusY: lerp(29, 33, sizeProgress),
+      scale,
       driftScale: lerp(1, 0.56, sizeProgress),
       parallaxScale: lerp(1, 0.58, sizeProgress),
-      objectWidth: Math.round(desktopObjectWidth * lerp(1, 0.52, sizeProgress)),
     };
   }, [viewportWidth]);
 
   const ringObjects = useMemo(() => {
-    const { centerX, centerY, radiusX, radiusY, driftScale } = heroLayout;
+    const { driftScale, scale } = heroLayout;
 
-    return heroObjects.map((item, index) => {
-      const angle = (-110 + (360 / heroObjects.length) * index) * (Math.PI / 180);
-
-      return {
-        ...item,
-        ringX: centerX + Math.cos(angle) * radiusX,
-        ringY: centerY + Math.sin(angle) * radiusY,
-        drift: (10 + (index % 3) * 2) * driftScale,
-        driftDuration: 9 + index * 0.5,
-        driftDelay: -index * 0.7,
-      };
-    });
+    return heroObjects.map((item, index) => ({
+      ...item,
+      ringX: item.x,
+      ringY: item.y,
+      width: Math.round(item.w * scale),
+      drift: (10 + (index % 3) * 2) * driftScale,
+      driftDuration: 9 + index * 0.5,
+      driftDelay: -index * 0.7,
+    }));
   }, [heroLayout]);
 
   const handleCanvasMove = (event) => {
@@ -517,7 +509,7 @@ function HomePage() {
                   className={`hero-object hero-object-${item.id}`}
                   alt={item.alt}
                   style={{
-                    width: `${heroLayout.objectWidth}px`,
+                    width: `${item.width}px`,
                     transform: `translate3d(calc(-50% + ${tx}px), calc(-50% + ${ty}px), 0) rotate(${rotation}deg)`,
                     animationDelay: `${index * 0.13}s`,
                   }}
