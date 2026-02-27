@@ -17,7 +17,7 @@ export const projectConfigs = [
   {
     slug: "pl-case-study",
     routeAliases: [],
-    template: "case-study",
+    template: "sainsbury-usecase",
     access: {
       passwordProtected: false,
     },
