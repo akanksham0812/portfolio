@@ -100,7 +100,7 @@ export const brandNames = [
 export const aboutContent = {
   image: image("assets/about/profile.jpg", "https://framerusercontent.com/images/2dGq2Dc8iLPprcwKMo8TRfce7A.jpg"),
   intro:
-    "I am AKANKSHA MAHANGARE, a creative designer crafting web and product experiences with bold visual direction and practical product thinking.",
+    "I am Akanksha Mahangare, a creative designer crafting web and product experiences with bold visual direction and practical product thinking.",
   details:
     "My work sits at the intersection of interface design, storytelling, and business clarity. I design fast, iterate with intent, and focus on details that improve how people actually use products.",
 };
