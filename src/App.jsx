@@ -14,7 +14,7 @@ import { withBase } from "./utils/assetPaths";
 import { UlioUsecasePage } from "./projects/template/ulioUsecase";
 import { SainsburyUsecasePage } from "./projects/template/sainsburyUsecase";
 
-const filters = ["All", "Product Design", "UX Case Study"];
+const filters = ["All", "Product Design", "UX Research & Design"];
 const HERO_IMAGE_SCALE = 0.7;
 const RESUME_PDF_PATH = withBase("assets/resume/Akanksha-Mahangere-Resume.pdf");
 const CONTACT_EMAIL = "akanksha.ux8@gmail.com";
