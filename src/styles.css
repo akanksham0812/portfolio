@@ -2625,6 +2625,7 @@ main {
 .ulio-footer p {
   margin: 0 0 0.8rem;
   font-size: 0.95rem;
+  color: #fff;
 }
 
 .ulio-footer h2 {
@@ -2711,22 +2712,42 @@ main {
 
 /* ── Colour overrides ───────────────────────────────────── */
 .sb-usecase .ulio-footer          { background: #F06C00; }
-.sb-hero                          { background: #F06C00 !important; }
 .sb-usecase .ulio-hero-pill-logo  { background: #F06C00; }
+
+/* ── Hero — full-bleed orange, no black gaps ────────────── */
+.sb-hero {
+  background: #F06C00 !important;
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%) !important;
+  border-radius: 0 !important;
+  padding: 2.2rem 2.6rem 0 !important;
+}
 
 /* ── Hero image ─────────────────────────────────────────── */
 .sb-hero-grid {
-  min-height: 260px;
+  min-height: 0;
+  align-items: flex-end;
+  margin-top: 2.5rem;
+}
+
+/* Override the ulio translateX shift — Sainsbury image should be centred */
+.sb-hero .ulio-hero-mockup-only {
+  align-items: flex-end;
+}
+.sb-hero .ulio-hero-mockup-only img {
+  transform: none;
 }
 
 .sb-hero-img {
-  width: 100%;
-  max-width: 860px;
-  height: auto;
+  width: auto;
+  max-width: min(780px, 90vw);
+  height: 380px;
+  object-fit: cover;
+  object-position: center top;
   display: block;
-  transform: none;
-  border-radius: 16px 16px 0 0;
-  margin: 1.2rem auto 0;
+  border-radius: 14px 14px 0 0;
+  margin: 0 auto;
+  box-shadow: 0 -16px 60px rgba(0,0,0,0.5);
 }
 
 /* ── Fade-in animation wrapper ──────────────────────────── */
@@ -3799,7 +3820,7 @@ main {
 
 /* ── USER FLOW SECTION ───────────────────────────────── */
 .sb-uf {
-  background: #0f0f0f;
+  background: #fff;
   border-radius: 22px;
   padding: 2.5rem 2.5rem 2rem;
   margin-top: 2.4rem;
@@ -3813,7 +3834,7 @@ main {
 .sb-uf-title {
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   font-weight: 700;
-  color: #fff;
+  color: #111;
   margin: 0 0 0.75rem;
   line-height: 1.15;
 }
@@ -3821,7 +3842,7 @@ main {
 .sb-uf-desc {
   font-size: 0.88rem;
   line-height: 1.7;
-  color: rgba(255,255,255,0.4);
+  color: rgba(0,0,0,0.45);
   margin: 0;
   max-width: 55%;
 }
@@ -4129,7 +4150,9 @@ main {
 
 /* ── WHAT I WOULD DO DIFFERENTLY ────────────────────── */
 .sb-retro {
-  background: #0D0D0D;
+  background: #fff;
+  border-radius: 22px;
+  margin-top: 2.4rem;
   padding: 80px 64px 88px;
   position: relative;
   overflow: hidden;
@@ -4146,7 +4169,7 @@ main {
 .sb-retro-heading {
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   font-weight: 700;
-  color: #fff;
+  color: #111;
   line-height: 1.05;
   margin: 0;
   letter-spacing: -1.5px;
@@ -4155,7 +4178,7 @@ main {
 .sb-retro-body {
   font-size: 1rem;
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.48);
+  color: rgba(0, 0, 0, 0.48);
   margin: 0;
   padding-top: 10px;
 }
@@ -4195,20 +4218,20 @@ main {
 .sb-retro-name {
   font-size: 20px;
   font-weight: 700;
-  color: #fff;
+  color: #111;
   display: block;
 }
 
 .sb-retro-role {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(0, 0, 0, 0.38);
   display: block;
 }
 
 .sb-retro-quote {
   font-size: clamp(18px, 2.2vw, 26px);
   font-style: italic;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(0, 0, 0, 0.6);
   line-height: 1.55;
   margin: 0;
   font-weight: 400;
@@ -4518,4 +4541,385 @@ main {
   .top-links a {
     font-size: 0.72rem;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INSIGHTS CASE STUDY
+═══════════════════════════════════════════════════════════════ */
+
+.ins-root {
+  background: #2D29D0;
+  min-height: 100vh;
+  position: relative;
+}
+
+.ins-back {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 100;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  font-family: "Overused Grotesk", sans-serif;
+}
+
+.ins-back:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* ── Hero ── */
+
+.ins-hero {
+  position: relative;
+  min-height: 100vh;
+  background: #2D29D0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.5rem 2rem 0;
+  overflow: hidden;
+}
+
+/* Top bar */
+
+.ins-hero-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 920px;
+}
+
+.ins-pill {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.88);
+  border-radius: 999px;
+  padding: 0.38rem 1.1rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  text-transform: lowercase;
+  font-family: "Overused Grotesk", sans-serif;
+}
+
+.ins-plus {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  font-weight: 300;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+/* Title block */
+
+.ins-title-block {
+  margin-top: 3.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.ins-title {
+  font-size: clamp(4.5rem, 13vw, 9.5rem);
+  font-weight: 900;
+  color: #0d0b2b;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-family: "Syne", sans-serif;
+  text-transform: lowercase;
+}
+
+.ins-scribble {
+  width: min(540px, 80vw);
+  display: block;
+  margin: 0.4rem auto 0;
+}
+
+/* Phones */
+
+.ins-phones {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1.4rem;
+  margin-top: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.ins-phone img,
+.ins-phone .img-fallback {
+  width: 210px;
+  height: auto;
+  display: block;
+  border-radius: 36px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.ins-phone .img-fallback {
+  height: 430px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ins-phone--left {
+  transform: rotate(-5deg) translateY(28px);
+  z-index: 1;
+}
+
+.ins-phone--center {
+  transform: translateY(0) scale(1.05);
+  z-index: 3;
+}
+
+.ins-phone--right {
+  transform: rotate(5deg) translateY(28px);
+  z-index: 2;
+}
+
+/* Decorative floaters */
+
+.ins-deco {
+  position: absolute;
+  font-size: 2rem;
+  animation: ins-float 4s ease-in-out infinite;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+.ins-deco--1 { top: 16%; left: 5%;   animation-delay: 0s;    font-size: 2.2rem; }
+.ins-deco--2 { top: 10%; right: 7%;  animation-delay: -1.4s; font-size: 1.8rem; }
+.ins-deco--3 { top: 54%; left: 3%;   animation-delay: -0.8s; font-size: 1.7rem; }
+.ins-deco--4 { top: 50%; right: 4%;  animation-delay: -2.2s; font-size: 1.9rem; }
+.ins-deco--5 { top: 28%; left: 9%;   animation-delay: -1.9s; font-size: 1.5rem; }
+.ins-deco--6 { top: 24%; right: 11%; animation-delay: -0.5s; font-size: 1.6rem; }
+
+@keyframes ins-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+  .ins-hero {
+    padding: 3rem 1.2rem 0;
+  }
+
+  .ins-title {
+    font-size: clamp(3.5rem, 17vw, 5.5rem);
+  }
+
+  .ins-phones {
+    gap: 0.8rem;
+    margin-top: 2.5rem;
+  }
+
+  .ins-phone img,
+  .ins-phone .img-fallback {
+    width: 150px;
+    border-radius: 26px;
+  }
+
+  .ins-phone .img-fallback {
+    height: 305px;
+  }
+
+  .ins-phone--left  { transform: rotate(-4deg) translateY(20px); }
+  .ins-phone--right { transform: rotate(4deg)  translateY(20px); }
+
+  .ins-deco { font-size: 1.4rem; }
+  .ins-deco--3,
+  .ins-deco--4 { display: none; }
+}
+
+@media (max-width: 480px) {
+  .ins-hero-topbar {
+    gap: 0.5rem;
+  }
+
+  .ins-pill {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.75rem;
+  }
+
+  .ins-phone img,
+  .ins-phone .img-fallback {
+    width: 120px;
+    border-radius: 22px;
+  }
+
+  .ins-phone .img-fallback {
+    height: 244px;
+  }
+
+  .ins-deco--5,
+  .ins-deco--6 { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SAINSBURY'S — FULL FLOW SECTION
+═══════════════════════════════════════════════════════════════ */
+
+.sb-full-flow {
+  padding: 5rem 2rem 4rem;
+  background: #fff;
+  border-top: 1px solid #eeece8;
+}
+
+.sb-full-flow-header {
+  max-width: 620px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.sb-full-flow-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F06C00;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-family: "Overused Grotesk", sans-serif;
+}
+
+.sb-full-flow-title {
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  font-family: "Syne", sans-serif;
+  color: #111;
+}
+
+.sb-full-flow-title strong {
+  font-weight: 800;
+}
+
+.sb-full-flow-desc {
+  font-size: 0.92rem;
+  color: #666;
+  line-height: 1.65;
+  font-family: "Overused Grotesk", sans-serif;
+}
+
+.sb-full-flow-strip {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #F06C00 #f0ede8;
+}
+
+.sb-full-flow-strip::-webkit-scrollbar {
+  height: 4px;
+}
+
+.sb-full-flow-strip::-webkit-scrollbar-track {
+  background: #f5f2ee;
+  border-radius: 2px;
+}
+
+.sb-full-flow-strip::-webkit-scrollbar-thumb {
+  background: #F06C00;
+  border-radius: 2px;
+}
+
+.sb-full-flow-item {
+  flex: 0 0 380px;
+  scroll-snap-align: start;
+}
+
+.sb-full-flow-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  margin-bottom: 0.75rem;
+  padding-left: 0.2rem;
+}
+
+.sb-full-flow-num {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: #F06C00;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Overused Grotesk", sans-serif;
+}
+
+.sb-full-flow-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111;
+  font-family: "Syne", sans-serif;
+  line-height: 1.1;
+}
+
+.sb-full-flow-sub {
+  font-size: 0.78rem;
+  color: #999;
+  font-family: "Overused Grotesk", sans-serif;
+}
+
+@media (max-width: 600px) {
+  .sb-full-flow {
+    padding: 3.5rem 1.2rem 3rem;
+  }
+
+  .sb-full-flow-item {
+    flex: 0 0 300px;
+  }
+}
+
+/* ── Sainsbury Prototype Embed Section ── */
+.sb-proto-launch {
+  margin-top: 2.4rem;
+  padding: 2.5rem 2.5rem 2.5rem;
+  text-align: center;
+  background: #0f0f0f;
+  border-radius: 22px;
+}
+
+.sb-proto-launch .sb-proto-eyebrow {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.sb-proto-launch .sb-proto-title {
+  color: #fff;
+}
+
+.sb-proto-launch-sub {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Overused Grotesk", sans-serif;
+  margin: 0.75rem auto 2.5rem;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+.sb-proto-embed-wrap {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0c0c0c;
 }

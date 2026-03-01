@@ -13,6 +13,7 @@ import SafeImage from "./components/SafeImage";
 import { withBase } from "./utils/assetPaths";
 import { UlioUsecasePage } from "./projects/template/ulioUsecase";
 import { SainsburyUsecasePage } from "./projects/template/sainsburyUsecase";
+import { InsightsUsecasePage } from "./projects/template/insightsUsecase";
 
 const filters = ["All", "Product Design", "UX Research & Design"];
 const HERO_IMAGE_SCALE = 0.7;
@@ -754,6 +755,10 @@ function CaseStudyPage({ slug }) {
 
   if (project.template === "sainsbury-usecase") {
     return <SainsburyUsecasePage project={project} />;
+  }
+
+  if (project.template === "insights-usecase") {
+    return <InsightsUsecasePage project={project} />;
   }
 
   if (project.template === "image-case-study") {

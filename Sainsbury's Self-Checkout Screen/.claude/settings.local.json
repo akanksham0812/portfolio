@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd.exe /c \"cd \"\"c:\\\\Users\\\\aakan\\\\Downloads\\\\Sainsbury''s Self-Checkout Screen\"\" && node_modules\\\\.bin\\\\tsc --noEmit 2>&1\")",
+      "Bash(cmd.exe /c \"netstat -ano | findstr :5174\")",
+      "Bash(cmd.exe /c \"netstat -ano | findstr :517\")"
+    ]
+  }
+}

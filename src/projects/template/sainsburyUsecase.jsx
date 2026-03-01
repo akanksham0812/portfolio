@@ -293,201 +293,6 @@ function DesignProcessSection() {
   );
 }
 
-function BasketScreen() {
-  const items = [
-    { name: "Whole Milk 2L",   price: "£1.45", done: true  },
-    { name: "Sourdough Bread", price: "£2.20", done: true  },
-    { name: "Mature Cheddar",  price: "£3.50", done: true  },
-    { name: "Loose Apples",    price: "wt.",   done: false },
-  ];
-  return (
-    <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-      {/* Backgrounds */}
-      <rect width="480" height="300" fill="#F8F5F1"/>
-      <rect width="270" height="300" fill="#FFFFFF"/>
-
-      {/* ── FULL-WIDTH ORANGE HEADER ── */}
-      <rect width="480" height="52" fill="#F06C00"/>
-      {/* Sainsbury's wordmark */}
-      <text x="14" y="34" fontSize="17" fontWeight="700" fontStyle="italic" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif">Sainsbury's</text>
-      <rect x="126" y="14" width="1" height="24" fill="rgba(255,255,255,0.3)"/>
-      <text x="136" y="23" fontSize="8" fill="rgba(255,255,255,0.7)" fontFamily="'Overused Grotesk',system-ui,sans-serif" letterSpacing="1.2" fontWeight="700">SMART BASKET</text>
-      <text x="136" y="38" fontSize="11.5" fontWeight="600" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif">Basket scanning active</text>
-      <circle cx="268" cy="28" r="3.5" fill="#4ade80"/>
-      <text x="277" y="32" fontSize="8.5" fill="rgba(255,255,255,0.88)" fontFamily="'Overused Grotesk',system-ui,sans-serif" fontWeight="700">LIVE</text>
-      {/* Help button */}
-      <rect x="436" y="16" width="30" height="20" rx="5" fill="rgba(255,255,255,0.18)"/>
-      <text x="451" y="30" fontSize="11.5" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="middle">?</text>
-      {/* Right header: My Basket */}
-      <line x1="270" y1="0" x2="270" y2="52" stroke="rgba(255,255,255,0.2)" strokeWidth="1"/>
-      <text x="284" y="27" fontSize="13" fontWeight="700" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif">My Basket</text>
-      <rect x="349" y="14" width="22" height="16" rx="8" fill="rgba(255,255,255,0.28)"/>
-      <text x="360" y="26" fontSize="9.5" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="middle" fontWeight="700">4</text>
-      <text x="284" y="42" fontSize="9" fill="rgba(255,255,255,0.7)" fontFamily="'Overused Grotesk',system-ui,sans-serif">3 confirmed · 1 weighing</text>
-
-      {/* ── LEFT PANEL ── */}
-      <text x="14" y="68" fontSize="8" fill="#bbb" fontFamily="'Overused Grotesk',system-ui,sans-serif" letterSpacing="0.8" fontWeight="600">CURRENTLY DETECTING</text>
-
-      {/* Product detection card */}
-      <rect x="14" y="74" width="242" height="86" rx="10" fill="#FFF8F2" stroke="#F5E6D5" strokeWidth="1"/>
-      {/* Product icon swatch */}
-      <rect x="26" y="86" width="48" height="50" rx="8" fill="#EDF7E6"/>
-      <ellipse cx="50" cy="107" rx="11" ry="14" fill="#7CB342" fillOpacity="0.75"/>
-      <path d="M50,93 Q55,89 59,91" stroke="#558B2F" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-      {/* Item info */}
-      <text x="84" y="95" fontSize="13.5" fontWeight="700" fill="#111" fontFamily="'Overused Grotesk',system-ui,sans-serif">Loose Apples</text>
-      <text x="84" y="108" fontSize="9.5" fill="#999" fontFamily="'Overused Grotesk',system-ui,sans-serif">Fruit · Produce aisle</text>
-      <rect x="84" y="116" width="98" height="17" rx="8.5" fill="#FFFBEB" stroke="#FCD34D" strokeWidth="0.8"/>
-      <circle cx="94" cy="124.5" r="3" fill="#F59E0B"/>
-      <text x="102" y="128" fontSize="8.5" fill="#D97706" fontWeight="600" fontFamily="'Overused Grotesk',system-ui,sans-serif">Detecting weight…</text>
-      {/* Price placeholder */}
-      <text x="246" y="102" fontSize="14" fontWeight="700" fill="#D0C8BE" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="end">wt.</text>
-      <text x="246" y="116" fontSize="8.5" fill="#D0C8BE" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="end">per kg</text>
-
-      {/* Progress bar */}
-      <text x="14" y="177" fontSize="8" fill="#bbb" fontFamily="'Overused Grotesk',system-ui,sans-serif" letterSpacing="0.5" fontWeight="600">BASKET PROGRESS</text>
-      <rect x="14" y="183" width="242" height="5" rx="2.5" fill="#EEE"/>
-      <rect x="14" y="183" width="182" height="5" rx="2.5" fill="#F06C00"/>
-      <text x="14" y="199" fontSize="9" fill="#777" fontFamily="'Overused Grotesk',system-ui,sans-serif">3 of 4 items confirmed</text>
-      <text x="256" y="199" fontSize="9" fill="#F06C00" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="end" fontWeight="700">75%</text>
-
-      {/* Confirmed chips */}
-      <text x="14" y="216" fontSize="8" fill="#bbb" fontFamily="'Overused Grotesk',system-ui,sans-serif" fontWeight="600">CONFIRMED</text>
-      {[
-        { label: "Milk",      x: 14,  w: 40  },
-        { label: "Sourdough", x: 60,  w: 68  },
-        { label: "Cheddar",   x: 134, w: 62  },
-        { label: "Apples ↻",  x: 202, w: 64, pending: true },
-      ].map(({ label, x, w, pending }) => (
-        <g key={label}>
-          <rect x={x} y={221} width={w} height={19} rx={9.5} fill={pending ? "#FFFBEB" : "#F0FFF4"} stroke={pending ? "#FCD34D" : "#86efac"} strokeWidth="1"/>
-          <text x={x + w / 2} y={234} fontSize="8.5" textAnchor="middle" fill={pending ? "#D97706" : "#16a34a"} fontWeight="600" fontFamily="'Overused Grotesk',system-ui,sans-serif">{label}</text>
-        </g>
-      ))}
-
-      {/* Nectar strip */}
-      <rect x="14" y="248" width="242" height="22" rx="7" fill="#F5F0FF" stroke="rgba(124,58,237,0.2)" strokeWidth="1"/>
-      <text x="26" y="263" fontSize="9.5" fill="#7C3AED" fontFamily="'Overused Grotesk',system-ui,sans-serif" fontWeight="700">Nectar</text>
-      <text x="66" y="263" fontSize="9.5" fill="#555" fontFamily="'Overused Grotesk',system-ui,sans-serif">You'll earn approximately</text>
-      <text x="248" y="263" fontSize="9.5" fill="#7C3AED" fontFamily="'Overused Grotesk',system-ui,sans-serif" fontWeight="700" textAnchor="end">+8 pts</text>
-
-      {/* ── RIGHT PANEL ── */}
-      <line x1="270" y1="52" x2="270" y2="300" stroke="#EDE9E3" strokeWidth="1"/>
-      {items.map(({ name, price, done }, i) => {
-        const y = 60 + i * 46;
-        return (
-          <g key={i}>
-            {i > 0 && <line x1="278" y1={y} x2="468" y2={y} stroke="#F0EBE5" strokeWidth="1"/>}
-            <rect x="278" y={y + 11} width="18" height="18" rx="9" fill={done ? "rgba(34,197,94,0.12)" : "rgba(245,158,11,0.12)"}/>
-            <text x="287" y={y + 24} fontSize="10" fill={done ? "#22c55e" : "#F59E0B"} textAnchor="middle" fontFamily="'Overused Grotesk',system-ui,sans-serif" fontWeight="700">{done ? "✓" : "↻"}</text>
-            <text x="304" y={y + 18} fontSize="11.5" fontWeight="600" fill={done ? "#111" : "#999"} fontFamily="'Overused Grotesk',system-ui,sans-serif">{name}</text>
-            <text x="304" y={y + 31} fontSize="9" fill={done ? "#16a34a" : "#D97706"} fontFamily="'Overused Grotesk',system-ui,sans-serif">{done ? "Added to basket" : "Weighing…"}</text>
-            <text x="466" y={y + 21} fontSize="13" fontWeight="700" fill={done ? "#111" : "#ccc"} fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="end">{price}</text>
-          </g>
-        );
-      })}
-      <line x1="270" y1="248" x2="480" y2="248" stroke="#E8E3DD" strokeWidth="1.5"/>
-      <text x="278" y="262" fontSize="10" fill="#888" fontFamily="'Overused Grotesk',system-ui,sans-serif">Subtotal (3 of 4 items)</text>
-      <text x="468" y="262" fontSize="13.5" fontWeight="700" fill="#111" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="end">£7.15</text>
-      <rect x="278" y="270" width="190" height="26" rx="7" fill="#F06C00"/>
-      <text x="373" y="287" fontSize="11.5" fontWeight="700" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="middle">Go to checkout  →</text>
-    </svg>
-  );
-}
-
-function TerminalScreen() {
-  const items = [
-    { name: "Whole Milk 2L",       price: "£1.45" },
-    { name: "Sourdough Bread",     price: "£2.20" },
-    { name: "Mature Cheddar 400g", price: "£3.50" },
-    { name: "Loose Apples 280g",   price: "£0.89" },
-  ];
-  return (
-    <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-      {/* Backgrounds */}
-      <rect width="480" height="300" fill="#111111"/>
-      <rect width="270" height="300" fill="#0C0C0C"/>
-
-      {/* ── FULL-WIDTH ORANGE HEADER ── */}
-      <rect width="480" height="52" fill="#F06C00"/>
-      {/* Sainsbury's wordmark */}
-      <text x="14" y="34" fontSize="17" fontWeight="700" fontStyle="italic" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif">Sainsbury's</text>
-      <rect x="126" y="14" width="1" height="24" fill="rgba(255,255,255,0.3)"/>
-      <text x="136" y="24" fontSize="8" fill="rgba(255,255,255,0.7)" fontFamily="'Overused Grotesk',system-ui,sans-serif" letterSpacing="1.2" fontWeight="700">SELF CHECKOUT</text>
-      <text x="136" y="39" fontSize="12" fontWeight="600" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif">Confirm &amp; Pay</text>
-      {/* Scan-complete badge */}
-      <rect x="244" y="17" width="82" height="19" rx="9.5" fill="rgba(0,0,0,0.22)"/>
-      <circle cx="255" cy="26.5" r="3.5" fill="#4ade80"/>
-      <text x="263" y="30.5" fontSize="8.5" fill="rgba(255,255,255,0.9)" fontFamily="'Overused Grotesk',system-ui,sans-serif" fontWeight="600">Scan complete</text>
-      {/* Right: ORDER TOTAL */}
-      <line x1="272" y1="0" x2="272" y2="52" stroke="rgba(255,255,255,0.18)" strokeWidth="1"/>
-      <text x="286" y="22" fontSize="8" fill="rgba(255,255,255,0.65)" fontFamily="'Overused Grotesk',system-ui,sans-serif" letterSpacing="1" fontWeight="700">ORDER TOTAL</text>
-      <text x="286" y="43" fontSize="20" fontWeight="700" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif">£7.54</text>
-
-      {/* ── LEFT PANEL ── */}
-      {/* All items banner */}
-      <rect x="12" y="60" width="252" height="30" rx="7" fill="rgba(22,163,74,0.12)" stroke="rgba(74,222,128,0.22)" strokeWidth="1"/>
-      <circle cx="24" cy="75" r="7" fill="rgba(34,197,94,0.18)"/>
-      <text x="24" y="79.5" fontSize="10" fill="#4ade80" textAnchor="middle" fontFamily="'Overused Grotesk',system-ui,sans-serif" fontWeight="700">✓</text>
-      <text x="37" y="73" fontSize="10" fill="#4ade80" fontWeight="700" fontFamily="'Overused Grotesk',system-ui,sans-serif">All 4 items scanned</text>
-      <text x="37" y="85" fontSize="8.5" fill="rgba(74,222,128,0.55)" fontFamily="'Overused Grotesk',system-ui,sans-serif">Ready for payment · No re-scanning needed</text>
-
-      <text x="14" y="106" fontSize="8" fill="rgba(255,255,255,0.28)" fontFamily="'Overused Grotesk',system-ui,sans-serif" letterSpacing="0.8" fontWeight="600">YOUR BASKET</text>
-
-      {items.map(({ name, price }, i) => {
-        const y = 112 + i * 35;
-        return (
-          <g key={i}>
-            <rect x="12" y={y} width="252" height="29" rx="7" fill="#1C1C1C"/>
-            <rect x="12" y={y} width="3.5" height="29" rx="1.75" fill="#F06C00" fillOpacity="0.65"/>
-            <circle cx="30" cy={y + 14.5} r="5" fill="rgba(34,197,94,0.15)"/>
-            <text x="30" y={y + 18.5} fontSize="9" fill="#22c55e" textAnchor="middle" fontFamily="'Overused Grotesk',system-ui,sans-serif" fontWeight="700">✓</text>
-            <text x="43" y={y + 12} fontSize="11" fontWeight="600" fill="rgba(255,255,255,0.85)" fontFamily="'Overused Grotesk',system-ui,sans-serif">{name}</text>
-            <text x="43" y={y + 24} fontSize="8.5" fill="rgba(255,255,255,0.25)" fontFamily="'Overused Grotesk',system-ui,sans-serif">×1 · Confirmed</text>
-            <text x="256" y={y + 19} fontSize="11.5" fontWeight="700" fill="rgba(255,255,255,0.85)" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="end">{price}</text>
-          </g>
-        );
-      })}
-
-      {/* Nectar strip */}
-      <rect x="12" y="258" width="252" height="34" rx="8" fill="rgba(124,58,237,0.12)" stroke="rgba(124,58,237,0.25)" strokeWidth="1"/>
-      <rect x="12" y="258" width="3.5" height="34" rx="1.75" fill="#7C3AED"/>
-      <text x="26" y="273" fontSize="9.5" fill="#A78BFA" fontFamily="'Overused Grotesk',system-ui,sans-serif" fontWeight="700">Nectar</text>
-      <text x="68" y="273" fontSize="9.5" fill="rgba(255,255,255,0.45)" fontFamily="'Overused Grotesk',system-ui,sans-serif">Points earned today</text>
-      <text x="257" y="273" fontSize="9.5" fill="#A78BFA" fontFamily="'Overused Grotesk',system-ui,sans-serif" fontWeight="700" textAnchor="end">+8 pts</text>
-      <text x="26" y="285" fontSize="8.5" fill="rgba(167,139,250,0.5)" fontFamily="'Overused Grotesk',system-ui,sans-serif">Linked: J. Smith · 1,248 total pts</text>
-
-      {/* ── RIGHT PANEL ── */}
-      <line x1="272" y1="52" x2="272" y2="300" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
-
-      {/* Order summary card */}
-      <rect x="282" y="60" width="186" height="92" rx="10" fill="#1C1C1C"/>
-      <text x="296" y="78" fontSize="8" fill="rgba(255,255,255,0.28)" fontFamily="'Overused Grotesk',system-ui,sans-serif" letterSpacing="0.8" fontWeight="600">ORDER SUMMARY</text>
-      <line x1="296" y1="84" x2="458" y2="84" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
-      <text x="296" y="101" fontSize="10.5" fill="rgba(255,255,255,0.4)" fontFamily="'Overused Grotesk',system-ui,sans-serif">Subtotal (4 items)</text>
-      <text x="458" y="101" fontSize="10.5" fill="rgba(255,255,255,0.5)" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="end">£8.04</text>
-      <text x="296" y="119" fontSize="10.5" fill="rgba(255,255,255,0.4)" fontFamily="'Overused Grotesk',system-ui,sans-serif">Nectar saving</text>
-      <text x="458" y="119" fontSize="10.5" fill="#4ade80" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="end">−£0.50</text>
-      <line x1="296" y1="127" x2="458" y2="127" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
-      <text x="296" y="145" fontSize="13" fontWeight="700" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif">Total</text>
-      <text x="458" y="145" fontSize="17" fontWeight="700" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="end">£7.54</text>
-
-      {/* Pay by Card CTA */}
-      <rect x="282" y="162" width="186" height="46" rx="10" fill="#F06C00"/>
-      <text x="375" y="181" fontSize="13" fontWeight="700" fill="white" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="middle">Pay by Card</text>
-      <text x="375" y="197" fontSize="9.5" fill="rgba(255,255,255,0.75)" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="middle">Insert · Tap · Swipe</text>
-
-      {/* Pay by Phone */}
-      <rect x="282" y="216" width="186" height="38" rx="10" fill="#1C1C1C" stroke="rgba(255,255,255,0.1)" strokeWidth="1"/>
-      <text x="375" y="232" fontSize="11" fontWeight="600" fill="rgba(255,255,255,0.55)" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="middle">Pay by Phone</text>
-      <text x="375" y="246" fontSize="8.5" fill="rgba(255,255,255,0.25)" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="middle">Apple Pay · Google Pay</text>
-
-      {/* Assistance */}
-      <rect x="282" y="264" width="186" height="28" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
-      <text x="375" y="282" fontSize="9.5" fill="rgba(255,255,255,0.28)" fontFamily="'Overused Grotesk',system-ui,sans-serif" textAnchor="middle">Need help? Call for assistance →</text>
-    </svg>
-  );
-}
 
 function WouldDoDifferentlySection() {
   return (
@@ -517,90 +322,63 @@ function WouldDoDifferentlySection() {
   );
 }
 
+// Natural kiosk dimensions (Root.tsx: screen 1024×640 + 16px padding each side + 20+148 terminal)
+const KIOSK_W = 1224;
+const KIOSK_H = 690;
+
 function PrototypeShowcaseSection() {
+  const wrapRef = useRef(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const update = () => {
+      if (wrapRef.current) {
+        setScale(wrapRef.current.offsetWidth / KIOSK_W);
+      }
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
   return (
-    <section className="sb-proto">
-      <div className="sb-proto-intro">
-        <p className="sb-proto-eyebrow">Screen Prototype</p>
-        <h2 className="sb-proto-title">
-          <strong>Rethinking</strong> the checkout<br />from the basket up
-        </h2>
-      </div>
-
-      <div className="sb-proto-stage">
-        {/* ── Row 1: Kiosk (basket) + caption ── */}
-        <div className="sb-proto-row">
-          <div className="sb-proto-device-wrap">
-            <div className="sb-proto-kiosk">
-              <div className="sb-proto-kiosk-topbar"/>
-              <div className="sb-proto-kiosk-screen-frame">
-                <div className="sb-proto-screen-inner">
-                  <BasketScreen />
-                </div>
-              </div>
-              <div className="sb-proto-kiosk-base">
-                <div className="sb-proto-kiosk-slot"/>
-                <span className="sb-proto-kiosk-tap">◉ TAP</span>
-              </div>
-            </div>
-          </div>
-          <div className="sb-proto-caption">
-            <span className="sb-proto-caption-tag">Smart Basket</span>
-            <h3 className="sb-proto-caption-title">Scan-as-you-shop</h3>
-            <p className="sb-proto-caption-body">
-              Sensor-embedded basket auto-identifies items as they're placed inside. Real-time confirmation on the terminal display. No barcode scanning, no bagging area, no errors.
-            </p>
-            <ul className="sb-proto-caption-list">
-              <li>Auto-identifies items by sensor array</li>
-              <li>Flags weighted items before checkout</li>
-              <li>Live subtotal updated in real time</li>
-            </ul>
-          </div>
-        </div>
-
-        {/* ── Row 2: caption + Kiosk (terminal) ── */}
-        <div className="sb-proto-row sb-proto-row--flip">
-          <div className="sb-proto-caption sb-proto-caption--dark">
-            <span className="sb-proto-caption-tag">Checkout Terminal</span>
-            <h3 className="sb-proto-caption-title">Confirm. Tap. Done.</h3>
-            <p className="sb-proto-caption-body">
-              By the time you reach the terminal, scanning is already complete. Review your pre-confirmed list, apply Nectar points, and pay in one tap. Assistance always on screen.
-            </p>
-            <ul className="sb-proto-caption-list sb-proto-caption-list--dark">
-              <li>No item-by-item scanning at terminal</li>
-              <li>Nectar loyalty applied automatically</li>
-              <li>Call for Assistance always visible</li>
-            </ul>
-          </div>
-          <div className="sb-proto-device-wrap">
-            <div className="sb-proto-kiosk sb-proto-kiosk--right">
-              <div className="sb-proto-kiosk-topbar"/>
-              <div className="sb-proto-kiosk-screen-frame">
-                <div className="sb-proto-screen-inner sb-proto-screen-inner--dark">
-                  <TerminalScreen />
-                </div>
-              </div>
-              <div className="sb-proto-kiosk-base">
-                <div className="sb-proto-kiosk-slot"/>
-                <span className="sb-proto-kiosk-tap">◉ TAP</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <section className="sb-proto-launch">
+      <p className="sb-proto-eyebrow">Interactive Prototype</p>
+      <h2 className="sb-proto-title">Try the full checkout flow</h2>
+      <p className="sb-proto-launch-sub">
+        Walk through the redesigned experience — Smart Basket scanning, item review, and tap-to-pay.
+      </p>
+      <div
+        ref={wrapRef}
+        className="sb-proto-embed-wrap"
+        style={{ height: Math.round(KIOSK_H * scale) }}
+      >
+        <iframe
+          src="http://localhost:5174/"
+          title="Sainsbury's Self-Checkout Prototype"
+          style={{
+            width: KIOSK_W,
+            height: KIOSK_H,
+            border: "none",
+            display: "block",
+            transformOrigin: "top left",
+            transform: `scale(${scale})`,
+          }}
+        />
       </div>
     </section>
   );
 }
 
 function UserFlowSection() {
-  const LC = "rgba(255,255,255,0.22)";
+  const LC = "rgba(0,0,0,0.15)";
   const LW = "1.5";
   const stepNodes = (rows, baseY) => rows.map(({ x, label, y: rowY }) => (
     <g key={label}>
       <rect x={x} y={rowY ?? baseY} width="102" height="28" rx="14"
-        fill="#1a1a1a" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
+        fill="#f4f4f4" stroke="rgba(0,0,0,0.1)" strokeWidth="1" />
       <text x={x + 51} y={(rowY ?? baseY) + 19} textAnchor="middle"
-        fill="rgba(255,255,255,0.78)" fontSize="10.5" fontFamily="'Overused Grotesk',sans-serif">{label}</text>
+        fill="rgba(0,0,0,0.65)" fontSize="10.5" fontFamily="'Overused Grotesk',sans-serif">{label}</text>
     </g>
   ));
 
@@ -666,9 +444,9 @@ function UserFlowSection() {
           ].map(({ label, cy }) => (
             <g key={label}>
               <rect x="180" y={cy - 17} width="108" height="34" rx="17"
-                fill="#1e1e1e" stroke="rgba(255,255,255,0.18)" strokeWidth="1"/>
+                fill="#e8e8e8" stroke="rgba(0,0,0,0.1)" strokeWidth="1"/>
               <text x="234" y={cy + 5} textAnchor="middle"
-                fill="rgba(255,255,255,0.88)" fontSize="11.5" fontFamily="'Overused Grotesk',sans-serif">{label}</text>
+                fill="rgba(0,0,0,0.7)" fontSize="11.5" fontFamily="'Overused Grotesk',sans-serif">{label}</text>
             </g>
           ))}
 
@@ -856,27 +634,6 @@ export function SainsburyUsecasePage({ project }) {
         <button className="cs-back" onClick={() => navigate("/?section=work")} type="button">
           <span className="cs-back-arrow">←</span> All Work
         </button>
-
-        {/* ── ORANGE HERO CARD ─────────────────────────────── */}
-        <section className="ulio-hero sb-hero">
-          <div className="ulio-hero-pill">
-            <span className="ulio-hero-pill-brand">
-              <span className="ulio-hero-pill-logo">S</span>
-              {project.shortTitle}
-            </span>
-            <span className="ulio-hero-pill-title">{project.category}</span>
-          </div>
-          <div className="ulio-hero-grid sb-hero-grid">
-            <div className="ulio-hero-mockup-only">
-              <img
-                src="https://framerusercontent.com/images/X3w8GYe6W5nU7Dc3B7XkSRbww.png"
-                alt={project.shortTitle}
-                loading="eager"
-                className="sb-hero-img"
-              />
-            </div>
-          </div>
-        </section>
 
         {/* ── INTRO (white card, Babbel-style) ─────────────── */}
         <section className="sb-intro">

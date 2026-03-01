@@ -8,7 +8,7 @@ export const plCaseStudyProject = createCaseStudyProject({
   year: "2023",
   summary:
     "A three-month independent study into the hidden failures of supermarket self-checkout, combining surveys, interviews, and live observational fieldwork to design a concept that changes the interaction model entirely.",
-  cover: imageAsset("assets/projects/pl-cover.png", "https://framerusercontent.com/images/O3MxqRH8PnbSLhr3kuyO5OnOw.png"),
+  cover: imageAsset("assets/projects/1%20sains.jpg", "https://framerusercontent.com/images/O3MxqRH8PnbSLhr3kuyO5OnOw.png"),
   hero: imageAsset("assets/projects/pl-hero.png", "https://framerusercontent.com/images/X3w8GYe6W5nU7Dc3B7XkSRbww.png"),
   gallery: [
     imageAsset("assets/projects/pl-hero.png", "https://framerusercontent.com/images/X3w8GYe6W5nU7Dc3B7XkSRbww.png"),
