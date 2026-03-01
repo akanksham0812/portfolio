@@ -329,6 +329,7 @@ const KIOSK_H = 690;
 function PrototypeShowcaseSection() {
   const wrapRef = useRef(null);
   const [scale, setScale] = useState(1);
+  const [src, setSrc] = useState("https://akankshaux.in/sb-prototype/");
 
   useEffect(() => {
     const update = () => {
@@ -354,7 +355,12 @@ function PrototypeShowcaseSection() {
         style={{ height: Math.round(KIOSK_H * scale) }}
       >
         <iframe
-          src="http://localhost:5174/"
+          src={src}
+          onError={()=> {
+            if (src != "http://localhost:5174") {
+              setSrc("http://localhost:5174")
+            }
+          }}
           title="Sainsbury's Self-Checkout Prototype"
           style={{
             width: KIOSK_W,
