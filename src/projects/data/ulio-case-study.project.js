@@ -22,7 +22,7 @@ const ulioUsecaseAssets = {
 };
 
 export const ulioCaseStudyProject = createCaseStudyProject({
-  title: "Ulio: Career Mobile App Design",
+  title: "Career Mobile App Design",
   shortTitle: "Ulio",
   category: "Product Design",
   year: "2024",
