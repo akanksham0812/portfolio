@@ -2,10 +2,10 @@ import { imageAsset } from "../imageAsset.js";
 import { createCaseStudyProject } from "../template/caseStudy.template.js";
 
 export const operationsDasboardProject = createCaseStudyProject({
-  title: "From Firefighting to Foresight with an Operations Intelligence Hub",
+  title: "Designing for Scale: A University Operations Platform",
   shortTitle: "Operations Intelligence Hub",
   category: "Product Design",
-  year: "2024",
+  year: "2025",
   summary:
     "A complete redesign of operation workflows that transforms real-time incident response into proactive, data-driven decision-making.",
   cover: imageAsset("assets/projects/ops-cover.jpg", "https://framerusercontent.com/images/9mlMP0RPbGpi8L0VDqfSD9W6ve4.jpg"),

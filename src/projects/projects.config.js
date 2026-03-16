@@ -1,13 +1,13 @@
 import { operationsDasboardProject } from "./data/operations-dasboard.project.js";
 import { plCaseStudyProject } from "./data/pl-case-study.project.js";
 import { ulioCaseStudyProject } from "./data/ulio-case-study.project.js";
-import { insightsCaseStudyProject } from "./data/insights-case-study.project.js";
+import { busrouteCaseStudyProject } from "./data/busroute-case-study.project.js";
 
 export const projectConfigs = [
   {
     slug: "operations-dasboard",
     routeAliases: ["operations-dashboard"],
-    template: "case-study",
+    template: "ops-usecase",
     access: {
       passwordProtected: true,
       envKey: "VITE_OPS_PROJECT_PASSWORD",
@@ -36,12 +36,12 @@ export const projectConfigs = [
     data: ulioCaseStudyProject,
   },
   {
-    slug: "insights-case-study",
-    routeAliases: ["insights"],
-    template: "insights-usecase",
+    slug: "busroute-case-study",
+    routeAliases: ["busroute"],
+    template: "busroute-bh",
     access: {
       passwordProtected: false,
     },
-    data: insightsCaseStudyProject,
+    data: busrouteCaseStudyProject,
   },
 ];

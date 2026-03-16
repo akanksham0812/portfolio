@@ -1,7 +1,28 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run dev)"
+      "Bash(npm run dev)",
+      "Bash(c:/Users/aakan/portfolio-main/src/styles.css:*)",
+      "Bash(npx vite build)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/sb-prototype/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5174/)",
+      "Bash(cat c:/Users/aakan/portfolio-main/vite.config.*)",
+      "Bash(curl -s http://localhost:5174/sb-prototype/)",
+      "Bash(curl -s http://localhost:5174/)",
+      "Bash(node -e \":*)",
+      "Bash(npm install --save-dev puppeteer)",
+      "Bash(\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --screenshot=\"c:/Users/aakan/portfolio-main/public/assets/projects/sb-preview.jpg\" --window-size=1440,820 --hide-scrollbars --no-sandbox \"http://localhost:5174/\")",
+      "Bash(python3 -c \":*)",
+      "Bash(\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --screenshot=\"c:/Users/aakan/portfolio-main/public/assets/projects/sb-preview.jpg\" --window-size=1440,820 --hide-scrollbars --no-sandbox --run-all-compositor-stages-before-draw --virtual-time-budget=3000 \"http://localhost:5174/\")",
+      "Bash(magick --version)",
+      "Bash(convert --version)",
+      "Bash(python3 -c \"from PIL import Image; print\\(''PIL OK''\\)\")",
+      "Bash(python -c \"from PIL import Image; print\\(''PIL OK''\\)\")",
+      "Bash(node -e \"require\\(''sharp''\\); console.log\\(''sharp OK''\\)\")",
+      "Bash(node -e \"const fs=require\\(''fs''\\); const buf=fs.readFileSync\\(''c:/Users/aakan/portfolio-main/public/assets/projects/sb-preview.jpg''\\); console.log\\(''size:'', buf.length, ''bytes''\\);\")",
+      "Bash(npm install sharp --save-dev)",
+      "Bash(node -e \"const sharp=require\\(''sharp''\\); sharp\\(''c:/Users/aakan/portfolio-main/public/assets/projects/sb-preview.jpg''\\).metadata\\(\\).then\\(m=>console.log\\(m.width,m.height\\)\\);\")"
     ]
   }
 }

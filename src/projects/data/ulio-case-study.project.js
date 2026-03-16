@@ -25,7 +25,7 @@ export const ulioCaseStudyProject = createCaseStudyProject({
   title: "Career Mobile App Design",
   shortTitle: "Ulio",
   category: "Product Design",
-  year: "2024",
+  year: "2025",
   summary:
     "A mobile-first product case study showcasing brand, research, and UI decisions for Ulio.",
   cover: ulioUsecaseAssets.cover,
