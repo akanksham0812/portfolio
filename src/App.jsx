@@ -19,7 +19,7 @@ import { BusrouteBHPage } from "./projects/template/busrouteBH";
 
 const filters = ["All", "Product Design", "UX Research & Design", "UX Case Study"];
 const HERO_IMAGE_SCALE = 0.7;
-const RESUME_PDF_PATH = withBase("assets/resume/Akanksha-Mahangere-Resume.pdf");
+const RESUME_PDF_PATH = withBase("assets/resume/Akanksha Mahangare CV.pdf");
 const CONTACT_EMAIL = "akanksha.ux8@gmail.com";
 const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 const LINKEDIN_URL = "https://www.linkedin.com/in/akankshamahangare/";
@@ -594,7 +594,7 @@ function HomePage() {
             <p>{aboutContent.details}</p>
             <div className="about-actions">
               <Link className="primary-action" to="/resume">
-                View Resume
+                About Me
               </Link>
               <a className="secondary-action" href={RESUME_PDF_PATH} download>
                 Download PDF
@@ -971,39 +971,224 @@ function CaseStudyPage({ slug }) {
   );
 }
 
+const ABT_TIMELINE = [
+  { year: "2025–26", title: "Associate UI/UX Designer - Globestar Edutech", desc: "UX audits, competitive research, 15+ usability improvements. Shipped 5 end-to-end design solutions across EdTech and SaaS - 3 enterprise dashboards, 5 mobile apps. Designed Knowledge Hub & Knowledge Buzz from concept to high-fidelity." },
+  { year: "2024–25", title: "Quality Analyst - Sigma AI, London", desc: "QA on linguistic data and AI training datasets for large LLMs. Boosted model performance by 20%, managed 3+ simultaneous AI training projects - proof that a UX brain is useful even when the 'user' is a machine." },
+  { year: "2024", title: "UX Designer - Interns Lab, Remote", desc: "Usability studies and interviews that lifted user satisfaction 30%. Designed wireframes and prototypes that cut delivery time by 40%. Applied accessibility guidelines to key user flows - because inclusive design isn't optional." },
+  { year: "2023–25", title: "UX Designer - Freelance, Remote", desc: "End-to-end design across 5 major projects in diverse industries. Research, wireframes, prototypes, usability testing - the full loop. Increased usability by up to 40% for clients who trusted a freelancer with their product. Bold of them. Worth it." },
+  { year: "2022–23", title: "MSc User Experience Engineering - Goldsmiths' University of London", desc: "Where the obsession became official. Specialised in UX engineering, research methods, inclusive design, and information architecture. Also learned that London is beautiful and cold and very good at both." },
+  { year: "2021", title: "UI/UX Developer - SporTech Innovation", desc: "Responsive interfaces that lifted user engagement by 30%. A/B testing and usability studies that increased conversion 35%. First real taste of shipping design that actually goes live - scary, then addictive." },
+  { year: "Origin", title: "The Japanese refrigerator moment", desc: "Saw a product so well-designed it felt alive. Fell into a rabbit hole of product design I've never climbed out of. Have not stopped redesigning things in my head since." },
+];
+
+const ABT_TOOLS = ["Figma", "Adobe XD", "Framer", "Axure", "InVision", "Miro / FigJam", "Maze", "Claude", "Hotjar", "Optimal Workshop", "Notion", "Confluence", "Webflow", "Vibe coding"];
+
+const ABT_POL_PHOTOS = [
+  { src: "/assets/resume/port/IMG_8846.JPG" },
+  { src: "/assets/resume/port/IMG_7881.JPG" },
+  { src: "/assets/resume/port/IMG_7887.JPG" },
+  { src: "/assets/resume/port/IMG_6320.jpg" },
+  { src: "/assets/resume/port/IMG_6800.jpg" },
+  { src: "/assets/resume/port/IMG_7651.jpg" },
+  { src: "/assets/resume/port/IMG_6809.jpg" },
+  { src: "/assets/resume/port/IMG_6817.jpg" },
+  { src: "/assets/resume/port/IMG_4542.jpg" },
+  { src: "/assets/resume/port/IMG_1679.jpg" },
+  { src: "/assets/resume/port/IMG_8011.jpg" },
+  { src: "/assets/resume/port/IMG_6844.jpg" },
+];
+
+const ABT_BOOKS = [
+  { title: "Mrityunjay",               author: "Shivaji Sawant",          genre: "Marathi Classic",       bg: "#1a1228", color: "#e8c49a", w: 27, h: 138, summary: "A towering Marathi epic retelling the Mahabharata through Karna's eyes - the warrior the world called a villain, but who was just born on the wrong side of fate. Heavy, beautiful, unforgettable." },
+  { title: "Grahan",                   author: "Narayan Dharap",           genre: "Marathi Thriller",      bg: "#2a1a0a", color: "#f0c878", w: 26, h: 132, summary: "A gripping Marathi thriller by the master of suspense. Dharap builds tension the way a good chai brews - slowly, deliberately, and then suddenly it's too hot to put down." },
+  { title: "Chetkin",                  author: "Narayan Dharap",           genre: "Marathi Thriller",      bg: "#0e2a1a", color: "#80d8a0", w: 26, h: 128, summary: "Another psychological thriller from Narayan Dharap, exploring the unsettling corners of the human mind. Proof that Marathi crime fiction deserves a much bigger global audience." },
+  { title: "The Crash",                author: "Freida McFadden",          genre: "Thriller",              bg: "#1e1010", color: "#f4b89a", w: 25, h: 124, summary: "A twisty psychological thriller where nothing is what it seems - and the person you trust most might be the one you should fear. McFadden's signature: you will not see the ending coming." },
+  { title: "The Sanctuary",            author: "Andrew Hunter Murray",     genre: "Thriller",              bg: "#0b3050", color: "#a8d8f0", w: 27, h: 140, summary: "A near-future thriller set in a crumbling Britain where a mysterious island retreat holds dark secrets. Atmospheric, tense, and the kind of book that makes you look up the author immediately after." },
+  { title: "The Woman Who Lied",       author: "Claire Douglas",           genre: "Psychological Thriller",bg: "#163320", color: "#8fd6b4", w: 25, h: 128, summary: "A crime writer whose fictional murders start mirroring real life. Meta, unsettling, and the kind of book that makes you double-lock your door at night - just in case." },
+  { title: "Never Lie",                author: "Freida McFadden",          genre: "Thriller",              bg: "#111111", color: "#e8e0d0", w: 24, h: 120, summary: "Tapes from a missing therapist. A newlywed who can't stop listening. Secrets buried for decades. McFadden at her most addictive - you'll finish this in one sitting and feel slightly unwell." },
+  { title: "Murder at Church Lodge",   author: "Greg Mosse",               genre: "Crime",                 bg: "#4a1010", color: "#f5c6a0", w: 26, h: 133, summary: "A classic whodunit set in an English country house. Cosy crime at its finest - ideal for reading with a blanket and something warm." },
+  { title: "Talking with Serial Killers", author: "Christopher Berry-Dee",genre: "True Crime",            bg: "#7a0000", color: "#ffe0cc", w: 25, h: 128, summary: "Firsthand interviews with some of the world's most notorious killers. Deeply unsettling, compulsively readable, and genuinely raises the question: why are we all so fascinated by this?" },
+  { title: "Agatha Christie",          author: "Agatha Christie",          genre: "Classic Mystery",       bg: "#2e2318", color: "#e8d5b0", w: 23, h: 115, summary: "The OG of crime fiction. Whether it's Poirot or Miss Marple, Christie invented the rules everyone else still follows." },
+  { title: "The Rules of Everything",  author: "Richard Templar",          genre: "Self-help",             bg: "#c8b888", color: "#2a2010", w: 27, h: 136, summary: "Sharp, witty rules for navigating life, work, and people. Less self-helpy than the title suggests - more like that blunt friend who tells you exactly what you need to hear." },
+  { title: "Trial & Retribution",      author: "Lynda La Plante",          genre: "Crime Drama",           bg: "#1a2e48", color: "#c8dff0", w: 24, h: 122, summary: "La Plante's gritty detective series at its best - a brutal murder, a complex investigation, and the kind of procedural storytelling that makes you feel like you're in the incident room." },
+  { title: "A Careless Husband",       author: "Paolo Sedazzari",          genre: "Literary Fiction",      bg: "#2e1e08", color: "#f5d9a8", w: 25, h: 130, summary: "A quiet, uncomfortable look at marriage, betrayal, and the small cruelties we commit against the people closest to us. The kind of book that stays with you longer than you'd like." },
+  { title: "Franz Kafka",              author: "Franz Kafka",              genre: "Classic / Absurdist",   bg: "#181818", color: "#c0c0c0", w: 21, h: 110, summary: "You wake up one day as a giant insect. Your family is horrified. Bureaucracy is inescapable. Everything is vaguely someone's fault but no one's fault. Peak Kafka. Somehow still relatable." },
+  { title: "The Long Game",            author: "Elena Armas",              genre: "Romance",               bg: "#1e5544", color: "#a8f0d8", w: 27, h: 138, summary: "Enemies-to-lovers slow burn between two people who are terrible at admitting they like each other. Sandwiched between serial killers and Kafka on this shelf, which honestly makes it more charming." },
+];
+
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll(".abt-reveal");
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("abt-reveal-visible"); observer.unobserve(e.target); } }),
+      { threshold: 0.08 }
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+}
+
 function ResumePage() {
+  const [activeBook, setActiveBook] = useState(null);
+  const [lightboxSrc, setLightboxSrc] = useState(null);
+  const detailRef = useRef(null);
+  useReveal();
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") setLightboxSrc(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  function handleBookClick(i) {
+    if (activeBook === i) { setActiveBook(null); return; }
+    setActiveBook(i);
+    setTimeout(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50);
+  }
+
+  const book = activeBook !== null ? ABT_BOOKS[activeBook] : null;
+
   return (
     <section className="resume-page">
-      <p className="resume-kicker">Resume</p>
-      <h1>Akanksha Mahangare</h1>
-      <p className="resume-summary">
-        Creative designer focused on product interfaces, brand-aligned visual systems, and conversion-ready web
-        experiences.
-      </p>
+      <div className="abt-inner">
 
-      <div className="resume-grid">
-        {resumeBlocks.map((block) => (
-          <article key={block.title}>
-            <h2>{block.title}</h2>
-            <ul>
-              {block.items.map((item) => (
-                <li key={item}>{item}</li>
+        {/* HERO */}
+        <div className="abt-hero-layout abt-reveal">
+          <div className="abt-hero-text">
+            <span className="abt-hero-tag">UX Designer · MSc Goldsmiths' University of London · Pune</span>
+            <h1 className="abt-hero-name">Hi, I'm Akanksha.</h1>
+            <p className="abt-hero-sub">I make things make sense.</p>
+            <p className="abt-body">MSc in User Experience Engineering from Goldsmiths' University of London. My mission: design things people don't hate. High bar, I know.</p>
+            <p className="abt-body">I've helped teams boost user satisfaction by 30% and cut delivery cycles by 40% - all while keeping Figma files organised and cross-functional collaboration drama-free. I also vibe-code now, so I'm basically a designer who can break things in two languages.</p>
+            <div className="abt-origin-block">
+              <p>It started with a Japanese refrigerator. I saw it, couldn't stop thinking about how something so ordinary could be so considered, and promptly fell into a rabbit hole of product design I've never climbed out of.</p>
+              <span>- how it actually started</span>
+            </div>
+          </div>
+          <div className="abt-hero-photo-col">
+            <div className="abt-hero-photo">
+              <img src="/assets/resume/port/FullSizeRender.jpg" alt="Akanksha Mahangare" />
+            </div>
+          </div>
+        </div>
+
+        <div className="abt-divider" />
+
+        {/* PHILOSOPHY */}
+        <div className="abt-reveal">
+          <span className="abt-label">Design philosophy</span>
+          <div className="abt-philosophy">
+            <p>"Design isn't decoration. It's the difference between someone getting it on the first click - or rage-quitting forever. I'd rather be the reason they stayed."</p>
+            <span>- Akanksha, bluntly</span>
+          </div>
+        </div>
+
+        <div className="abt-divider" />
+
+        {/* TIMELINE */}
+        <div className="abt-reveal">
+          <span className="abt-label">Career so far</span>
+          <div className="abt-timeline">
+            {ABT_TIMELINE.map((item, i) => (
+              <div key={item.year} className="abt-tl-item abt-reveal" style={{ "--abt-delay": `${i * 0.1}s` }}>
+                <div className="abt-tl-year">{item.year}</div>
+                <div className="abt-tl-content">
+                  <div className="abt-tl-title">{item.title}</div>
+                  <div className="abt-tl-desc">{item.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="abt-divider" />
+
+        {/* TOOLS */}
+        <div className="abt-reveal">
+          <span className="abt-label">Tools of the trade</span>
+          <div className="abt-tools">
+            {ABT_TOOLS.map((t) => <span key={t} className="abt-tool">{t}</span>)}
+          </div>
+        </div>
+
+        <div className="abt-divider" />
+
+        {/* PHOTOS */}
+        <div className="abt-reveal">
+          <span className="abt-label">My digital photo diary</span>
+          <div className="abt-photo-grid">
+            {ABT_POL_PHOTOS.map((p, i) => (
+              <div key={i} className="abt-photo-tile" onClick={() => setLightboxSrc(p.src)}>
+                <img src={p.src} alt="" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="abt-divider" />
+
+        {/* BOOKSHELF */}
+        <div className="abt-reveal">
+          <span className="abt-label">Currently on my shelf</span>
+
+          {book && (
+            <div className="abt-book-detail" ref={detailRef}>
+              <button className="abt-detail-close" onClick={() => setActiveBook(null)}>close ✕</button>
+              <p className="abt-detail-genre">{book.genre}</p>
+              <p className="abt-detail-title">{book.title}</p>
+              <p className="abt-detail-author">{book.author}</p>
+              <p className="abt-detail-summary">{book.summary}</p>
+            </div>
+          )}
+
+          <div className="abt-shelf-unit">
+            <div className="abt-shelf-row">
+              {ABT_BOOKS.map((b, i) => (
+                <div
+                  key={i}
+                  className={`abt-book${activeBook === i ? " abt-book-active" : ""}`}
+                  style={{ width: b.w, height: b.h, background: b.bg }}
+                  onClick={() => handleBookClick(i)}
+                >
+                  <div className="abt-book-top" />
+                  <div className="abt-book-highlight" />
+                  <span className="abt-book-spine" style={{ color: b.color }}>
+                    <span className="abt-spine-title">{b.title}</span>
+                    <span className="abt-spine-author">{b.author.split(" ").pop()}</span>
+                  </span>
+                </div>
               ))}
-            </ul>
-          </article>
-        ))}
+            </div>
+            <div className="abt-shelf-plank" />
+            <p className="abt-shelf-footer">click any book · crime, marathi classics & one romance · zero regrets</p>
+          </div>
+        </div>
+
+        <div className="abt-divider" />
+
+        {/* FUN FACT */}
+        <div className="abt-reveal">
+          <div className="abt-fun-fact">
+            <p className="abt-fun-fact-text"><strong>One fun fact:</strong> If you've ever struggled with a confusing checkout flow at 11pm, there's a decent chance I've quietly judged it and mentally fixed it too.</p>
+          </div>
+        </div>
+
+        {/* ACTIONS */}
+        <div className="resume-actions abt-reveal" style={{ marginTop: "2.5rem" }}>
+          <a href={RESUME_PDF_PATH} download>Download Resume PDF</a>
+          <a href={CONTACT_MAILTO}>Contact</a>
+          <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn</a>
+          <Link to="/?section=work">View Work</Link>
+        </div>
+
       </div>
 
-      <div className="resume-actions">
-        <a href={RESUME_PDF_PATH} download>
-          Download Resume PDF
-        </a>
-        <a href={CONTACT_MAILTO}>Contact</a>
-        <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
-          LinkedIn
-        </a>
-        <Link to="/?section=work">View Work</Link>
-      </div>
+      {lightboxSrc && (
+        <div className="abt-lightbox" onClick={() => setLightboxSrc(null)}>
+          <button className="abt-lightbox-close" onClick={() => setLightboxSrc(null)}>✕</button>
+          <img src={lightboxSrc} alt="" onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
     </section>
   );
 }

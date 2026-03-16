@@ -7,14 +7,14 @@ export const createCaseStudyProject = (overrides) => ({
   cover: "",
   hero: "",
   gallery: [],
-  // Overview bar — role, timeline, methods, outcome
+  // Overview bar - role, timeline, methods, outcome
   overview: {
     role: "",
     timeline: "",
     methods: [],
     outcome: "",
   },
-  // Main sections — array of { heading, body } objects
+  // Main sections - array of { heading, body } objects
   sections: [],
   // Legacy fields kept for backward compatibility
   challenge: "",

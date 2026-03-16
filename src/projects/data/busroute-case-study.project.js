@@ -7,7 +7,7 @@ export const busrouteCaseStudyProject = createCaseStudyProject({
   category: "Mobile Design",
   year: "2026",
   summary:
-    "A 14-week end-to-end UX project to bring live bus intelligence to India's commuters — the GPS infrastructure already exists across cities like Bengaluru and Mumbai. The consumer-facing product doesn't. This project asks why, and designs what it would take.",
+    "A 14-week end-to-end UX project to bring live bus intelligence to India's commuters - the GPS infrastructure already exists across cities like Bengaluru and Mumbai. The consumer-facing product doesn't. This project asks why, and designs what it would take.",
   cover: imageAsset("assets/projects/zing.png", ""),
   hero: imageAsset("assets/projects/zing.png", ""),
   overview: {

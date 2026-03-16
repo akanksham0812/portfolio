@@ -91,8 +91,8 @@ function ProblemSection() {
         It started with a personal observation. As an international student in the UK,
         I struggled with Sainsbury's self-checkout machines: the confusing prompts, the
         unexpected error states, the bagging area that seemed to have a mind of its own.
-        But standing in a queue one afternoon, I watched local customers — people who had
-        used these machines for years — experiencing the exact same friction.
+        But standing in a queue one afternoon, I watched local customers - people who had
+        used these machines for years - experiencing the exact same friction.
       </p>
 
       <div className="sb-bh-problem-grid">
@@ -200,7 +200,7 @@ function SolutionSection() {
       <p className="sb-bh-section-body">
         Instead of fixing a broken checkout, I questioned the premise: why does scanning
         happen at the checkout at all? The Smart Basket pre-scans items during shopping.
-        By the time the customer reaches the terminal, scanning is already done — leaving
+        By the time the customer reaches the terminal, scanning is already done - leaving
         only confirmation and payment.
       </p>
       <div className="sb-bh-solution-grid">
@@ -217,7 +217,7 @@ function SolutionSection() {
         <div className="sb-bh-solution-card">
           <div className="sb-bh-solution-accent" />
           <h3>Weighted item flow</h3>
-          <p>Produce and loose items get a dedicated confirmation step — so the scale never rejects a bag of apples again.</p>
+          <p>Produce and loose items get a dedicated confirmation step - so the scale never rejects a bag of apples again.</p>
         </div>
         <div className="sb-bh-solution-card">
           <div className="sb-bh-solution-accent" />
@@ -279,7 +279,7 @@ function PrototypeSection() {
       <div className="sb-bh-section-label">06 / Prototype</div>
       <h2 className="sb-bh-section-h2">Try the full checkout flow.</h2>
       <p className="sb-bh-section-body">
-        Walk through the redesigned experience — Smart Basket scanning, item review, and tap-to-pay.
+        Walk through the redesigned experience - Smart Basket scanning, item review, and tap-to-pay.
       </p>
       <div ref={wrapRef} className="sb-bh-proto-wrap" style={{ height: Math.round(KIOSK_H * scale) }}>
         <iframe
@@ -314,7 +314,7 @@ function UserFlowSection() {
       <h2 className="sb-bh-section-h2">Pre-scanned. Confirmed. Done.</h2>
       <p className="sb-bh-section-body">
         The Smart Basket pre-scans items during shopping. By the time the customer reaches
-        the terminal, scanning is already done — leaving only confirmation and payment.
+        the terminal, scanning is already done - leaving only confirmation and payment.
       </p>
       <div className="sb-bh-uf-diagram">
         <svg viewBox="0 0 980 420" fill="none" xmlns="http://www.w3.org/2000/svg" className="sb-bh-uf-svg">
@@ -385,7 +385,7 @@ function ReflectionsSection() {
             <span className="sb-bh-reflection-num">03</span>
             <div>
               <h3>Explore the operational implications</h3>
-              <p>RFID infrastructure costs, item tagging workflows, loss prevention — these weren't in scope but matter enormously for real-world feasibility.</p>
+              <p>RFID infrastructure costs, item tagging workflows, loss prevention - these weren't in scope but matter enormously for real-world feasibility.</p>
             </div>
           </div>
         </div>
