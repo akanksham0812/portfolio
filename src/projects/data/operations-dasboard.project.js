@@ -1,23 +1,30 @@
 import { imageAsset } from "../imageAsset.js";
 import { createCaseStudyProject } from "../template/caseStudy.template.js";
 
+const universityOpsAssets = {
+  cover: imageAsset("assets/projects/ops-cover.jpg", ""),
+  hero: imageAsset("assets/projects/ulio-usecase/vendor-management-system-shot-61.png", ""),
+  galleryOverview: imageAsset("assets/projects/ulio-usecase/vendor-management-system-section.png", ""),
+  galleryMobile: imageAsset("assets/projects/ulio-usecase/modile_index1.png", ""),
+};
+
 export const operationsDasboardProject = createCaseStudyProject({
   title: "Designing for Scale: A University Operations Platform",
-  shortTitle: "Operations Intelligence Hub",
-  category: "Product Design",
-  year: "2025",
+  shortTitle: "Ulio University Dashboard",
+  category: "UX Case Study",
+  year: "2024-2025",
   summary:
-    "A complete redesign of operation workflows that transforms real-time incident response into proactive, data-driven decision-making.",
-  cover: imageAsset("assets/projects/ops-cover.jpg", "https://framerusercontent.com/images/9mlMP0RPbGpi8L0VDqfSD9W6ve4.jpg"),
-  hero: imageAsset("assets/projects/ops-hero.png", "https://framerusercontent.com/images/WuHozxnyRSOE6LWB1s6Jfe5zz4.png"),
+    "Designing a multi-module university admissions platform for teams navigating record application volume, fragmented tooling, and enrollment pressure.",
+  cover: universityOpsAssets.cover,
+  hero: universityOpsAssets.hero,
   gallery: [
-    imageAsset("assets/projects/ops-hero.png", "https://framerusercontent.com/images/WuHozxnyRSOE6LWB1s6Jfe5zz4.png"),
-    imageAsset("assets/projects/ops-board.png", "https://framerusercontent.com/images/DCbc4g6QHc84Yf53f8QzL0jIyg.png"),
-    imageAsset("assets/projects/ops-cover.jpg", "https://framerusercontent.com/images/9mlMP0RPbGpi8L0VDqfSD9W6ve4.jpg"),
+    universityOpsAssets.galleryOverview,
+    universityOpsAssets.hero,
+    universityOpsAssets.galleryMobile,
   ],
   challenge:
-    "The existing system was highly reactive, with teams spending significant time resolving issues after they occurred. This led to delayed response times, fragmented communication across departments, and an inability to identify operational bottlenecks before escalation.",
+    "Admissions teams were juggling record application volume across Slate, Salesforce, Zoom, spreadsheets, and email without a unified operational view or early warning on enrollment performance.",
   solution:
-    "I designed a modular command-center experience with priority signal cards, timeline-based anomaly tracking, and quick filters for region, line, and severity.",
-  impact: ["62% faster incident triage", "Single source of truth for ops reviews", "Higher trust in data quality"],
+    "I designed a six-module command center spanning home, analytics, management, communication, community, and trust settings to connect insight directly to action.",
+  impact: ["~40% faster time-to-first-action", "3x faster campaign creation", "Lower drop-off between verification and launch"],
 });
