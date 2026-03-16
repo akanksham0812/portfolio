@@ -20,6 +20,36 @@ function useInView(threshold = 0.12) {
   return [ref, on];
 }
 
+/* ── CountUp: number rolls up when it enters the viewport ── */
+function CountUp({ to, suffix = "", prefix = "", duration = 1400, decimals = 0 }) {
+  const [val, setVal] = useState(0);
+  const ref = useRef(null);
+  const rafRef = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        const start = performance.now();
+        const tick = (now) => {
+          const t = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          setVal(parseFloat((eased * to).toFixed(decimals)));
+          if (t < 1) rafRef.current = requestAnimationFrame(tick);
+        };
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        setVal(0);
+      }
+    }, { threshold: 0.4 });
+    obs.observe(el);
+    return () => { obs.disconnect(); if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [to, duration, decimals]);
+  return <span ref={ref}>{prefix}{val.toFixed(decimals)}{suffix}</span>;
+}
+
 /* ── AnimatedBars: progress bars that animate in on scroll ── */
 function AnimatedBars() {
   const [ref, on] = useInView(0.3);
@@ -503,12 +533,14 @@ export function BusrouteBHPage({ project }) {
         {/* Stats row */}
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:12, marginTop:12 }}>
           {[
-            { num:"70M+", label:"Daily bus riders in India with no usable real-time app" },
-            { num:"34 min", label:"Average daily wait time wasted per commuter" },
-            { num:"90%", label:"First-session task success rate in prototype testing" },
-          ].map(({ num, label }) => (
-            <div key={num} style={{ background:"#111115", border:"1px solid rgba(255,255,255,0.07)", borderRadius:16, padding:"24px 20px" }}>
-              <div style={{ fontSize:28, fontWeight:800, color:"#C6F135", letterSpacing:"-0.04em", lineHeight:1, marginBottom:8 }}>{num}</div>
+            { to:70, suffix:"M+", label:"Daily bus riders in India with no usable real-time app" },
+            { to:34, suffix:" min", label:"Average daily wait time wasted per commuter" },
+            { to:90, suffix:"%", label:"First-session task success rate in prototype testing" },
+          ].map(({ to, suffix, label }) => (
+            <div key={label} style={{ background:"#111115", border:"1px solid rgba(255,255,255,0.07)", borderRadius:16, padding:"24px 20px" }}>
+              <div style={{ fontSize:28, fontWeight:800, color:"#C6F135", letterSpacing:"-0.04em", lineHeight:1, marginBottom:8 }}>
+                <CountUp to={to} suffix={suffix} />
+              </div>
               <div style={{ fontSize:12, color:"rgba(255,255,255,0.38)", lineHeight:1.5 }}>{label}</div>
             </div>
           ))}
@@ -612,7 +644,7 @@ export function BusrouteBHPage({ project }) {
             {/* Card 1 */}
             <div>
               <div style={{fontSize:12, color:"rgba(255,255,255,0.38)", letterSpacing:"0.05em", marginBottom:8}}>Users</div>
-              <div style={{fontSize:52, fontWeight:700, color:"#F0F0F2", letterSpacing:"-0.03em", lineHeight:1, marginBottom:16}}>78%</div>
+              <div style={{fontSize:52, fontWeight:700, color:"#F0F0F2", letterSpacing:"-0.03em", lineHeight:1, marginBottom:16}}><CountUp to={78} suffix="%" /></div>
               <div style={{fontSize:12, color:"rgba(255,255,255,0.38)", marginBottom:8}}>Insight</div>
               <div style={{fontSize:18, fontWeight:600, color:"#F0F0F2", lineHeight:1.35, maxWidth:260, marginBottom:28}}>Prefer real-time data over schedule estimates.</div>
               <div style={{height:52, borderRadius:999, background:"repeating-linear-gradient(90deg, #C6F135 0px, #C6F135 1.5px, transparent 1.5px, transparent 7px)"}} />
@@ -621,7 +653,7 @@ export function BusrouteBHPage({ project }) {
             {/* Card 3 */}
             <div>
               <div style={{fontSize:12, color:"rgba(255,255,255,0.38)", letterSpacing:"0.05em", marginBottom:8}}>Users</div>
-              <div style={{fontSize:52, fontWeight:700, color:"#F0F0F2", letterSpacing:"-0.03em", lineHeight:1, marginBottom:16}}>46%</div>
+              <div style={{fontSize:52, fontWeight:700, color:"#F0F0F2", letterSpacing:"-0.03em", lineHeight:1, marginBottom:16}}><CountUp to={46} suffix="%" /></div>
               <div style={{fontSize:12, color:"rgba(255,255,255,0.38)", marginBottom:8}}>Insight</div>
               <div style={{fontSize:18, fontWeight:600, color:"#F0F0F2", lineHeight:1.35, maxWidth:260, marginBottom:28}}>Need bus information in their native language.</div>
               <div style={{height:52, borderRadius:999, background:"repeating-linear-gradient(90deg, #FF7A63 0px, #FF7A63 1.5px, transparent 1.5px, transparent 7px)"}} />
@@ -640,7 +672,7 @@ export function BusrouteBHPage({ project }) {
             {/* Card 2 — offset down */}
             <div style={{marginTop:120}}>
               <div style={{fontSize:12, color:"rgba(255,255,255,0.38)", letterSpacing:"0.05em", marginBottom:8}}>Users</div>
-              <div style={{fontSize:52, fontWeight:700, color:"#F0F0F2", letterSpacing:"-0.03em", lineHeight:1, marginBottom:16}}>90%</div>
+              <div style={{fontSize:52, fontWeight:700, color:"#F0F0F2", letterSpacing:"-0.03em", lineHeight:1, marginBottom:16}}><CountUp to={90} suffix="%" /></div>
               <div style={{fontSize:12, color:"rgba(255,255,255,0.38)", marginBottom:8}}>Insight</div>
               <div style={{fontSize:18, fontWeight:600, color:"#F0F0F2", lineHeight:1.35, maxWidth:260, marginBottom:28}}>Task success on first session with zero onboarding.</div>
               <div style={{height:52, borderRadius:999, background:"repeating-linear-gradient(90deg, #4B6BFF 0px, #4B6BFF 1.5px, transparent 1.5px, transparent 7px)"}} />
@@ -848,15 +880,15 @@ export function BusrouteBHPage({ project }) {
 
         <div className={`bh-outcomes-grid${outcomesOn ? " bh-anim--on" : ""}`} ref={outcomesRef}>
           {[
-            { num:"90%",   label:"First-session task success",  desc:"Participants found ETA for their regular route with zero instruction. Benchmark for zero-onboarding usability.", star:false },
-            { num:"4.6 / 5", label:"Trust rating",  desc:"vs 2.1 for the PMPML official app in the same prototype test. Same GPS data feed, radically different product decisions.", star:true },
-            { num:"9 / 10",  label:"Ease of use",  desc:"Pune participants rated the prototype very easy on first session using a SUS-adapted scale. Validates the zero-onboarding hypothesis.", star:false },
-            { num:"3",     label:"Prototype iterations", desc:"Three major design pivots, each triggered by field validation data. Every assumption was tested before advancing to the next round.", star:false },
-            { num:"n=86",  label:"Survey respondents",   desc:"Screened survey across Pune and Mumbai commuters. Established the quantitative baseline before any screen was designed.", star:false },
-            { num:"12",    label:"User interviews",       desc:"Semi-structured sessions with daily public transit users. Surfaced the trust gap, the ETA anxiety, and the language barrier.", star:false },
-          ].map(({ num, label, desc, star }) => (
+            { to:90,  suffix:"%",      label:"First-session task success",  desc:"Participants found ETA for their regular route with zero instruction. Benchmark for zero-onboarding usability.", star:false },
+            { to:4.6, suffix:" / 5",   decimals:1, label:"Trust rating",  desc:"vs 2.1 for the PMPML official app in the same prototype test. Same GPS data feed, radically different product decisions.", star:true },
+            { to:9,   suffix:" / 10",  label:"Ease of use",  desc:"Pune participants rated the prototype very easy on first session using a SUS-adapted scale. Validates the zero-onboarding hypothesis.", star:false },
+            { to:3,   suffix:"",       label:"Prototype iterations", desc:"Three major design pivots, each triggered by field validation data. Every assumption was tested before advancing to the next round.", star:false },
+            { to:86,  prefix:"n=",     label:"Survey respondents",   desc:"Screened survey across Pune and Mumbai commuters. Established the quantitative baseline before any screen was designed.", star:false },
+            { to:12,  suffix:"",       label:"User interviews",       desc:"Semi-structured sessions with daily public transit users. Surfaced the trust gap, the ETA anxiety, and the language barrier.", star:false },
+          ].map(({ to, suffix = "", prefix = "", decimals = 0, label, desc, star }) => (
             <div className={`bh-oc${star ? " featured" : ""}`} key={label}>
-              <div className="bh-oc-num">{num}</div>
+              <div className="bh-oc-num"><CountUp to={to} suffix={suffix} prefix={prefix} decimals={decimals} /></div>
               <div className="bh-oc-label">{label}</div>
               <div className="bh-oc-desc">{desc}</div>
             </div>

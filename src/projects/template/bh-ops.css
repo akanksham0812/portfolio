@@ -5,7 +5,7 @@
 .bh-page {
   background: #ffffff;
   color: #111;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
@@ -63,7 +63,7 @@
 
 /* "NIVA MOBILE APPLICATION" equivalent */
 .bh-hero-category {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -166,7 +166,7 @@
 .bh-dot.y { background: #febc2e; }
 .bh-dot.g { background: #28c840; }
 .bh-dash-url {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
   color: rgba(255,255,255,0.25);
   margin-left: 10px;
@@ -235,7 +235,7 @@
   color: rgba(255,255,255,0.35);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 .bh-alerts { display: flex; flex-direction: column; gap: 5px; }
 .bh-alert-row {
@@ -251,7 +251,7 @@
 .bh-alert-label {
   font-size: 10px;
   color: rgba(255,255,255,0.5);
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   flex: 0 0 140px;
   white-space: nowrap;
   overflow: hidden;
@@ -339,7 +339,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -391,7 +391,7 @@
 }
 .bh-prob-card:hover { background: #fafafa; }
 .bh-prob-num {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 11px;
   letter-spacing: 0.12em;
   color: #ccc;
@@ -439,7 +439,7 @@
   max-width: 700px;
 }
 .bh-quote-cite {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -460,7 +460,7 @@
 }
 .bh-persona-col { background: rgba(255,255,255,0.04); padding: 40px; height: 100%; }
 .bh-persona-col-label {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -503,7 +503,7 @@
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 .bh-table td {
   padding: 18px 20px;
@@ -521,7 +521,7 @@
 
 /* ── Findings ── */
 .bh-findings-label {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -539,7 +539,7 @@
 }
 .bh-finding:last-child { border-bottom: none; }
 .bh-finding-num {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 11px;
   letter-spacing: 0.08em;
   color: #e63946;
@@ -582,7 +582,7 @@
   font-size: 12px;
   color: #888;
   margin-bottom: 28px;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   letter-spacing: 0.04em;
 }
 .bh-kano-col--dark .bh-kano-sub { color: rgba(255,255,255,0.35); }
@@ -599,7 +599,7 @@
 
 /* ── Principles ── */
 .bh-principles-label {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -617,7 +617,7 @@
 }
 .bh-principle:last-child { border-bottom: none; }
 .bh-principle-n {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 11px;
   letter-spacing: 0.08em;
   color: #ccc;
@@ -653,13 +653,13 @@
   border: 1px solid #e0e0e0;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 .bh-tab:hover { color: #e63946; border-color: #e63946; background: #fff5f5; }
 .bh-tab--on { background: #111; color: #fff; border-color: #111; }
 .bh-tab--on .bh-tab-tag { color: rgba(255,255,255,0.4); }
 .bh-tab-tag {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
   letter-spacing: 0.06em;
   color: #bbb;
@@ -672,7 +672,7 @@
   align-items: start;
 }
 .bh-mod-sub {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -714,7 +714,7 @@
   border-bottom: 1px solid #ddd;
 }
 .bh-mod-screen-title {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
   color: #888;
   margin-left: 8px;
@@ -797,7 +797,7 @@
 .bh-ba-col--before { background: rgba(255,255,255,0.03); }
 .bh-ba-col--after { background: #e63946; }
 .bh-ba-label {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -828,7 +828,7 @@
 }
 .bh-reflection:last-child { border-bottom: none; }
 .bh-reflection-n {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 11px;
   letter-spacing: 0.08em;
   color: #e63946;
@@ -867,7 +867,7 @@
 }
 .bh-footer-inner { position: relative; z-index: 1; max-width: 600px; }
 .bh-footer-label {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -896,7 +896,7 @@
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.2s;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 .bh-footer-back:hover { background: rgba(255,255,255,0.07); color: #fff; border-color: rgba(255,255,255,0.35); }
 

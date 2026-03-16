@@ -43,6 +43,28 @@ function TypedText({ text, delay = 0 }) {
   return <span ref={ref}>{displayed}{!done && <span className="ulio-cursor">|</span>}</span>;
 }
 
+function FadeSection({ children, delay = 0 }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.08 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <div
+      ref={ref}
+      className={`sb-fade${visible ? " sb-fade--in" : ""}`}
+      style={delay ? { transitionDelay: `${delay}ms` } : {}}
+    >
+      {children}
+    </div>
+  );
+}
+
 
 export function UlioUsecasePage({ project }) {
   const navigate = useNavigate();
@@ -84,122 +106,136 @@ export function UlioUsecasePage({ project }) {
           </div>
         </section>
 
-        <section className="ulio-about">
-          <p className="ulio-about-body">{data.about?.body}</p>
-          <div className="ulio-about-tags">
-            {(data.about?.tags || []).map((tag, index) => (
-              <span key={tag} className={`ulio-chip ulio-chip--about ulio-chip--${index + 1}`}>
-                <TypedText text={tag} delay={index * 350} />
-              </span>
-            ))}
-          </div>
-        </section>
-
-        <section className="ulio-brand-cards-wrap">
-        <section className="ulio-brand-cards">
-          <div className="ulio-brand-card ulio-brand-card--red">
-            {data.brandCards?.whiteLogo && (
-              <div className="ulio-brand-logo-center">
-                <SafeImage image={data.brandCards.whiteLogo} alt="Ulio" className="ulio-brand-logo-img" />
-              </div>
-            )}
-            <div className="ulio-brand-tags">
-              {(data.brandCards?.leftTags || []).map((tag, index) => (
-                <span key={tag} className={`ulio-chip ulio-chip--brand ulio-chip--brand-${index + 1}`}>{tag}</span>
+        <FadeSection>
+          <section className=”ulio-about”>
+            <p className=”ulio-about-body”>{data.about?.body}</p>
+            <div className=”ulio-about-tags”>
+              {(data.about?.tags || []).map((tag, index) => (
+                <span key={tag} className={`ulio-chip ulio-chip--about ulio-chip--${index + 1}`}>
+                  <TypedText text={tag} delay={index * 350} />
+                </span>
               ))}
             </div>
-          </div>
-          <div className="ulio-brand-card ulio-brand-card--dark">
-            <div className="ulio-brand-grid" aria-hidden="true">
-              {data.brandCards?.icons?.red && <SafeImage image={data.brandCards.icons.red} alt="" className="ulio-brand-dot is-red" />}
-              {data.brandCards?.icons?.blue && <SafeImage image={data.brandCards.icons.blue} alt="" className="ulio-brand-dot is-blue" />}
-              {data.brandCards?.icons?.teal && <SafeImage image={data.brandCards.icons.teal} alt="" className="ulio-brand-dot is-teal" />}
-              {data.brandCards?.icons?.purple && <SafeImage image={data.brandCards.icons.purple} alt="" className="ulio-brand-dot is-purple" />}
-            </div>
-            {data.brandCards?.whiteLogo && (
-              <div className="ulio-brand-logo-center">
-                <SafeImage image={data.brandCards.whiteLogo} alt="Ulio" className="ulio-brand-logo-img" />
+          </section>
+        </FadeSection>
+
+        <FadeSection>
+          <section className=”ulio-brand-cards-wrap”>
+          <section className=”ulio-brand-cards”>
+            <div className=”ulio-brand-card ulio-brand-card--red”>
+              {data.brandCards?.whiteLogo && (
+                <div className=”ulio-brand-logo-center”>
+                  <SafeImage image={data.brandCards.whiteLogo} alt=”Ulio” className=”ulio-brand-logo-img” />
+                </div>
+              )}
+              <div className=”ulio-brand-tags”>
+                {(data.brandCards?.leftTags || []).map((tag, index) => (
+                  <span key={tag} className={`ulio-chip ulio-chip--brand ulio-chip--brand-${index + 1}`}>{tag}</span>
+                ))}
               </div>
-            )}
-          </div>
-        </section>
-        </section>
-
-        <section className="ulio-research">
-          <h2>{data.research?.title}</h2>
-          <div className="ulio-research-grid">
-            <div className="ulio-research-card">
-              <h3>{data.research?.primaryTitle}</h3>
-              <ul>
-                {(data.research?.primary || []).map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
             </div>
-            <div className="ulio-research-card">
-              <h3>{data.research?.secondaryTitle}</h3>
-              <ul>
-                {(data.research?.secondary || []).map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="ulio-pain">
-          <div className="ulio-pain-grid">
-            <div>
-              <span className="ulio-badge is-warn">{data.painPoints?.leftLabel}</span>
-              <ul className="ulio-pain-list">
-                {(data.painPoints?.items || []).map((item) => (
-                  <li key={item}><span aria-hidden="true">⚠️</span>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="ulio-pain-divider" aria-hidden="true" />
-            <div>
-              <span className="ulio-badge">{data.painPoints?.rightLabel}</span>
-              <ul className="ulio-pain-list">
-                {(data.painPoints?.solutions || []).map((item) => (
-                  <li key={item}><span aria-hidden="true">🎯</span>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <h2 className="ulio-section-title">{data.typography?.label}</h2>
-        <section className="ulio-typography">
-          <div className="ulio-typography-grid">
-            <div className="ulio-typography-hero">Aa</div>
-            <div className="ulio-typography-copy">
-              <p>“{data.typography?.quote}”</p>
-              <h3>{data.typography?.font}</h3>
-              <span>{(data.typography?.weights || []).join(" · ")}</span>
-            </div>
-          </div>
-          <div className="ulio-palette">
-            {(data.palette || []).map((color, i) => (
-              <div key={i} className="ulio-swatch">
-                <SafeImage image={color.image} alt="" className="ulio-swatch-img" />
+            <div className=”ulio-brand-card ulio-brand-card--dark”>
+              <div className=”ulio-brand-grid” aria-hidden=”true”>
+                {data.brandCards?.icons?.red && <SafeImage image={data.brandCards.icons.red} alt=”” className=”ulio-brand-dot is-red” />}
+                {data.brandCards?.icons?.blue && <SafeImage image={data.brandCards.icons.blue} alt=”” className=”ulio-brand-dot is-blue” />}
+                {data.brandCards?.icons?.teal && <SafeImage image={data.brandCards.icons.teal} alt=”” className=”ulio-brand-dot is-teal” />}
+                {data.brandCards?.icons?.purple && <SafeImage image={data.brandCards.icons.purple} alt=”” className=”ulio-brand-dot is-purple” />}
               </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="ulio-ui is-single">
-          {data.uiShowcase?.mockup ? (
-            <div className="ulio-ui-mockup">
-              <SafeImage image={data.uiShowcase?.mockup} alt="Ulio UI mockups" />
+              {data.brandCards?.whiteLogo && (
+                <div className=”ulio-brand-logo-center”>
+                  <SafeImage image={data.brandCards.whiteLogo} alt=”Ulio” className=”ulio-brand-logo-img” />
+                </div>
+              )}
             </div>
-          ) : null}
-        </section>
+          </section>
+          </section>
+        </FadeSection>
 
-        <section className="ulio-footer">
-          <p>{data.footer?.preface}</p>
-          <h2>{data.footer?.thanks}</h2>
-        </section>
+        <FadeSection>
+          <section className=”ulio-research”>
+            <h2>{data.research?.title}</h2>
+            <div className=”ulio-research-grid”>
+              <div className=”ulio-research-card”>
+                <h3>{data.research?.primaryTitle}</h3>
+                <ul>
+                  {(data.research?.primary || []).map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className=”ulio-research-card”>
+                <h3>{data.research?.secondaryTitle}</h3>
+                <ul>
+                  {(data.research?.secondary || []).map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+        </FadeSection>
+
+        <FadeSection>
+          <section className=”ulio-pain”>
+            <div className=”ulio-pain-grid”>
+              <div>
+                <span className=”ulio-badge is-warn”>{data.painPoints?.leftLabel}</span>
+                <ul className=”ulio-pain-list”>
+                  {(data.painPoints?.items || []).map((item) => (
+                    <li key={item}><span aria-hidden=”true”>⚠️</span>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className=”ulio-pain-divider” aria-hidden=”true” />
+              <div>
+                <span className=”ulio-badge”>{data.painPoints?.rightLabel}</span>
+                <ul className=”ulio-pain-list”>
+                  {(data.painPoints?.solutions || []).map((item) => (
+                    <li key={item}><span aria-hidden=”true”>🎯</span>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+        </FadeSection>
+
+        <FadeSection>
+          <h2 className=”ulio-section-title”>{data.typography?.label}</h2>
+          <section className=”ulio-typography”>
+            <div className=”ulio-typography-grid”>
+              <div className=”ulio-typography-hero”>Aa</div>
+              <div className=”ulio-typography-copy”>
+                <p>”{data.typography?.quote}”</p>
+                <h3>{data.typography?.font}</h3>
+                <span>{(data.typography?.weights || []).join(“ · “)}</span>
+              </div>
+            </div>
+            <div className=”ulio-palette”>
+              {(data.palette || []).map((color, i) => (
+                <div key={i} className=”ulio-swatch”>
+                  <SafeImage image={color.image} alt=”” className=”ulio-swatch-img” />
+                </div>
+              ))}
+            </div>
+          </section>
+        </FadeSection>
+
+        <FadeSection>
+          <section className=”ulio-ui is-single”>
+            {data.uiShowcase?.mockup ? (
+              <div className=”ulio-ui-mockup”>
+                <SafeImage image={data.uiShowcase?.mockup} alt=”Ulio UI mockups” />
+              </div>
+            ) : null}
+          </section>
+        </FadeSection>
+
+        <FadeSection>
+          <section className=”ulio-footer”>
+            <p>{data.footer?.preface}</p>
+            <h2>{data.footer?.thanks}</h2>
+          </section>
+        </FadeSection>
       </article>
     </div>
   );

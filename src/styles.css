@@ -1,6 +1,24 @@
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Overused Grotesk", sans-serif;
-  font-weight: 500;
+/* ── Font weight scale ──────────────────────────────────────────────────────
+   DM Sans is used globally (PolySans substitute).
+   Syne is reserved exclusively for .hero-title-wrap h1 ("Design Thinker").
+   300 → captions / subtle text
+   400 → body copy
+   600 → subheadings, UI labels
+   700 → primary headings
+   ─────────────────────────────────────────────────────────────────────────── */
+h1, h2 {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+}
+
+h3, h4 {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+}
+
+h5, h6 {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
 }
 
 :root {
@@ -30,7 +48,7 @@ html {
 }
 
 body {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 16px;
   color: var(--text);
   background: var(--bg);
@@ -190,7 +208,7 @@ main {
 .hero-left-lines,
 .hero-right-lines {
   margin: 0;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 
   line-height: 1.12;
   letter-spacing: 0.035em;
@@ -259,7 +277,7 @@ main {
 
 .section-top h2 {
   margin: 0.5rem 0 0;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   letter-spacing: -0.03em;
   font-size: clamp(2rem, 4.8vw, 4.2rem);
 }
@@ -542,7 +560,7 @@ main {
 
 .contact-panel h2 {
   margin: 0.55rem 0 0;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: clamp(2rem, 6vw, 4.5rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
@@ -656,7 +674,7 @@ main {
 .case-page h1,
 .resume-page h1 {
   margin: 0;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   letter-spacing: -0.03em;
   line-height: 1.06;
   font-size: clamp(2.15rem, 5.2vw, 5.1rem);
@@ -1168,7 +1186,7 @@ main {
 
 .case-section-label {
   margin: 0 0 0.6rem;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 0.72rem;
 
   letter-spacing: 0.12em;
@@ -1177,7 +1195,7 @@ main {
 
 .case-section h2 {
   margin: 0 0 1.2rem;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: clamp(1.6rem, 3.2vw, 2.6rem);
   letter-spacing: -0.03em;
   line-height: 1.1;
@@ -1265,7 +1283,7 @@ main {
 }
 
 .case-stat-value {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: clamp(2rem, 4vw, 3.2rem);
   letter-spacing: -0.04em;
   line-height: 1;
@@ -1288,7 +1306,7 @@ main {
 }
 
 .impact-section h2 {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: clamp(1.6rem, 3.2vw, 2.6rem);
   letter-spacing: -0.03em;
   margin: 0 0 1.2rem;
@@ -1553,7 +1571,7 @@ main {
 }
 
 .cs-title {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: clamp(2.2rem, 5.5vw, 5.2rem);
   letter-spacing: -0.04em;
   line-height: 1.02;
@@ -1645,7 +1663,7 @@ main {
 }
 
 .cs-section-label {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 0.65rem;
 
   letter-spacing: 0.14em;
@@ -1654,7 +1672,7 @@ main {
 }
 
 .cs-section-heading {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: clamp(1.3rem, 2.2vw, 1.9rem);
   letter-spacing: -0.03em;
   line-height: 1.14;
@@ -1700,7 +1718,7 @@ main {
 }
 
 .cs-stat-value {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: clamp(2rem, 4vw, 3.2rem);
   letter-spacing: -0.05em;
   line-height: 1;
@@ -1739,7 +1757,7 @@ main {
 }
 
 .cs-item-num {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 0.68rem;
   color: #ff4e14;
   letter-spacing: 0.08em;
@@ -1786,7 +1804,7 @@ main {
 }
 
 .cs-impact-heading {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   letter-spacing: -0.03em;
   color: #0a0a0a;
@@ -1835,7 +1853,7 @@ main {
 }
 
 .cs-impact-num {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 0.65rem;
   color: #ff4e14;
   letter-spacing: 0.1em;
@@ -1899,7 +1917,7 @@ main {
   align-items: center;
   gap: 1rem;
   text-decoration: none;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: clamp(1.4rem, 3vw, 2.4rem);
   letter-spacing: -0.03em;
   color: #0a0a0a;
@@ -2020,7 +2038,7 @@ main {
 .ulio-usecase {
   background: #0a0a0a;
   color: #f6f6f6;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   min-height: 100vh;
   padding-bottom: 6rem;
 }
@@ -2501,7 +2519,7 @@ main {
   margin-top: 1rem;
   border-radius: 20px;
   padding: 2.5rem;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .ulio-typography-grid {
@@ -2771,7 +2789,7 @@ main {
   padding: 3rem 3rem 2.6rem;
   margin-top: 1rem;
   color: #111;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 /* 1 — Big headline */
@@ -3611,7 +3629,7 @@ main {
   padding: 3rem;
   margin-top: 2.4rem;
   color: #111;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 /* Header: big title left, description right */
@@ -3750,7 +3768,7 @@ main {
   grid-template-columns: 1fr 1.15fr;
   gap: 1.2rem;
   margin-top: 2.4rem;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .sb-solutions-col {
@@ -3854,7 +3872,7 @@ main {
   border-radius: 22px;
   padding: 3rem 3rem 3.5rem;
   margin-top: 2.4rem;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .sb-dp-header {
@@ -3923,7 +3941,7 @@ main {
 
 .sb-dp-tag {
   display: inline-block;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   color: #fff;
@@ -3978,7 +3996,7 @@ main {
 }
 
 .sb-dp-hypothesis-label {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 0.68rem;
   font-weight: 700;
   color: #F06C00;
@@ -3987,7 +4005,7 @@ main {
 }
 
 .sb-dp-hypothesis-text {
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 1rem;
   line-height: 1.75;
   color: rgba(255,255,255,0.92);
@@ -4033,7 +4051,7 @@ main {
   margin-top: 2.4rem;
   overflow: hidden;
   padding: 2rem 2rem 0;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .sb-ks-dots {
@@ -4150,7 +4168,7 @@ main {
   border-radius: 22px;
   padding: 2.5rem 2.5rem 2rem;
   margin-top: 2.4rem;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .sb-uf-header {
@@ -4454,7 +4472,7 @@ main {
   font-weight: 700;
   color: rgba(255,255,255,0.2);
   letter-spacing: 1.5px;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 @media (max-width: 900px) {
@@ -4893,7 +4911,7 @@ main {
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .ins-back:hover {
@@ -4934,7 +4952,7 @@ main {
   font-weight: 500;
   letter-spacing: 0.025em;
   text-transform: lowercase;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .ins-plus {
@@ -5122,7 +5140,7 @@ main {
   color: #F06C00;
   font-weight: 700;
   margin-bottom: 0.75rem;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .sb-full-flow-title {
@@ -5142,7 +5160,7 @@ main {
   font-size: 0.92rem;
   color: #666;
   line-height: 1.65;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .sb-full-flow-strip {
@@ -5189,7 +5207,7 @@ main {
   color: #F06C00;
   font-weight: 700;
   text-transform: uppercase;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .sb-full-flow-name {
@@ -5203,7 +5221,7 @@ main {
 .sb-full-flow-sub {
   font-size: 0.78rem;
   color: #999;
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 @media (max-width: 600px) {
@@ -5236,7 +5254,7 @@ main {
 .sb-proto-launch-sub {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.5);
-  font-family: "Overused Grotesk", sans-serif;
+  font-family: "DM Sans", sans-serif;
   margin: 0.75rem auto 2.5rem;
   max-width: 480px;
   line-height: 1.6;
