@@ -37,6 +37,9 @@ jobs:
       - name: Add CNAME file
         run: echo "akankshaux.in" > ./dist/CNAME
 
+      - name: Create 404.html for SPA routing on GitHub Pages
+        run: cp ./dist/index.html ./dist/404.html
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
