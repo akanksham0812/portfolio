@@ -5,8 +5,8 @@ import { busrouteCaseStudyProject } from "./data/busroute-case-study.project.js"
 
 export const projectConfigs = [
   {
-    slug: "operations-dasboard",
-    routeAliases: ["operations-dashboard"],
+    slug: "designing-for-scale",
+    routeAliases: ["operations-dasboard", "operations-dashboard"],
     template: "ops-usecase",
     access: {
       passwordProtected: true,
@@ -16,8 +16,8 @@ export const projectConfigs = [
     data: operationsDasboardProject,
   },
   {
-    slug: "pl-case-study",
-    routeAliases: [],
+    slug: "sainsburys-smart-basket",
+    routeAliases: ["pl-case-study"],
     template: "sainsbury-usecase",
     access: {
       passwordProtected: false,
@@ -25,8 +25,8 @@ export const projectConfigs = [
     data: plCaseStudyProject,
   },
   {
-    slug: "ulio-case-study",
-    routeAliases: ["ulio"],
+    slug: "career-mobile-app-design",
+    routeAliases: ["ulio-case-study", "ulio"],
     template: "ulio-usecase",
     access: {
       passwordProtected: true,
@@ -36,8 +36,8 @@ export const projectConfigs = [
     data: ulioCaseStudyProject,
   },
   {
-    slug: "busroute-case-study",
-    routeAliases: ["busroute"],
+    slug: "zing",
+    routeAliases: ["busroute-case-study", "busroute"],
     template: "busroute-bh",
     access: {
       passwordProtected: false,
