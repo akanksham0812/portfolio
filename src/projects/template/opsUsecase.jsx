@@ -137,39 +137,39 @@ const MODULES = [
     id: "home",
     tag: "01",
     title: "The Command Centre",
-    sub: "Home — Live Operations Overview",
-    body: "Operations managers begin every shift with an orientation tax — checking emails, logging into five tools, pulling up spreadsheets. The Home screen eliminates that entirely. Built on a newspaper front-page model: status at the top, actionable items below.",
+    sub: "Home - Live Operations Overview",
+    body: "Operations managers begin every shift with an orientation tax - checking emails, logging into five tools, pulling up spreadsheets. The Home screen eliminates that entirely. Built on a newspaper front-page model: status at the top, actionable items below.",
     points: [
-      "KPI bar above the fold: Active incidents, MTTR, Resolution rate, Team availability — status before any scrolling",
+      "KPI bar above the fold: Active incidents, MTTR, Resolution rate, Team availability - status before any scrolling",
       "Priority-ranked incident feed replacing the undifferentiated alert stream that trained teams to ignore dashboards",
       "Quick Actions card: the two most frequent tasks surfaced as shortcuts, bypassing sub-module navigation",
-      "Anomaly timeline shows last 24h pattern — making the invisible visible before it becomes a crisis",
+      "Anomaly timeline shows last 24h pattern - making the invisible visible before it becomes a crisis",
     ],
   },
   {
     id: "incidents",
     tag: "02",
     title: "Incident Workspace",
-    sub: "Incidents — Triage & Response",
-    body: "The average incident triage involved switching between 5 tools — Slack, PagerDuty, Grafana, Jira, and email. Each switch added context loss. The Incident module makes all of that one surface. Most P2→P1 escalations happened at handoff — communication failure, not technical failure.",
+    sub: "Incidents - Triage & Response",
+    body: "The average incident triage involved switching between 5 tools - Slack, PagerDuty, Grafana, Jira, and email. Each switch added context loss. The Incident module makes all of that one surface. Most P2→P1 escalations happened at handoff - communication failure, not technical failure.",
     points: [
-      "Contextual incident cards with full history inline — eliminated the need to reconstruct context from memory under pressure",
-      "Inline communication thread co-located with the incident timeline — no Slack tab required",
+      "Contextual incident cards with full history inline - eliminated the need to reconstruct context from memory under pressure",
+      "Inline communication thread co-located with the incident timeline - no Slack tab required",
       "Smart assignment surfacing team availability and domain expertise, reducing mis-assignment by design",
-      "One-click escalation with automatic context bundling — no manual status writeup before handoff",
+      "One-click escalation with automatic context bundling - no manual status writeup before handoff",
     ],
   },
   {
     id: "analytics",
     tag: "03",
     title: "Decisions, Not Data",
-    sub: "Analytics — Intelligence Layer",
-    body: "The difference between '847 alerts this week' and 'API alerts are 40% above baseline — your payment service is the likely root' is the entire value proposition. Every chart connects to an action. Every trend surfaces a recommendation.",
+    sub: "Analytics - Intelligence Layer",
+    body: "The difference between '847 alerts this week' and 'API alerts are 40% above baseline - your payment service is the likely root' is the entire value proposition. Every chart connects to an action. Every trend surfaces a recommendation.",
     points: [
-      "Incident volume trends with drill-down — pattern recognition surfaced automatically, not manually",
+      "Incident volume trends with drill-down - pattern recognition surfaced automatically, not manually",
       "MTTR tracking by team and priority tier, enabling targeted coaching and resource reallocation",
       "Escalation pattern analysis identifying systemic gaps in playbooks and on-call coverage",
-      "Custom report builder for stakeholder communication — ops teams stop writing status emails",
+      "Custom report builder for stakeholder communication - ops teams stop writing status emails",
     ],
   },
 ];
@@ -206,17 +206,17 @@ export function OpsUsecasePage() {
       {/* ── HERO ── */}
       <section className="bh-hero">
         <div className="bh-hero-inner">
-          {/* Small category label — like "NIVA MOBILE APPLICATION" */}
+          {/* Small category label - like "NIVA MOBILE APPLICATION" */}
           <div className="bh-hero-category">Operations Intelligence Hub</div>
 
-          {/* Large editorial heading — medium weight, not bold */}
+          {/* Large editorial heading - medium weight, not bold */}
           <h1 className="bh-hero-h1">
             From firefighting to foresight.<br />
             Fewer tools. More clarity.<br />
             No more fires.
           </h1>
 
-          {/* Tags below heading — outlined pills */}
+          {/* Tags below heading - outlined pills */}
           <div className="bh-hero-tags">
             {["UX Strategy", "0→1 Product Design", "Enterprise SaaS", "B2B Operations", "Systems Design"].map(t => (
               <span key={t} className="bh-tag">{t}</span>
@@ -281,7 +281,7 @@ export function OpsUsecasePage() {
           </p>
         </R>
 
-        {/* 3 problems — editorial layout */}
+        {/* 3 problems - editorial layout */}
         <div className="bh-problem-grid">
           {[
             {
@@ -293,13 +293,13 @@ export function OpsUsecasePage() {
             {
               num: "02",
               title: "Tool Fragmentation",
-              body: "Slack, PagerDuty, Grafana, Jira, email — five tools, none connected. Every context switch costs 3–8 minutes. The average triage involved 5+ app switches.",
+              body: "Slack, PagerDuty, Grafana, Jira, email - five tools, none connected. Every context switch costs 3–8 minutes. The average triage involved 5+ app switches.",
               icon: "🧩",
             },
             {
               num: "03",
               title: "Escalation Blindspots",
-              body: "34% of P1 incidents had detectable signals 45+ minutes earlier. Pattern recognition was manual and lived in individuals — it left when they did.",
+              body: "34% of P1 incidents had detectable signals 45+ minutes earlier. Pattern recognition was manual and lived in individuals - it left when they did.",
               icon: "📡",
             },
           ].map((p, i) => (
@@ -392,7 +392,7 @@ export function OpsUsecasePage() {
         </R>
         <R delay={120}>
           <p className="bh-section-lead">
-            Multi-method research grounding every design decision in qualitative insight and quantitative validation — across discovery, synthesis, and validation phases.
+            Multi-method research grounding every design decision in qualitative insight and quantitative validation - across discovery, synthesis, and validation phases.
           </p>
         </R>
 
@@ -410,9 +410,9 @@ export function OpsUsecasePage() {
               <tbody>
                 {[
                   ["Stakeholder Interviews · 8 ops managers", "Teams want signal, not noise. Alert volume overwhelms without priority context. Directors want dashboards that decide, not report.", "Priority-ranked incident feed replacing undifferentiated alert stream."],
-                  ["Workflow Shadowing · live incidents", "Context switching between 5+ tools per triage adds ~18 min per cycle. Most context loss happens at handoff, not during resolution.", "Unified incident workspace with inline comms — no Slack tab required."],
-                  ["Competitive Analysis · PagerDuty, OpsGenie, Datadog", "Competitors excel at alerting; weak on narrative. Teams can't see the story behind the numbers — only the numbers.", "Timeline-based anomaly tracking as core navigation paradigm."],
-                  ["Survey · n=42 ops professionals", "78% cite 'lack of context' as primary cause of escalation failures. Who, what, when — instantly. Not after three clicks.", "Contextual incident cards with full history inline. Context surfaced, not recalled."],
+                  ["Workflow Shadowing · live incidents", "Context switching between 5+ tools per triage adds ~18 min per cycle. Most context loss happens at handoff, not during resolution.", "Unified incident workspace with inline comms - no Slack tab required."],
+                  ["Competitive Analysis · PagerDuty, OpsGenie, Datadog", "Competitors excel at alerting; weak on narrative. Teams can't see the story behind the numbers - only the numbers.", "Timeline-based anomaly tracking as core navigation paradigm."],
+                  ["Survey · n=42 ops professionals", "78% cite 'lack of context' as primary cause of escalation failures. Who, what, when - instantly. Not after three clicks.", "Contextual incident cards with full history inline. Context surfaced, not recalled."],
                   ["Historical Data Analysis · 6 months logs", "34% of P1 incidents had detectable signals 45+ minutes earlier. Pattern recognition was manual and inconsistent.", "Anomaly signature framework as foundation for predictive alerting roadmap."],
                 ].map(([m, l, d], i) => (
                   <tr key={i}>
@@ -426,14 +426,14 @@ export function OpsUsecasePage() {
           </div>
         </R>
 
-        {/* Findings — numbered editorial blocks */}
+        {/* Findings - numbered editorial blocks */}
         <div className="bh-findings">
           <R>
             <div className="bh-findings-label">Key Findings</div>
           </R>
           {[
-            { n: "01", t: "Signal/noise ratio is the core problem", b: "Teams weren't starved of data — they were drowning in it. Undifferentiated alert streams trained managers to ignore dashboards. The platform's primary job is curation, not collection." },
-            { n: "02", t: "Context collapse under pressure", b: "Under high-stress conditions, ops teams lose the ability to recall system state. Context must be surfaced at the point of action — not stored somewhere for later retrieval." },
+            { n: "01", t: "Signal/noise ratio is the core problem", b: "Teams weren't starved of data - they were drowning in it. Undifferentiated alert streams trained managers to ignore dashboards. The platform's primary job is curation, not collection." },
+            { n: "02", t: "Context collapse under pressure", b: "Under high-stress conditions, ops teams lose the ability to recall system state. Context must be surfaced at the point of action - not stored somewhere for later retrieval." },
             { n: "03", t: "Communication is where incidents escalate", b: "Most P2→P1 escalations happened at handoff. Communication failure, not technical failure. Bringing comms into the incident surface was the highest-impact design decision." },
             { n: "04", t: "Trust is earned through accuracy", b: "Teams had learned to ignore dashboards that had cried wolf. Every false positive erodes adoption. The priority classification needed to be correct before it could be displayed." },
             { n: "05", t: "Peak cognitive load at the worst moment", b: "Peak alert volume coincides with lowest team capacity. Design for 2am, not 10am. Clear hierarchy, one-click actions, escape routes everywhere." },
@@ -463,23 +463,23 @@ export function OpsUsecasePage() {
           </h2>
         </R>
         <R delay={120}>
-          <p className="bh-section-lead">Applied the Kano Model to prioritise across three build phases — ensuring immediate value delivery without overbuilding an MVP that needed trust first.</p>
+          <p className="bh-section-lead">Applied the Kano Model to prioritise across three build phases - ensuring immediate value delivery without overbuilding an MVP that needed trust first.</p>
         </R>
 
         <div className="bh-kano">
           {[
             {
-              phase: "Must-Haves", sub: "MVP — Avoid dissatisfaction",
+              phase: "Must-Haves", sub: "MVP - Avoid dissatisfaction",
               items: ["Real-time incident feed", "Priority signal classification (P1/P2/P3)", "Incident assignment & acknowledgment", "Basic timeline view", "Status communication templates"],
               dark: true,
             },
             {
-              phase: "Performance", sub: "Phase 2 — Linear satisfaction gains",
+              phase: "Performance", sub: "Phase 2 - Linear satisfaction gains",
               items: ["Anomaly timeline with context", "Team workload visibility", "Escalation path visualiser", "Analytics & reporting module", "Cross-incident correlation"],
               dark: false,
             },
             {
-              phase: "Delighters", sub: "Phase 3 — Exponential word-of-mouth",
+              phase: "Delighters", sub: "Phase 3 - Exponential word-of-mouth",
               items: ["Predictive anomaly detection", "Automated runbook suggestions", "Capacity planning module", "AI-assisted root cause analysis", "Custom alert signature builder"],
               dark: false,
               gold: true,
@@ -505,7 +505,7 @@ export function OpsUsecasePage() {
           <div className="bh-principles">
             {[
               { n: "01", t: "Signal Over Noise", b: "The value of an operations platform is what it hides, not what it shows. Every alert must earn its place by being actionable. Curation is a design act." },
-              { n: "02", t: "Context at First Glance", b: "An ops manager under pressure cannot reconstruct context. Who escalated this, when, and what system is affected — before a single click. Surface, don't store." },
+              { n: "02", t: "Context at First Glance", b: "An ops manager under pressure cannot reconstruct context. Who escalated this, when, and what system is affected - before a single click. Surface, don't store." },
               { n: "03", t: "Trust Through Accuracy", b: "A dashboard that alerts incorrectly is worse than none. Precision is a trust mechanism. Volume is a liability. We spent two sprints on classification before visual design." },
               { n: "04", t: "Design for Degraded States", b: "The platform must perform best when its users are performing worst. Clear hierarchy, one-click actions, and escape routes for every dead end. Design for 2am." },
             ].map((p, i) => (
@@ -604,7 +604,7 @@ export function OpsUsecasePage() {
         </R>
         <R delay={120}>
           <p className="bh-section-lead bh-section-lead--inv">
-            The platform shipped to a pilot cohort of 12 operations teams. Early signals validated both the design direction and the core insight — that context, not data volume, is the lever for operational excellence.
+            The platform shipped to a pilot cohort of 12 operations teams. Early signals validated both the design direction and the core insight - that context, not data volume, is the lever for operational excellence.
           </p>
         </R>
 

@@ -394,7 +394,7 @@ function ResearchSection() {
         </div>
       </div>
 
-      {/* Phase 05 — Competitive Audit */}
+      {/* Phase 05 - Competitive Audit */}
       <div className="sb-dp-phase5">
         <div className="sb-dp-card sb-dp-phase5-intro">
           <div className="sb-dp-card-top">
@@ -617,7 +617,7 @@ function DesignSection() {
       <div className="sb-section-label">04: Design</div>
       <h2 className="sb-section-heading">Design principles that drove every decision</h2>
 
-      {/* 5 Principles — 2 col grid, 5th wraps */}
+      {/* 5 Principles - 2 col grid, 5th wraps */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem", marginTop: "2.5rem" }}>
         {BR_PRINCIPLES.map(({ icon, title, text }) => (
           <div key={title} style={{ ...researchCard, display: "flex", gap: "1.2rem", alignItems: "flex-start", padding: "2.2rem" }}>
@@ -850,7 +850,7 @@ export function BusRouteUsecasePage({ project }) {
         {/* ── BENTO GRID ─────────────────────────────── */}
         <div className="sb-bento">
 
-          {/* 1 — Fieldwork card */}
+          {/* 1 - Fieldwork card */}
           <div className="sb-bento-card sb-bento-photo" style={{ background: "#0d0d0d", minHeight: 240 }}>
             <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(0deg,rgba(255,255,255,0.03) 0,rgba(255,255,255,0.03) 1px,transparent 1px,transparent 28px),repeating-linear-gradient(90deg,rgba(255,255,255,0.03) 0,rgba(255,255,255,0.03) 1px,transparent 1px,transparent 28px)" }} />
             <div className="sb-bento-photo-overlay">
@@ -859,14 +859,14 @@ export function BusRouteUsecasePage({ project }) {
             </div>
           </div>
 
-          {/* 2 — Dark quote card */}
+          {/* 2 - Dark quote card */}
           <div className="sb-bento-card sb-bento-quote">
             <p className="sb-bento-quote-text">When the infrastructure exists, but commuters still guess.</p>
             <p className="sb-bento-quote-sub">India's bus network carries more passengers than the metro in most cities. GPS data exists on thousands of buses. Yet no consumer product gives commuters real-time intelligence on when their bus actually arrives.</p>
             <span className="sb-bento-url">safar.app →</span>
           </div>
 
-          {/* 3 — Tall card: CSS phone mockup */}
+          {/* 3 - Tall card: CSS phone mockup */}
           <div className="sb-bento-card sb-bento-tall">
             <div style={{ position: "absolute", inset: 0, background: "#0d0d0d", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
               <div style={{ width: 168, background: "#1a1a1a", borderRadius: 28, padding: 8, border: "1px solid rgba(255,255,255,0.08)", boxShadow: "0 24px 48px rgba(0,0,0,0.5)" }}>
@@ -911,13 +911,13 @@ export function BusRouteUsecasePage({ project }) {
             </div>
           </div>
 
-          {/* 4 — Orange stat card */}
+          {/* 4 - Orange stat card */}
           <div className="sb-bento-card sb-bento-stat">
             <span className="sb-bento-stat-num"><PopIn>70M+</PopIn></span>
             <p className="sb-bento-stat-desc">daily bus commuters in India's top 10 cities with zero real-time tracking</p>
           </div>
 
-          {/* 5 — Dark mock card */}
+          {/* 5 - Dark mock card */}
           <div className="sb-bento-card sb-bento-mock">
             <div className="sb-bento-mock-content">
               <div className="sb-bento-mock-stats">

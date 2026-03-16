@@ -233,7 +233,7 @@ function DesignProcessSection() {
       </div>
 
       <div className="sb-dp-body">
-        {/* Left column — phases 1 & 2 */}
+        {/* Left column - phases 1 & 2 */}
         <div className="sb-dp-col">
           {SB_DESIGN_PROCESS.slice(0, 2).map((item, i) => (
             <div key={i} className="sb-dp-card">
@@ -246,7 +246,7 @@ function DesignProcessSection() {
           ))}
         </div>
 
-        {/* Center — research image */}
+        {/* Center - research image */}
         <div className="sb-dp-image-wrap">
           <img
             src="/assets/projects/1%20sains.jpg"
@@ -255,7 +255,7 @@ function DesignProcessSection() {
           />
         </div>
 
-        {/* Right column — phases 3 & 4 */}
+        {/* Right column - phases 3 & 4 */}
         <div className="sb-dp-col">
           {SB_DESIGN_PROCESS.slice(2, 4).map((item, i) => (
             <div key={i} className="sb-dp-card">
@@ -269,7 +269,7 @@ function DesignProcessSection() {
         </div>
       </div>
 
-      {/* Phase 05 — Hypothesis */}
+      {/* Phase 05 - Hypothesis */}
       <div className="sb-dp-phase5">
         <div className="sb-dp-card sb-dp-phase5-intro">
           <div className="sb-dp-card-top">
@@ -347,7 +347,7 @@ function PrototypeShowcaseSection() {
       <p className="sb-proto-eyebrow">Interactive Prototype</p>
       <h2 className="sb-proto-title">Try the full checkout flow</h2>
       <p className="sb-proto-launch-sub">
-        Walk through the redesigned experience — Smart Basket scanning, item review, and tap-to-pay.
+        Walk through the redesigned experience - Smart Basket scanning, item review, and tap-to-pay.
       </p>
       <div
         ref={wrapRef}
@@ -411,7 +411,7 @@ function UserFlowSection() {
           {/* Shopping L2 (cy=70) → rows */}
           <path d="M 288 70 C 310 70 310 40 325 40"   stroke={LC} strokeWidth={LW} fill="none"/>
           <path d="M 288 70 C 310 70 310 100 325 100" stroke={LC} strokeWidth={LW} fill="none"/>
-          {/* Shopping row 1 (center y=40) — gap 30px */}
+          {/* Shopping row 1 (center y=40) - gap 30px */}
           <line x1="427" y1="40" x2="457" y2="40" stroke={LC} strokeWidth={LW}/>
           <line x1="559" y1="40" x2="589" y2="40" stroke={LC} strokeWidth={LW}/>
           <line x1="691" y1="40" x2="721" y2="40" stroke={LC} strokeWidth={LW}/>
@@ -438,7 +438,7 @@ function UserFlowSection() {
           <line x1="691" y1="356" x2="721" y2="356" stroke={LC} strokeWidth={LW}/>
 
           {/* ── NODES ── */}
-          {/* Orange start — center y=228 aligns with Confirmation L2 */}
+          {/* Orange start - center y=228 aligns with Confirmation L2 */}
           <rect x="10" y="208" width="130" height="40" rx="20" fill="#F06C00"/>
           <text x="75" y="233" textAnchor="middle" fill="#fff" fontSize="12" fontWeight="600" fontFamily="'Overused Grotesk',sans-serif">Smart Basket</text>
 
@@ -516,7 +516,7 @@ function KeyStatsSection() {
       </div>
 
       <div className="sb-ks-grid">
-        {/* Row 1 — theme 01, left */}
+        {/* Row 1 - theme 01, left */}
         <div className="sb-ks-cell sb-ks-cell--stat">
           <span className="sb-ks-value"><PaddedCountUp to={1} /></span>
           <span className="sb-ks-title">Unclear Error Recovery</span>
@@ -525,7 +525,7 @@ function KeyStatsSection() {
         <div className="sb-ks-cell" />
         <div className="sb-ks-cell" />
 
-        {/* Row 2 — theme 02, center */}
+        {/* Row 2 - theme 02, center */}
         <div className="sb-ks-cell" />
         <div className="sb-ks-cell sb-ks-cell--stat">
           <span className="sb-ks-value"><PaddedCountUp to={2} /></span>
@@ -534,7 +534,7 @@ function KeyStatsSection() {
         </div>
         <div className="sb-ks-cell" />
 
-        {/* Row 3 — theme 03, right */}
+        {/* Row 3 - theme 03, right */}
         <div className="sb-ks-cell" />
         <div className="sb-ks-cell" />
         <div className="sb-ks-cell sb-ks-cell--stat">
@@ -560,7 +560,7 @@ function ProblemSection({ section }) {
       </div>
 
       <div className="sb-problem-grid">
-        {/* Top row — 3 cards */}
+        {/* Top row - 3 cards */}
         <div className="sb-problem-row">
           <div className="sb-problem-card">
             <span className="sb-problem-card-num">Problem: 01</span>
@@ -576,12 +576,12 @@ function ProblemSection({ section }) {
           </div>
         </div>
 
-        {/* Center — animated ? */}
+        {/* Center - animated ? */}
         <div className="sb-problem-qmark-row">
           <div className="sb-problem-qmark" aria-hidden="true">?</div>
         </div>
 
-        {/* Bottom row — 3 cards */}
+        {/* Bottom row - 3 cards */}
         <div className="sb-problem-row">
           <div className="sb-problem-card">
             <span className="sb-problem-card-num">Problem: 04</span>
@@ -644,14 +644,14 @@ export function SainsburyUsecasePage({ project }) {
         {/* ── INTRO (white card, Babbel-style) ─────────────── */}
         <section className="sb-intro">
 
-          {/* 1 — Large editorial headline */}
+          {/* 1 - Large editorial headline */}
           <h1 className="sb-intro-headline">
             {project.shortTitle}:{" "}
             <strong>Redesigning Self-Checkout</strong> Through{" "}
             <strong>Mixed-Methods Research</strong>
           </h1>
 
-          {/* 2 — Ghost brand name + about text */}
+          {/* 2 - Ghost brand name + about text */}
           <div className="sb-intro-mid">
             <div className="sb-intro-ghost" aria-hidden="true">
               +Sainsbury's
@@ -662,7 +662,7 @@ export function SainsburyUsecasePage({ project }) {
             </div>
           </div>
 
-          {/* 3 — Meta table + method tags */}
+          {/* 3 - Meta table + method tags */}
           <div className="sb-intro-bottom">
             <div className="sb-intro-meta">
               {metaRows.map((row) => (
@@ -686,7 +686,7 @@ export function SainsburyUsecasePage({ project }) {
         {/* ── BENTO GRID ───────────────────────────────────── */}
         <div className="sb-bento">
 
-          {/* 1 — Grayscale photo card */}
+          {/* 1 - Grayscale photo card */}
           <div className="sb-bento-card sb-bento-photo">
             <img
               src="/assets/projects/1%20sains.jpg"
@@ -699,7 +699,7 @@ export function SainsburyUsecasePage({ project }) {
             </div>
           </div>
 
-          {/* 2 — Dark quote card */}
+          {/* 2 - Dark quote card */}
           <div className="sb-bento-card sb-bento-quote">
             <p className="sb-bento-quote-text">
               When convenience becomes a burden.
@@ -710,7 +710,7 @@ export function SainsburyUsecasePage({ project }) {
             <span className="sb-bento-url">sainsburys.co.uk →</span>
           </div>
 
-          {/* 4 — Tall hero card (spans both rows, right side) */}
+          {/* 4 - Tall hero card (spans both rows, right side) */}
           <div className="sb-bento-card sb-bento-tall">
             <img
               src="/assets/projects/2%20sains.jpg"
@@ -722,7 +722,7 @@ export function SainsburyUsecasePage({ project }) {
             </div>
           </div>
 
-          {/* 5 — Orange stat card */}
+          {/* 5 - Orange stat card */}
           <div className="sb-bento-card sb-bento-stat">
             <span className="sb-bento-stat-num"><PopIn>1 in 3</PopIn></span>
             <p className="sb-bento-stat-desc">
@@ -730,7 +730,7 @@ export function SainsburyUsecasePage({ project }) {
             </p>
           </div>
 
-          {/* 6 — Dark wide card: key stats + mockup */}
+          {/* 6 - Dark wide card: key stats + mockup */}
           <div className="sb-bento-card sb-bento-mock">
             <div className="sb-bento-mock-content">
               <div className="sb-bento-mock-stats">

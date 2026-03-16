@@ -498,7 +498,7 @@ export function BusrouteBHPage({ project }) {
           display:"flex", alignItems:"stretch", justifyContent:"space-between",
           padding:"40px 40px",
         }}>
-          {/* Background image — full bleed */}
+          {/* Background image - full bleed */}
           <img src="/assets/projects/zing.png" alt="" aria-hidden="true"
             style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }}
           />
@@ -506,14 +506,14 @@ export function BusrouteBHPage({ project }) {
           <div style={{ position:"absolute", inset:0, background:"linear-gradient(135deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.22) 50%, rgba(0,0,0,0.6) 100%)" }} />
           <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"55%", background:"linear-gradient(to top, rgba(0,0,0,0.55), transparent)" }} />
 
-          {/* LEFT — big headline pinned to top */}
+          {/* LEFT - big headline pinned to top */}
           <div style={{ position:"relative", zIndex:1, alignSelf:"flex-start", maxWidth:420 }}>
             <div style={{ fontSize:"clamp(40px,5.5vw,68px)", fontWeight:800, color:"#FFFFFF", letterSpacing:"-0.04em", lineHeight:1.0 }}>
               Your city,<br />simplified.
             </div>
           </div>
 
-          {/* RIGHT — quote card pinned to top */}
+          {/* RIGHT - quote card pinned to top */}
           <div style={{ position:"relative", zIndex:1, alignSelf:"flex-start", flexShrink:0 }}>
             <div style={{ background:"rgba(255,255,255,0.12)", backdropFilter:"blur(20px)", WebkitBackdropFilter:"blur(20px)", borderRadius:16, padding:"20px 18px", width:210, border:"1px solid rgba(255,255,255,0.2)", boxShadow:"0 16px 48px rgba(0,0,0,0.3)" }}>
               <p style={{ fontSize:12, color:"rgba(255,255,255,0.88)", lineHeight:1.6, margin:"0 0 14px", fontWeight:400 }}>
@@ -635,10 +635,10 @@ export function BusrouteBHPage({ project }) {
           </p>
         </div>
 
-        {/* Staggered stat cards — open layout, no borders/shadows */}
+        {/* Staggered stat cards - open layout, no borders/shadows */}
         <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0 48px", alignItems:"start", marginBottom:12}}>
 
-          {/* LEFT column — card 1 top, card 3 below */}
+          {/* LEFT column - card 1 top, card 3 below */}
           <div style={{display:"flex", flexDirection:"column", gap:64}}>
 
             {/* Card 1 */}
@@ -661,7 +661,7 @@ export function BusrouteBHPage({ project }) {
 
           </div>
 
-          {/* RIGHT column — description top-right, card 2 shifted down */}
+          {/* RIGHT column - description top-right, card 2 shifted down */}
           <div style={{display:"flex", flexDirection:"column"}}>
 
             {/* Description */}
@@ -669,7 +669,7 @@ export function BusrouteBHPage({ project }) {
               Every design decision in zing was constrained by field research, not studio intuition.
             </p>
 
-            {/* Card 2 — offset down */}
+            {/* Card 2 - offset down */}
             <div style={{marginTop:120}}>
               <div style={{fontSize:12, color:"rgba(255,255,255,0.38)", letterSpacing:"0.05em", marginBottom:8}}>Users</div>
               <div style={{fontSize:52, fontWeight:700, color:"#F0F0F2", letterSpacing:"-0.03em", lineHeight:1, marginBottom:16}}><CountUp to={90} suffix="%" /></div>
@@ -682,7 +682,7 @@ export function BusrouteBHPage({ project }) {
 
         </div>
 
-        {/* Interview findings — clean list, no card boxes */}
+        {/* Interview findings - clean list, no card boxes */}
         <div style={{marginTop:8}}>
           <div style={{fontSize:11, fontWeight:600, color:"rgba(255,255,255,0.35)", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:32}}>Key findings from 12 interviews</div>
           {[
@@ -717,12 +717,12 @@ export function BusrouteBHPage({ project }) {
         {/* Persona card */}
         <div style={{display:"flex", borderRadius:16, overflow:"hidden", border:"1px solid var(--dark-border)", marginTop:36, minHeight:420}}>
 
-          {/* Left — photo fills full card height */}
+          {/* Left - photo fills full card height */}
           <div style={{width:260, flexShrink:0, position:"relative"}}>
             <img src="/assets/projects/persona.jpg" alt="Priya" style={{width:"100%", height:"100%", objectFit:"cover", objectPosition:"top center", display:"block", position:"absolute", inset:0}} />
           </div>
 
-          {/* Right — quote + bars + bio */}
+          {/* Right - quote + bars + bio */}
           <div style={{flex:1, display:"flex", flexDirection:"column", justifyContent:"space-between", padding:"40px 48px", background:"var(--dark-surface)", borderLeft:"1px solid var(--dark-border)"}}>
 
             {/* Quote at top */}
@@ -730,7 +730,7 @@ export function BusrouteBHPage({ project }) {
               When I'm late, I need to know right now if my bus is 2 minutes away or 20. Fast answers and a reliable ETA really matter to me.
             </div>
 
-            {/* Progress bars — animated on scroll */}
+            {/* Progress bars - animated on scroll */}
             <AnimatedBars />
 
             {/* Bio at bottom */}
@@ -830,7 +830,7 @@ export function BusrouteBHPage({ project }) {
           ].map(({ screen, img, n, title, titleBold, desc, callouts }) => (
             <div key={screen} style={{display:"grid", gridTemplateColumns:"auto 1fr", gap:64, alignItems:"center"}}>
 
-              {/* LEFT — phone + dashed callouts */}
+              {/* LEFT - phone + dashed callouts */}
               <div style={{position:"relative", width:200, flexShrink:0}}>
                 {img
                   ? <img src={img} alt={title} style={{width:200, height:420, objectFit:"cover", borderRadius:36, display:"block", boxShadow:"0 32px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08)"}} />
@@ -849,7 +849,7 @@ export function BusrouteBHPage({ project }) {
                 ))}
               </div>
 
-              {/* RIGHT — title + desc + decisions */}
+              {/* RIGHT - title + desc + decisions */}
               <div>
                 <div style={{fontSize:11, fontWeight:600, color:"#C6F135", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:16}}>{n}</div>
                 <div style={{fontSize:"clamp(28px,3.5vw,44px)", lineHeight:1.15, letterSpacing:"-0.02em", marginBottom:20}}>
@@ -911,7 +911,7 @@ export function BusrouteBHPage({ project }) {
               { n:"01", title:"Ship and measure", body:"A live pilot on the PMPML Pune network, where GPS infrastructure already exists. Instrument retention, task completion rate, and trust signals in the first 30 days." },
               { n:"02", title:"Data partnership strategy", body:"Build a standardised GTFS-RT data contract with one municipal operator. Prove the model works before scaling to more cities. Beachhead before broad expansion." },
               { n:"03", title:"Operator-side product", body:"Research surfaced that bus drivers receive late-running alerts 40 minutes after the fact. An operator dashboard is the second product. Real-time data needs to flow both ways." },
-              { n:"04", title:"Monetisation hypothesis", body:"Zero-login consumer app funded by B2B data licensing to route planners, real-estate platforms, and city planning tools — not ads or subscription friction for users." },
+              { n:"04", title:"Monetisation hypothesis", body:"Zero-login consumer app funded by B2B data licensing to route planners, real-estate platforms, and city planning tools - not ads or subscription friction for users." },
             ].map(({n, title, body}) => (
               <div key={n} className={`bh-priority-card${priorityOn ? " bh-anim--on" : ""}`} style={{background:"var(--dark-surface)", borderRadius:16, padding:"36px 40px", border:"1px solid var(--dark-border)", display:"flex", flexDirection:"column", gap:12}}>
                 <div style={{fontSize:11, fontWeight:700, color:"rgba(255,255,255,0.25)", letterSpacing:".1em"}}>{n}</div>
