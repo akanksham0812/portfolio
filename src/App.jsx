@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { HashRouter, Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Spline from "@splinetool/react-spline";
 import { aboutContent, brandNames, heroObjects, resumeBlocks } from "./siteData";
 import {
@@ -1038,9 +1038,9 @@ function Layout() {
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Layout />
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
