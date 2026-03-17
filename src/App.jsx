@@ -21,12 +21,56 @@ function MobileBlock() {
   return (
     <div className="mobile-block">
       <div className="mobile-block-inner">
-        <div className="mobile-block-emoji">🖥️</div>
         <p className="mobile-block-title">Hey!</p>
         <p className="mobile-block-body">
           I designed this for desktop so every detail lands right. Grab a laptop. It'll be worth the switch.
         </p>
         <div className="mobile-block-tag">Desktop only</div>
+      </div>
+      <div className="cat-scene">
+        <div className="cat-walker">
+          <svg width="76" height="58" viewBox="0 0 76 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Tail */}
+            <path d="M13,35 C5,28 7,17 13,14 C17,10 21,16 18,21" stroke="#d0d0d0" strokeWidth="3.5" strokeLinecap="round"/>
+            {/* Body */}
+            <ellipse cx="36" cy="35" rx="19" ry="11" fill="#d0d0d0"/>
+            {/* Head */}
+            <circle cx="52" cy="26" r="12" fill="#d0d0d0"/>
+            {/* Ears */}
+            <polygon points="44,18 48,9 52,18" fill="#d0d0d0"/>
+            <polygon points="53,18 57,9 61,18" fill="#d0d0d0"/>
+            <polygon points="45,18 48,11 51,18" fill="rgba(240,108,0,0.45)"/>
+            <polygon points="54,18 57,11 60,18" fill="rgba(240,108,0,0.45)"/>
+            {/* Eyes */}
+            <ellipse cx="48" cy="25" rx="1.9" ry="2.3" fill="#111"/>
+            <ellipse cx="56" cy="25" rx="1.9" ry="2.3" fill="#111"/>
+            <circle cx="49" cy="24" r="0.65" fill="#fff"/>
+            <circle cx="57" cy="24" r="0.65" fill="#fff"/>
+            {/* Nose */}
+            <polygon points="51,29 52,31 53,29" fill="#F06C00"/>
+            {/* Mouth */}
+            <path d="M50,31 Q52,33 54,31" stroke="#888" strokeWidth="0.9" strokeLinecap="round"/>
+            {/* Whiskers */}
+            <line x1="39" y1="27" x2="46" y2="28" stroke="#aaa" strokeWidth="0.8"/>
+            <line x1="39" y1="30" x2="46" y2="29" stroke="#aaa" strokeWidth="0.8"/>
+            <line x1="65" y1="27" x2="58" y2="28" stroke="#aaa" strokeWidth="0.8"/>
+            <line x1="65" y1="30" x2="58" y2="29" stroke="#aaa" strokeWidth="0.8"/>
+            {/* Front legs */}
+            <g className="cat-leg-a" style={{ transformBox: "fill-box", transformOrigin: "50% 0%" }}>
+              <rect x="45" y="44" width="5" height="11" rx="2.5" fill="#d0d0d0"/>
+            </g>
+            <g className="cat-leg-b" style={{ transformBox: "fill-box", transformOrigin: "50% 0%" }}>
+              <rect x="52" y="44" width="5" height="11" rx="2.5" fill="#d0d0d0"/>
+            </g>
+            {/* Back legs */}
+            <g className="cat-leg-b" style={{ transformBox: "fill-box", transformOrigin: "50% 0%" }}>
+              <rect x="25" y="44" width="5" height="11" rx="2.5" fill="#d0d0d0"/>
+            </g>
+            <g className="cat-leg-a" style={{ transformBox: "fill-box", transformOrigin: "50% 0%" }}>
+              <rect x="32" y="44" width="5" height="11" rx="2.5" fill="#d0d0d0"/>
+            </g>
+          </svg>
+        </div>
       </div>
     </div>
   );
