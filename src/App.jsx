@@ -17,6 +17,22 @@ import { BusRouteUsecasePage } from "./projects/template/busrouteUsecase";
 import { OpsUsecasePage } from "./projects/template/opsUsecase";
 import { BusrouteBHPage } from "./projects/template/busrouteBH";
 
+function MobileBlock() {
+  return (
+    <div className="mobile-block">
+      <div className="mobile-block-inner">
+        <div className="mobile-block-emoji">🖥️</div>
+        <p className="mobile-block-title">Made for big screens</p>
+        <p className="mobile-block-body">
+          This portfolio has high-fidelity prototypes and interactions that deserve a proper canvas.
+          Grab a laptop and come back — it's worth it.
+        </p>
+        <div className="mobile-block-tag">Desktop only</div>
+      </div>
+    </div>
+  );
+}
+
 const filters = ["All", "Product Design", "UX Research & Design", "UX Case Study"];
 const HERO_IMAGE_SCALE = 0.7;
 const RESUME_PDF_PATH = withBase("assets/resume/Akanksha Mahangare CV.pdf");
@@ -1230,9 +1246,12 @@ function Layout() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout />
-    </BrowserRouter>
+    <>
+      <MobileBlock />
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
+    </>
   );
 }
 

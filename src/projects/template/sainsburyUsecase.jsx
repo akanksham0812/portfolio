@@ -322,6 +322,381 @@ function WouldDoDifferentlySection() {
   );
 }
 
+// ── DATA-DRIVEN SECTION COMPONENTS ───────────────────────────────────────────
+
+function ResearchApproachSection({ section }) {
+  const phases = [
+    { phase: "Phase 01 / Literature Review",       icon: DP_ICONS[0], text: section.body[1] },
+    { phase: "Phase 02 / User Survey",             icon: DP_ICONS[1], text: section.body[2] },
+    { phase: "Phase 03 / In-Depth Interviews",     icon: DP_ICONS[2], text: section.body[3] },
+    { phase: "Phase 04 / Observational Fieldwork", icon: DP_ICONS[3], text: section.body[4] },
+  ];
+  return (
+    <section className="sb-dp">
+      <div className="sb-dp-header" style={{ maxWidth: "100%" }}>
+        <h2 className="sb-dp-title">{section.heading}</h2>
+        <p className="sb-dp-desc">{section.body[0]}</p>
+      </div>
+      <div className="sb-dp-body">
+        <div className="sb-dp-col">
+          {phases.slice(0, 2).map((item, i) => (
+            <div key={i} className="sb-dp-card">
+              <div className="sb-dp-card-top">
+                <span className="sb-dp-icon">{item.icon}</span>
+                <span className="sb-dp-tag">{item.phase}</span>
+              </div>
+              <p className="sb-dp-card-text">{item.text}</p>
+            </div>
+          ))}
+        </div>
+        <div className="sb-dp-image-wrap">
+          <img src="/assets/projects/research.jpg" alt="Research fieldwork and interviews" className="sb-dp-img" />
+        </div>
+        <div className="sb-dp-col">
+          {phases.slice(2, 4).map((item, i) => (
+            <div key={i} className="sb-dp-card">
+              <div className="sb-dp-card-top">
+                <span className="sb-dp-icon">{item.icon}</span>
+                <span className="sb-dp-tag">{item.phase}</span>
+              </div>
+              <p className="sb-dp-card-text">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="sb-dp-phase5">
+        <div className="sb-dp-card sb-dp-phase5-intro">
+          <div className="sb-dp-card-top">
+            <span className="sb-dp-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 7 7c0 2.5-1.3 4.7-3.3 6L15 17H9l-.7-2C6.3 13.7 5 11.5 5 9a7 7 0 0 1 7-7z"/></svg>
+            </span>
+            <span className="sb-dp-tag">Phase 05 / Synthesis</span>
+          </div>
+          <p className="sb-dp-card-text">
+            Each method was chosen to challenge the assumptions of the last. Only patterns consistent across all four were taken forward into design.
+          </p>
+        </div>
+        <div className="sb-dp-hypothesis">
+          <span className="sb-dp-hypothesis-label">Guiding Principle</span>
+          <p className="sb-dp-hypothesis-text">
+            "Self-reported data about checkout frustration is unreliable. People normalise friction they experience repeatedly. Behavioural observation is the ground truth."
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function KeyFindingsSection({ section }) {
+  const shortTitles = ["Bagging Area: Black Box", "Produce Lookup Barrier", "Premature Staff Escalation"];
+  const findings = section.body.slice(1).map((text, i) => {
+    const cleaned = text.replace(/^(First|Second|Third):\s*/i, "");
+    const dotIdx = cleaned.indexOf(". ");
+    const desc = dotIdx > -1 ? cleaned.slice(dotIdx + 2) : cleaned;
+    return { num: i + 1, title: shortTitles[i], desc };
+  });
+  return (
+    <section className="sb-ks">
+      <div className="sb-ks-dots">
+        <span className="sb-ks-dot sb-ks-dot--orange" />
+        <span className="sb-ks-dot sb-ks-dot--yellow" />
+        <span className="sb-ks-dot sb-ks-dot--purple" />
+      </div>
+      <div className="sb-ks-intro">
+        <p className="sb-ks-intro-heading">{section.heading}</p>
+        <p className="sb-ks-intro-body">{section.body[0]}</p>
+      </div>
+      <div className="sb-ks-grid">
+        <div className="sb-ks-cell sb-ks-cell--stat">
+          <span className="sb-ks-value"><PaddedCountUp to={1} /></span>
+          <span className="sb-ks-title">{findings[0].title}</span>
+          <span className="sb-ks-label">{findings[0].desc}</span>
+        </div>
+        <div className="sb-ks-cell" />
+        <div className="sb-ks-cell" />
+        <div className="sb-ks-cell" />
+        <div className="sb-ks-cell sb-ks-cell--stat">
+          <span className="sb-ks-value"><PaddedCountUp to={2} /></span>
+          <span className="sb-ks-title">{findings[1].title}</span>
+          <span className="sb-ks-label">{findings[1].desc}</span>
+        </div>
+        <div className="sb-ks-cell" />
+        <div className="sb-ks-cell" />
+        <div className="sb-ks-cell" />
+        <div className="sb-ks-cell sb-ks-cell--stat">
+          <span className="sb-ks-value"><PaddedCountUp to={3} /></span>
+          <span className="sb-ks-title">{findings[2].title}</span>
+          <span className="sb-ks-label">{findings[2].desc}</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DesignResponseSection({ section }) {
+  // Parse "...A [item]. A [item]. A [item]." into individual checkmark items
+  const changes = section.body[1]
+    .split(". A ")
+    .slice(1)
+    .map(s => "A " + s.replace(/\.$/, ""));
+
+  return (
+    <section className="sb-solutions">
+      <div className="sb-solutions-col sb-solutions-col--left">
+        <div className="sb-solutions-card">
+          <h2 className="sb-solutions-heading" style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}>{section.heading}</h2>
+          <ul className="sb-solutions-list">
+            {changes.map((s, i) => (
+              <li key={i} className="sb-solutions-item">
+                <span className="sb-solutions-check" aria-hidden="true">✓</span>
+                <span>{s}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="sb-solutions-photo">
+          <img src="/assets/projects/1%20sains.jpg" alt="Sainsbury's self-checkout fieldwork" className="sb-solutions-img" />
+        </div>
+      </div>
+      <div className="sb-solutions-col sb-solutions-col--right">
+        <p className="sb-solutions-tagline">
+          Every error state the current system generates should become a <em>guided interaction</em> in the new one.{" "}
+          <strong>Not fewer errors. Smarter recovery.</strong>
+        </p>
+        <div className="sb-solutions-card">
+          <h2 className="sb-solutions-heading">Accessibility</h2>
+          <ul className="sb-solutions-list">
+            {section.body[2].split(". ").filter(Boolean).map((s, i) => (
+              <li key={i} className="sb-solutions-item">
+                <span className="sb-solutions-check" aria-hidden="true">✓</span>
+                <span>{s.replace(/\.$/, "")}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ValidationSection({ section }) {
+  return (
+    <section className="sb-retro" style={{ padding: "2.5rem 3rem" }}>
+      <div className="sb-retro-top" style={{ marginBottom: "1.5rem" }}>
+        <h2 className="sb-retro-heading">{section.heading}</h2>
+        <p className="sb-retro-body">{section.body[0]}</p>
+        <p className="sb-retro-body" style={{ marginTop: "0.75rem" }}>{section.body[1]}</p>
+      </div>
+      <blockquote className="sb-retro-quote" style={{ fontSize: "1rem", color: "rgba(0,0,0,0.75)", fontStyle: "normal" }}>
+        {section.body[2]}
+        <span style={{ display: "block", marginTop: "0.75rem", fontSize: "0.82rem", opacity: 0.55 }}>
+          {section.body[3]}
+        </span>
+      </blockquote>
+    </section>
+  );
+}
+
+const SHIPPING_META = [
+  {
+    label: "Hardware",
+    timeline: "6–12 mo lead time",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+        <rect x="3" y="11" width="18" height="11" rx="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+    ),
+  },
+  {
+    label: "MLOps",
+    timeline: "Ongoing commitment",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+        <ellipse cx="12" cy="5" rx="9" ry="3"/>
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+      </svg>
+    ),
+  },
+  {
+    label: "Operations",
+    timeline: "Pre-rollout pilot",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    ),
+  },
+];
+
+function ShippingSection({ section }) {
+  const constraints = section.body.slice(1, 4);
+  const recommendation = section.body[4];
+
+  return (
+    <section style={{
+      background: "#0d0d0d",
+      borderRadius: "24px",
+      padding: "3rem",
+      margin: "0",
+    }}>
+
+      {/* Header */}
+      <div style={{ marginBottom: "2.5rem" }}>
+        <h2 style={{
+          fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
+          fontWeight: 700,
+          lineHeight: 1.15,
+          color: "#ffffff",
+          margin: "0 0 0.75rem",
+        }}>
+          {section.heading}
+        </h2>
+        <p style={{
+          fontSize: "0.95rem",
+          color: "rgba(255,255,255,0.5)",
+          maxWidth: "52ch",
+          lineHeight: 1.65,
+          margin: 0,
+        }}>
+          {section.body[0]}
+        </p>
+      </div>
+
+      {/* Constraint cards */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: "1rem",
+        marginBottom: "1rem",
+      }}>
+        {constraints.map((text, i) => (
+          <div key={i} style={{
+            position: "relative",
+            background: "#1a1a1a",
+            borderRadius: "16px",
+            padding: "1.75rem",
+            overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+          }}>
+            {/* Ghost number */}
+            <span style={{
+              position: "absolute",
+              top: "-0.25rem",
+              right: "1rem",
+              fontSize: "6rem",
+              fontWeight: 800,
+              color: "#fff",
+              opacity: 0.04,
+              lineHeight: 1,
+              userSelect: "none",
+              pointerEvents: "none",
+            }}>
+              {String(i + 1).padStart(2, "0")}
+            </span>
+
+            {/* Icon + type chip */}
+            <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+              <span style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 36,
+                height: 36,
+                borderRadius: "10px",
+                background: "rgba(240,108,0,0.15)",
+                color: "#F06C00",
+                flexShrink: 0,
+              }}>
+                {SHIPPING_META[i].icon}
+              </span>
+              <span style={{
+                fontSize: "0.7rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.45)",
+              }}>
+                {SHIPPING_META[i].label}
+              </span>
+            </div>
+
+            {/* Description */}
+            <p style={{
+              fontSize: "0.875rem",
+              color: "rgba(255,255,255,0.75)",
+              lineHeight: 1.65,
+              margin: 0,
+              flex: 1,
+            }}>
+              {text}
+            </p>
+
+            {/* Timeline badge */}
+            <span style={{
+              alignSelf: "flex-start",
+              fontSize: "0.72rem",
+              fontWeight: 500,
+              color: "rgba(255,255,255,0.35)",
+              background: "rgba(255,255,255,0.06)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: "999px",
+              padding: "0.25rem 0.75rem",
+            }}>
+              {SHIPPING_META[i].timeline}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Recommendation: full width orange card */}
+      <div style={{
+        background: "#F06C00",
+        borderRadius: "16px",
+        padding: "2rem 2.25rem",
+        display: "flex",
+        alignItems: "center",
+        gap: "2rem",
+      }}>
+        <span style={{
+          fontSize: "2rem",
+          flexShrink: 0,
+          lineHeight: 1,
+        }} aria-hidden="true">→</span>
+        <div>
+          <span style={{
+            display: "block",
+            fontSize: "0.7rem",
+            fontWeight: 700,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "rgba(255,255,255,0.65)",
+            marginBottom: "0.4rem",
+          }}>
+            Recommended First Ship
+          </span>
+          <p style={{
+            fontSize: "1rem",
+            fontWeight: 500,
+            color: "#fff",
+            margin: 0,
+            lineHeight: 1.55,
+          }}>
+            {recommendation}
+          </p>
+        </div>
+      </div>
+
+    </section>
+  );
+}
+
 // Natural kiosk dimensions (Root.tsx: screen 1024×640 + 16px padding each side + 20+148 terminal)
 const KIOSK_W = 1224;
 const KIOSK_H = 690;
@@ -560,7 +935,6 @@ function ProblemSection({ section }) {
       </div>
 
       <div className="sb-problem-grid">
-        {/* Top row - 3 cards */}
         <div className="sb-problem-row">
           <div className="sb-problem-card">
             <span className="sb-problem-card-num">Problem: 01</span>
@@ -575,13 +949,9 @@ function ProblemSection({ section }) {
             <p className="sb-problem-card-text">The screen froze on payment and I had to abandon my trolley entirely.</p>
           </div>
         </div>
-
-        {/* Center - animated ? */}
         <div className="sb-problem-qmark-row">
           <div className="sb-problem-qmark" aria-hidden="true">?</div>
         </div>
-
-        {/* Bottom row - 3 cards */}
         <div className="sb-problem-row">
           <div className="sb-problem-card">
             <span className="sb-problem-card-num">Problem: 04</span>
@@ -597,6 +967,20 @@ function ProblemSection({ section }) {
           </div>
         </div>
       </div>
+
+      {/* Stats from fieldwork */}
+      {section.stats && section.stats.length > 0 && (
+        <div className="sb-stats-grid" style={{ marginTop: "2.5rem" }}>
+          {section.stats.map((stat, i) => (
+            <div key={i} className="sb-stat-card">
+              <span className="sb-stat-value">{stat.value}</span>
+              <span className="sb-stat-label">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {section.note && <p className="sb-note" style={{ marginTop: "1.5rem" }}>{section.note}</p>}
     </section>
   );
 }
@@ -754,81 +1138,33 @@ export function SainsburyUsecasePage({ project }) {
         </div>
 
         {/* ── SECTIONS ─────────────────────────────────────── */}
-        {sections.map((section, idx) => idx === 0 ? (
+        {sections.map((section, idx) => (
           <React.Fragment key={idx}>
             <FadeSection>
-              <ProblemSection section={section} />
+              {idx === 0 && <ResearchApproachSection section={section} />}
+              {idx === 1 && <ProblemSection section={section} />}
+              {idx === 2 && <KeyFindingsSection section={section} />}
+              {idx === 3 && <DesignResponseSection section={section} />}
+              {idx === 4 && <ValidationSection section={section} />}
+              {idx === 5 && <ShippingSection section={section} />}
             </FadeSection>
-            <FadeSection>
-              <SolutionsSection />
-            </FadeSection>
-            <FadeSection>
-              <DesignProcessSection />
-            </FadeSection>
-            <FadeSection>
-              <KeyStatsSection />
-            </FadeSection>
-            <FadeSection>
-              <UserFlowSection />
-            </FadeSection>
-            <FadeSection>
-              <PrototypeShowcaseSection />
-            </FadeSection>
-            <FadeSection>
-              <WouldDoDifferentlySection />
-            </FadeSection>
+
+            {/* Visual anchor: user flow after Key Findings */}
+            {idx === 2 && (
+              <FadeSection>
+                <UserFlowSection />
+              </FadeSection>
+            )}
+
+            {/* Visual anchor: prototype after Design Response */}
+            {idx === 3 && (
+              <FadeSection>
+                <PrototypeShowcaseSection />
+              </FadeSection>
+            )}
           </React.Fragment>
-        ) : (
-          <FadeSection key={idx}>
-            <section className="sb-section">
-              <div className="sb-section-label">{section.label}</div>
-              <h2 className="sb-section-heading">{section.heading}</h2>
-
-              {Array.isArray(section.body)
-                ? section.body.map((p, i) => <p key={i} className="sb-section-body">{p}</p>)
-                : section.body && <p className="sb-section-body">{section.body}</p>
-              }
-
-              {section.stats && (
-                <div className="sb-stats-grid">
-                  {section.stats.map((stat, si) => (
-                    <div key={si} className="sb-stat-card">
-                      <span className="sb-stat-value">{stat.value}</span>
-                      <span className="sb-stat-label">{stat.label}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {section.items && (
-                <div className="ulio-research-grid">
-                  {section.items.map((item, ii) => (
-                    <div key={ii} className="ulio-research-card">
-                      <h3>{item.title}</h3>
-                      <p>{item.description}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {section.note && <p className="sb-note">{section.note}</p>}
-            </section>
-          </FadeSection>
         ))}
 
-        {/* ── IMPACT ───────────────────────────────────────── */}
-        {project.impact && project.impact.length > 0 && (
-          <FadeSection>
-            <section className="sb-section">
-              <div className="sb-section-label">Key Outcomes</div>
-              <ul className="ulio-pain-list" style={{ marginTop: "1rem" }}>
-                {project.impact.map((item, i) => (
-                  <li key={i}><span aria-hidden="true">🎯</span>{item}</li>
-                ))}
-              </ul>
-            </section>
-          </FadeSection>
-        )}
 
         {/* ── FOOTER ───────────────────────────────────────── */}
         <section className="ulio-footer">
