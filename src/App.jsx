@@ -24,10 +24,9 @@ function MobileBlock() {
         <div className="mobile-block-spline">
           <Spline scene="https://prod.spline.design/bl0SPoTthftcZOXnfvrxXgYt-9HH/scene.splinecode" />
         </div>
-        <p className="mobile-block-title">Made for big screens</p>
+        <p className="mobile-block-title">Hey!</p>
         <p className="mobile-block-body">
-          This portfolio has high-fidelity prototypes and interactions that deserve a proper canvas.
-          Grab a laptop and come back. It's worth it.
+          I designed this for desktop so every detail lands right. Grab a laptop. It'll be worth the switch.
         </p>
         <div className="mobile-block-tag">Desktop only</div>
       </div>
@@ -1224,18 +1223,20 @@ function Layout() {
       <TopNav />
       <main>
         <MobileBlock />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          {projectRoutes.map((route) => (
-            <Route
-              key={route.path}
-              path={`/${route.path}`}
-              element={<CaseStudyPage slug={route.canonicalSlug} />}
-            />
-          ))}
-          <Route path="/resume" element={<ResumePage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <div className="desktop-only">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            {projectRoutes.map((route) => (
+              <Route
+                key={route.path}
+                path={`/${route.path}`}
+                element={<CaseStudyPage slug={route.canonicalSlug} />}
+              />
+            ))}
+            <Route path="/resume" element={<ResumePage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
       </main>
       <footer className="site-footer">
         <p>Crafted with love and logic.</p>

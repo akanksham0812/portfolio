@@ -5737,6 +5737,9 @@ main {
     padding: 3rem 2rem;
     background: #0d0d0d;
   }
+  .desktop-only {
+    display: none;
+  }
 }
 
 .mobile-block-inner {
