@@ -5740,6 +5740,9 @@ main {
   .desktop-only {
     display: none;
   }
+  body, .site, main {
+    background: #0d0d0d !important;
+  }
 }
 
 .mobile-block-inner {
@@ -5747,12 +5750,15 @@ main {
   max-width: 300px;
 }
 
-.mobile-block-spline {
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 1.5rem;
-  border-radius: 50%;
-  overflow: hidden;
+.mobile-block-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  animation: mb-float 3s ease-in-out infinite;
+}
+
+@keyframes mb-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
 }
 
 .mobile-block-title {

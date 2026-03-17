@@ -21,9 +21,7 @@ function MobileBlock() {
   return (
     <div className="mobile-block">
       <div className="mobile-block-inner">
-        <div className="mobile-block-spline">
-          <Spline scene="https://prod.spline.design/bl0SPoTthftcZOXnfvrxXgYt-9HH/scene.splinecode" />
-        </div>
+        <div className="mobile-block-emoji">🖥️</div>
         <p className="mobile-block-title">Hey!</p>
         <p className="mobile-block-body">
           I designed this for desktop so every detail lands right. Grab a laptop. It'll be worth the switch.
