@@ -126,7 +126,7 @@ const HERO_TAGS = [
   "Research Led",
 ];
 
-const HERO_META = ["Senior UX Designer", "UX Research", "Product Strategy", "2024-2025"];
+const HERO_META = ["Senior UX Designer", "UX Research", "Product Strategy", "2025"];
 
 const STATS = [
   { value: 6, label: "Core modules\ndesigned end-to-end" },
@@ -210,7 +210,7 @@ const RESEARCH_ROWS = [
   },
   {
     method: "Market Data Analysis",
-    sample: "2024-2025 industry reports",
+    sample: "2025 industry reports",
     learned:
       "60% of students expect same-day responses, 67% of counselors lack essential tools, and 62% of students cite cost as a top stressor.",
     impact: "Validated a multi-sided platform direction and sharpened communication and scholarship priorities.",
@@ -1662,7 +1662,7 @@ export function OpsUsecasePage({ project }) {
         <div className="bh-footer-inner">
           <div className="bh-footer-label">{caseStudyLabel}</div>
           <h2 className="bh-footer-h">Designing systems that reduce human friction.</h2>
-          <p className="bh-footer-meta">Senior UX Designer - 2024-2025 - Confidential case study</p>
+          <p className="bh-footer-meta">Senior UX Designer - 2025 - Confidential case study</p>
           <button className="bh-footer-back" onClick={() => navigate("/?section=work")}>
             <span>←</span> Back to Work
           </button>

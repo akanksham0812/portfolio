@@ -12,7 +12,7 @@ export const operationsDasboardProject = createCaseStudyProject({
   title: "Designing for Scale: A University Operations Platform",
   shortTitle: "Ulio University Dashboard",
   category: "UX Case Study",
-  year: "2024-2025",
+  year: "2025",
   summary:
     "Designing a multi-module university admissions platform for teams navigating record application volume, fragmented tooling, and enrollment pressure.",
   cover: universityOpsAssets.cover,
