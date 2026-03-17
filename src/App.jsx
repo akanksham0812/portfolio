@@ -21,11 +21,13 @@ function MobileBlock() {
   return (
     <div className="mobile-block">
       <div className="mobile-block-inner">
-        <div className="mobile-block-emoji">🖥️</div>
+        <div className="mobile-block-spline">
+          <Spline scene="https://prod.spline.design/bl0SPoTthftcZOXnfvrxXgYt-9HH/scene.splinecode" />
+        </div>
         <p className="mobile-block-title">Made for big screens</p>
         <p className="mobile-block-body">
           This portfolio has high-fidelity prototypes and interactions that deserve a proper canvas.
-          Grab a laptop and come back — it's worth it.
+          Grab a laptop and come back. It's worth it.
         </p>
         <div className="mobile-block-tag">Desktop only</div>
       </div>
@@ -1221,6 +1223,7 @@ function Layout() {
       <ScrollToTop />
       <TopNav />
       <main>
+        <MobileBlock />
         <Routes>
           <Route path="/" element={<HomePage />} />
           {projectRoutes.map((route) => (
@@ -1246,12 +1249,9 @@ function Layout() {
 
 function App() {
   return (
-    <>
-      <MobileBlock />
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   );
 }
 

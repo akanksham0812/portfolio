@@ -5726,18 +5726,16 @@ main {
 /* ── Mobile block ────────────────────────────────────────────────────────── */
 .mobile-block {
   display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: #0d0d0d;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
 }
 
 @media (max-width: 768px) {
   .mobile-block {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding: 3rem 2rem;
+    background: #0d0d0d;
   }
 }
 
@@ -5746,15 +5744,12 @@ main {
   max-width: 300px;
 }
 
-.mobile-block-emoji {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  animation: mb-float 3s ease-in-out infinite;
-}
-
-@keyframes mb-float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
+.mobile-block-spline {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .mobile-block-title {
