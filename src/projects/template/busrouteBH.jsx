@@ -788,65 +788,35 @@ export function BusrouteBHPage({ project }) {
         <div style={{display:"flex", flexDirection:"column", gap:80}}>
           {[
             {
-              screen:"home", img:"/assets/projects/1.png", n:"01",
-              title:"Zero-tap access.",
-              titleBold:"Nearest buses, instantly.",
-              desc:"Opens directly to buses near you. No login, no search required. LIVE badge with pulsing dot distinguishes GPS-confirmed ETAs from schedule estimates.",
-              callouts:[
-                { label:"LIVE ETA badge", top:"22%", left:"62%" },
-                { label:"Nearby stops", top:"52%", left:"62%" },
-              ],
+              n:"01", img:"/assets/zing/iPhone 15 Pro Max-2.svg",
+              title:"Personalised zero-state.",
+              titleBold:"No search required.",
+              desc:"The home screen opens to a live map of buses near the user. No login gate, no search prompt. Saved places (Home, Work) are ranked by recurrence, not recency, so the commuter's most-used destinations surface automatically. The LIVE badge distinguishes GPS-confirmed ETAs from schedule estimates, a distinction that turned out to be the single biggest driver of trust in user interviews.",
             },
             {
-              screen:"search", n:"02",
-              title:"Search that",
-              titleBold:"understands commuters.",
-              desc:"Progressive mode filters appear only after a destination is typed. Recent locations and stop suggestions reduce typing to near-zero for habitual commuters.",
-              callouts:[
-                { label:"Mode filter chips", top:"28%", left:"62%" },
-                { label:"Recent locations", top:"58%", left:"62%" },
-              ],
+              n:"02", img:"/assets/zing/iPhone 15 Pro Max-9.svg",
+              title:"Decision support,",
+              titleBold:"not just a list of routes.",
+              desc:"Routes are scored on a composite of time, cost, reliability, and walking distance. Not speed alone. The Best Route label resolves the paradox of choice at 7am without removing user agency. Delay signals surface inline with the fare, not buried in a separate alerts tab, so users weigh risk and cost in a single glance. This information architecture cut decision time by 3× in usability testing.",
             },
             {
-              screen:"live", n:"03",
-              title:"Best route.",
-              titleBold:"Not just fastest.",
-              desc:"Two clear options above the fold: Best (optimal mix) and Fastest. Fare shown alongside Ola/Uber cost so users can justify the switch to public transit.",
-              callouts:[
-                { label:"Cost vs cab", top:"30%", left:"62%" },
-                { label:"Leg breakdown", top:"55%", left:"62%" },
-              ],
+              n:"03", img:"/assets/zing/iPhone 15 Pro Max-10.svg",
+              title:"Real-time wayfinding.",
+              titleBold:"Stop-level precision.",
+              desc:"A stop-level journey timeline replaces the generic 'X minutes away' with an ordered sequence users can reason from in real time. GPS refreshes every 15 seconds. Transfer alerts fire 2 stops before the interchange, not at the platform. A timing decision derived from observational field research that reduced missed-transfer errors to zero across 10 prototype sessions.",
             },
             {
-              screen:"trip", n:"04",
-              title:"Live tracking,",
-              titleBold:"zero anxiety.",
-              desc:"Bus position refreshes every 15 seconds. Stop timeline shows exactly where the bus is. One-tap arrival alert works in the background, no setup needed.",
-              callouts:[
-                { label:"Stop timeline", top:"26%", left:"62%" },
-                { label:"Arrival alert", top:"56%", left:"62%" },
-              ],
+              n:"04", img:"/assets/zing/iPhone 15 Pro Max-12.svg",
+              title:"Closing the loop.",
+              titleBold:"Receipt, not just history.",
+              desc:"The trip summary breaks cost by leg (walk, transit, walk), mirroring how experienced commuters mentally account for their journey. Showing ₹40 vs a ₹220 cab fare directly on the completion screen reinforces the value proposition at the moment of highest recall. The 4-star rating with an optional note captures quality signal with near-zero friction, feeding future route-ranking model training.",
             },
-          ].map(({ screen, img, n, title, titleBold, desc, callouts }) => (
-            <div key={screen} style={{display:"grid", gridTemplateColumns:"auto 1fr", gap:64, alignItems:"center"}}>
+          ].map(({ img, n, title, titleBold, desc }) => (
+            <div key={n} style={{display:"grid", gridTemplateColumns:"auto 1fr", gap:64, alignItems:"center"}}>
 
-              {/* LEFT - phone + dashed callouts */}
-              <div style={{position:"relative", width:200, flexShrink:0}}>
-                {img
-                  ? <img src={img} alt={title} style={{width:200, height:420, objectFit:"cover", borderRadius:36, display:"block", boxShadow:"0 32px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08)"}} />
-                  : <ZingPhone screen={screen} />
-                }
-                {callouts.map(c => (
-                  <div key={c.label} style={{position:"absolute", top:c.top, left:c.left, display:"flex", alignItems:"center", gap:8, pointerEvents:"none"}}>
-                    {/* dashed connector line */}
-                    <svg style={{position:"absolute", right:"100%", top:"50%", transform:"translateY(-50%)", overflow:"visible", pointerEvents:"none"}} width="40" height="1">
-                      <line x1="0" y1="0" x2="40" y2="0" stroke="rgba(255,255,255,0.2)" strokeWidth="1" strokeDasharray="3 3"/>
-                    </svg>
-                    <div style={{background:"rgba(255,255,255,0.08)", border:"1px solid rgba(255,255,255,0.12)", borderRadius:100, padding:"5px 12px", fontSize:11, fontWeight:500, color:"rgba(255,255,255,0.7)", whiteSpace:"nowrap", backdropFilter:"blur(8px)"}}>
-                      {c.label}
-                    </div>
-                  </div>
-                ))}
+              {/* LEFT - phone mockup */}
+              <div style={{flexShrink:0}}>
+                <img src={img} alt={title} style={{width:240, display:"block", filter:"drop-shadow(0 24px 48px rgba(0,0,0,0.55))"}} />
               </div>
 
               {/* RIGHT - title + desc + decisions */}
