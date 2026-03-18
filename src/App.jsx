@@ -78,7 +78,7 @@ function MobileBlock() {
 
 const filters = ["All", "Product Design", "UX Research & Design", "UX Case Study"];
 const HERO_IMAGE_SCALE = 0.7;
-const RESUME_PDF_PATH = withBase("assets/resume/Akanksha Mahangare CV.pdf");
+const RESUME_PDF_PATH = withBase("assets/resume/Akanksha_Mahangare_CV.pdf");
 const CONTACT_EMAIL = "akanksha.ux8@gmail.com";
 const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 const LINKEDIN_URL = "https://www.linkedin.com/in/akankshamahangare/";
