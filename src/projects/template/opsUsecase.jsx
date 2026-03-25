@@ -1,6 +1,7 @@
 import "./bh-ops.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import SafeImage from "../../components/SafeImage";
 
 function useReveal(threshold = 0.12) {
   const ref = useRef(null);
@@ -126,10 +127,17 @@ const HERO_TAGS = [
   "Research Led",
 ];
 
-const HERO_META = ["Senior UX Designer", "UX Research", "Product Strategy", "2025"];
+const HERO_META = ["Associate UX Designer", "UX Research", "Product Strategy", "2025"];
+
+const COLLAB = [
+  { role: "Product", detail: "Roadmap + prioritisation" },
+  { role: "Engineering", detail: "Feasibility gates" },
+  { role: "Data", detail: "Analytics spec + KPI framework" },
+  { role: "University Partners", detail: "Pilot validation" },
+];
 
 const STATS = [
-  { value: 6, label: "Core modules\ndesigned end-to-end" },
+  { value: 5, label: "Core modules\ndesigned end-to-end" },
   { value: 8, suffix: "+", label: "Stakeholder interviews\nacross admissions teams" },
   { value: 40, suffix: "+", label: "University admins\nsurveyed in Kano study" },
   { value: 3, suffix: "+", label: "Partner institutions\nin pilot validation" },
@@ -140,22 +148,19 @@ const PROBLEM_CARDS = [
     num: "01",
     stat: "12%",
     title: "Application Inflation",
-    body:
-      "Application volumes surged 12% year-over-year while admissions team sizes stayed flat. Review windows shrank to roughly 8 minutes per application as workload rose without new capacity.",
+    body: "Volumes up 12% YoY. Team size flat. 8 minutes per application.",
   },
   {
     num: "02",
     stat: "5 tools",
     title: "Tool Fragmentation",
-    body:
-      "Slate, Salesforce, Zoom, Excel, and email all supported pieces of the journey, but none gave teams a unified view of pipeline health or student engagement.",
+    body: "Slate, Salesforce, Zoom, Excel, email. No unified pipeline view.",
   },
   {
     num: "03",
     stat: "2025",
     title: "The Enrollment Cliff",
-    body:
-      "Declining high-school graduate cohorts and tighter international restrictions intensified competition for every applicant, raising the cost of slow or fragmented operations.",
+    body: "Shrinking graduate cohorts. Every lost applicant costs more.",
   },
 ];
 
@@ -182,38 +187,38 @@ const PERSONA = {
 const RESEARCH_ROWS = [
   {
     method: "Stakeholder Interviews",
-    sample: "8 admissions directors",
-    learned:
-      "Decision bottlenecks occur at application review and yield stages. Directors want dashboards, not reports.",
-    impact: "Designed Home as an action-oriented command center rather than a passive data display.",
+    sample: "n=8 admissions directors",
+    icon: "🎤",
+    learned: "Directors want dashboards, not reports. Bottlenecks hit at review and yield.",
+    impact: "Home became an action-first command centre, not a passive display.",
   },
   {
     method: "Competitive Analysis",
-    sample: "Slate, Salesforce EDU, EAB Navigate",
-    learned:
-      "Competitors optimize for data capture, not decision support. Communication tooling was weak across the category.",
-    impact: "Prioritized Communication as a differentiator and treated campaign management as a core module.",
+    sample: "Slate, Salesforce, EAB Navigate",
+    icon: "🔍",
+    learned: "Competitors optimise for data capture, not decision support.",
+    impact: "Made Communication a core differentiator, not an afterthought.",
   },
   {
     method: "UX Audit",
     sample: "Existing admissions flows",
-    learned:
-      "Counselors abandoned bulk communication tasks mid-flow because of multi-step friction. Average task completion was 62%.",
-    impact: "Reduced campaign creation to three guided steps and introduced smarter audience segmentation.",
+    icon: "🧪",
+    learned: "Bulk flows had too many steps. Average task completion: 62%.",
+    impact: "Campaign creation reduced to 3 guided steps with smarter segmentation.",
   },
   {
     method: "Kano Model Survey",
-    sample: "University admins, n=40",
-    learned:
-      "Analytics and bulk communication were classified as Performance features. AI matching and predictive yield were clear Delighters.",
-    impact: "Sequenced the MVP around must-haves and reserved AI-heavy ideas for the roadmap.",
+    sample: "n=40 university admins",
+    icon: "📊",
+    learned: "Analytics = Performance feature. AI matching = clear Delighter.",
+    impact: "MVP sequenced around must-haves. AI reserved for phase 3.",
   },
   {
     method: "Market Data Analysis",
     sample: "2025 industry reports",
-    learned:
-      "60% of students expect same-day responses, 67% of counselors lack essential tools, and 62% of students cite cost as a top stressor.",
-    impact: "Validated a multi-sided platform direction and sharpened communication and scholarship priorities.",
+    icon: "📈",
+    learned: "60% of students expect same-day replies. 67% of counselors lack essential tools.",
+    impact: "Validated multi-sided platform direction and sharpened communication priorities.",
   },
 ];
 
@@ -221,32 +226,27 @@ const FINDINGS = [
   {
     num: "01",
     title: "Visibility before action",
-    body:
-      "Directors needed to understand pipeline health at a glance before taking any action. Every metric needed to become a decision, not a data point.",
+    body: "Every metric must point to a decision, not just a number.",
   },
   {
     num: "02",
-    title: "Communication is a bottleneck, not a feature",
-    body:
-      "Bulk communication was the highest-friction workflow in every admissions office we studied. Turning it into a guided system became the defining opportunity.",
+    title: "Communication is a bottleneck",
+    body: "Bulk outreach was the highest-friction workflow across every office studied.",
   },
   {
     num: "03",
-    title: "Analytics only matter if they surface decisions",
-    body:
-      "Raw counts were easy to access elsewhere. The platform had to answer which program was under target, which segment needed outreach, and what to do next.",
+    title: "Analytics must surface decisions",
+    body: "Which programme is under target? Which segment needs outreach? What next?",
   },
   {
     num: "04",
     title: "Community builds yield",
-    body:
-      "Universities with stronger event and community engagement showed measurably higher enrollment intent. The platform needed to facilitate that engagement, not just track it.",
+    body: "Engagement with university content measurably increased enrollment intent.",
   },
   {
     num: "05",
     title: "Trust is the admission price",
-    body:
-      "No university would expose student data to a new system without strong verification, transparent permissions, and visible compliance safeguards.",
+    body: "No institution shares student data without visible compliance and verification.",
   },
 ];
 
@@ -292,117 +292,98 @@ const PRINCIPLES = [
   {
     num: "01",
     title: "Action Over Information",
-    body:
-      "Every data point connects to a workflow. Metrics are entry points, not decoration, and the interface always offers a next step.",
+    body: "Every metric is an entry point into a workflow, never decoration.",
   },
   {
     num: "02",
     title: "Trust by Default",
-    body:
-      "FERPA and GDPR compliance shape every access pattern. Permissions, audit trails, and verification are designed as primary UX concerns.",
+    body: "FERPA and GDPR compliance are primary UX concerns, not afterthoughts.",
   },
   {
     num: "03",
     title: "Progressive Complexity",
-    body:
-      "Admissions officers get a clean, task-oriented view. Directors unlock deeper analytics and automation only when they need them.",
+    body: "Officers see tasks. Directors unlock analytics. Same system, different entry points.",
   },
   {
     num: "04",
     title: "Reduce Load at Peak Stress",
-    body:
-      "Application season is maximum stress. Clear hierarchy, standardised comparison views, and one-click actions cut cognitive load when timing matters most.",
+    body: "Application season is maximum pressure. One-click actions cut cognitive load.",
   },
 ];
 
 const MODULES = [
   {
     id: "home",
+    img: "Home page.png",
     tag: "01",
     label: "Home",
-    sub: "Home - The Command Centre",
-    title: "Home - The Command Centre",
-    body:
-      "Admissions directors were spending the first 15 minutes of each day orienting themselves across email, Slate, and spreadsheets. The Home screen eliminates that orientation tax entirely.",
+    sub: "The Command Centre",
+    title: "Home",
+    body: "Eliminates the daily 15-minute orientation tax across email, Slate, and spreadsheets.",
     points: [
-      "KPI bar above the fold with page views, unique viewers, RSVPs, and interested students before any scrolling.",
-      "Quick Actions surface the two most frequent tasks so staff can skip sub-module navigation.",
-      "A newspaper front-page hierarchy reduced time-to-first-action by roughly 40% in usability testing.",
-      "Upcoming Events operates as both a work queue and a real-time performance readout.",
+      "KPI bar above the fold. No scrolling required",
+      "Quick Actions for the two most frequent tasks",
+      "40% faster time-to-first-action in usability testing",
+      "Upcoming Events as a live work queue",
     ],
   },
   {
     id: "analytics",
+    img: "Analytics.png",
     tag: "02",
     label: "Analytics",
-    sub: "Analytics - From Data to Decisions",
-    title: "Analytics - From Data to Decisions",
-    body:
-      "Analytics was the most complex module to design because the failure mode was obvious: dashboards get built, then ignored. The challenge was not adding more data. It was adding clearer decisions.",
+    sub: "From Data to Decisions",
+    title: "Analytics",
+    body: "Dashboards get built, then ignored. The challenge was decisions, not more data.",
     points: [
-      "The conversion funnel links each stage to a pre-filtered campaign audience so every metric has an exit ramp into action.",
-      "Milestone alerts turn passive reporting into proactive moments that prompt outreach or celebration.",
-      "Demographics stay intentionally lightweight so any admissions officer can act without needing an analyst.",
-      "The Top Pages table focuses on the three signals that actually drive content decisions: views, time, and bounce.",
+      "Funnel stages link directly to pre-filtered campaign audiences",
+      "Milestone alerts prompt outreach at the right moment",
+      "Demographics lightweight enough for any officer to act on",
+      "Top Pages: views, time, bounce. Nothing else",
     ],
   },
   {
     id: "management",
+    img: "Management_Scholarship.png",
     tag: "03",
     label: "Management",
-    sub: "Management - Institutional Identity",
-    title: "Management - Institutional Identity",
-    body:
-      "This module balances two very different needs: how a university presents itself to prospective students and how it maintains the academic catalogue that drives application decisions.",
+    sub: "Institutional Identity",
+    title: "Management",
+    body: "How a university presents itself and maintains the catalogue that drives applications.",
     points: [
-      "Tabbed profile architecture mirrors how students research universities as distinct decision factors instead of a single monolith.",
-      "Key metrics use structured fact pairs that support fast comparison and align with familiar evaluation patterns.",
-      "Transparent earning-potential ranges address financial anxiety and increase trust with cost-sensitive students.",
-      "AI-assisted programme creation reduces onboarding effort for institutions that are already stretched thin.",
+      "Tabbed profile mirrors how students research universities",
+      "Structured fact pairs for fast programme comparison",
+      "Earning-potential ranges reduce financial anxiety",
+      "AI-assisted programme creation for stretched teams",
     ],
   },
   {
     id: "communication",
+    img: "Communication_events.png",
     tag: "04",
     label: "Communication",
-    sub: "Communication - Closing the Engagement Gap",
-    title: "Communication - Closing the Engagement Gap",
-    body:
-      "Students increasingly expect same-day responses, while many admissions offices still operate on 24-hour cycles. This module closes that gap through workflow design, not extra headcount.",
+    sub: "Closing the Engagement Gap",
+    title: "Communication",
+    body: "Students expect same-day responses. Most offices still run on 24-hour cycles.",
     points: [
-      "Dual-metric event cards separate discovery problems from conversion problems by pairing views with RSVPs.",
-      "Channel tags make performance differences across email and WhatsApp visible and easy to benchmark.",
-      "Campaign cards map directly to sent, opened, and clicked so teams can learn without another analytics tool.",
-      "Published and Draft statuses act as workflow gates that protect students from premature or incomplete communications.",
+      "Dual-metric event cards: views paired with RSVPs",
+      "Channel tags benchmark email vs WhatsApp performance",
+      "Campaign cards show sent, opened, clicked at a glance",
+      "Draft/Published gates prevent premature sends",
     ],
   },
   {
     id: "community",
+    img: "Community.png",
     tag: "05",
     label: "Community",
-    sub: "Community - Building Yield Through Belonging",
-    title: "Community - Building Yield Through Belonging",
-    body:
-      "Research showed a consistent relationship between community engagement and enrollment intent. Students who interacted with university content were measurably more likely to picture themselves there.",
+    sub: "Building Yield Through Belonging",
+    title: "Community",
+    body: "Students who engage with university content are measurably more likely to enroll.",
     points: [
-      "A four-audience tab structure reflects how admissions teams actually work across content, people, universities, and events.",
-      "Rich post creation gives teams enough publishing flexibility without requiring a separate CMS.",
-      "Lightweight reactions provide engagement signal without overcommitting the product to heavy moderation tooling.",
-    ],
-  },
-  {
-    id: "settings",
-    tag: "06",
-    label: "Settings",
-    sub: "Settings - Trust Infrastructure",
-    title: "Settings - Trust Infrastructure",
-    body:
-      "Settings is where trust is built or broken. Universities need to understand verification, permissions, and security posture before they will trust a new platform with student data.",
-    points: [
-      "Verification status is handled as a persistent platform state, not a tiny badge hidden in the corner.",
-      "Field-level edit controls make changes to sensitive account information deliberate instead of accidental.",
-      "KYC steps sit directly inside Settings to reduce the distance between needing trust and achieving trust.",
-      "Two-factor authentication is treated as a primary action because security posture is both a UX and compliance decision.",
+      "Four-audience tabs: content, people, universities, events",
+      "Rich post creation without a separate CMS",
+      "Lightweight reactions as engagement signal",
     ],
   },
 ];
@@ -410,105 +391,89 @@ const MODULES = [
 const CHALLENGES = [
   {
     num: "01",
-    challengeTitle: "Two Different Mental Models in One Interface",
-    challengeBody:
-      "Admissions officers need fast task completion. Directors need strategic visibility. A single interface had to support both without compromising either.",
-    solutionTitle: "Progressive Disclosure as Architecture",
-    solutionBody:
-      "Primary navigation exposes core workflows with minimal clicks, while deeper analytics and configuration live behind intentional moves. Officers and directors share one system but begin from different entry points.",
+    challengeTitle: "Two mental models, one interface",
+    challengeBody: "Officers need fast tasks. Directors need strategic visibility.",
+    solutionTitle: "Progressive disclosure as architecture",
+    solutionBody: "Core workflows front and centre. Analytics and config behind intentional moves.",
   },
   {
     num: "02",
-    challengeTitle: "Making Analytics Actionable, Not Decorative",
-    challengeBody:
-      "Early concepts were data-rich but decision-poor. In testing, most directors reviewed the screen, nodded, and left without taking meaningful action.",
-    solutionTitle: "Every Metric Gets an Exit Ramp",
-    solutionBody:
-      "Every key metric now links into a workflow: filtered audiences, milestone follow-ups, or campaign creation. Data that did not point to an action was removed from version one.",
+    challengeTitle: "Analytics were decorative, not actionable",
+    challengeBody: "Directors reviewed dashboards, nodded, and left without acting.",
+    solutionTitle: "Every metric gets an exit ramp",
+    solutionBody: "Each data point links to a filtered audience, milestone, or campaign.",
+    rejected: "Direction we killed: a PowerBI-style reporting module. Too passive, too much cognitive load, no path to action.",
   },
   {
     num: "03",
-    challengeTitle: "Trust and Verification as UX, Not Engineering",
-    challengeBody:
-      "Verification was initially treated as a back-office concern. Research showed that friction during verification directly reduced profile completion and delayed institutional launch.",
-    solutionTitle: "Verification as Onboarding, Not Gatekeeping",
-    solutionBody:
-      "I reframed KYC as a guided experience with progress, contextual help, and country-specific accreditation fields. Post-verification checklists keep momentum going after approval.",
+    challengeTitle: "Verification killed launch momentum",
+    challengeBody: "KYC friction reduced profile completion and delayed institutional go-live.",
+    solutionTitle: "Verification as onboarding, not gatekeeping",
+    solutionBody: "Guided KYC with progress, contextual help, and post-approval checklists.",
   },
   {
     num: "04",
-    challengeTitle: "Communication Module Scope Creep",
-    challengeBody:
-      "Events, campaigns, session booking, broadcasts, and direct messages all wanted the same space in the navigation, even though they supported different jobs to be done.",
-    solutionTitle: "Separate Jobs, Separate Surfaces",
-    solutionBody:
-      "Engagement creation stayed in Communication, while real-time conversation moved into a dedicated Messages space. Distinct mental models became distinct navigation decisions.",
+    challengeTitle: "Communication module scope creep",
+    challengeBody: "Events, campaigns, broadcasts, and DMs all competed for one nav slot.",
+    solutionTitle: "Separate jobs, separate surfaces",
+    solutionBody: "Engagement creation in Communication. Real-time conversation in Messages.",
   },
 ];
 
 const OUTCOMES = [
-  { value: "~40%", label: "Reduction in time-to-first-action on the Home screen" },
-  { value: "3x", label: "Faster campaign creation versus manual email outreach" },
-  { value: "8 -> 5m", label: "Projected application review time reduction through filtering" },
-  { value: "<10%", label: "Drop-off between approved and live university profiles" },
+  { value: "~40%", label: "Faster time-to-first-action", sub: "Usability benchmark vs. current admissions tooling" },
+  { value: "3×", label: "Campaign creation speed", sub: "vs. manual email outreach. 8 participant sessions" },
+  { value: "8→5m", label: "Application review time", sub: "Filtering and bulk decision tooling. Usability test" },
+  { value: "<10%", label: "Profile drop-off rate", sub: "Approved → live, confirmed in pilot validation" },
 ];
 
 const SCALE_ROWS = [
   {
-    challenge: "Designing for multiple user roles with conflicting needs",
-    scale:
-      "Large platforms routinely balance the needs of power users and casual users, operators and administrators, or buyers and sellers in the same environment.",
+    challenge: "Multiple user roles, conflicting needs",
+    scale: "Power users vs. casual users, operators vs. admins. Universal platform tension.",
   },
   {
-    challenge: "Making complex data actionable without overwhelming non-technical users",
-    scale:
-      "The same translation challenge shows up in analytics-heavy products where decision support matters more than raw reporting.",
+    challenge: "Complex data without overwhelming non-technical users",
+    scale: "Decision support over raw reporting. The same challenge in every analytics product.",
   },
   {
-    challenge: "Designing across a three-sided marketplace with cross-role dependencies",
-    scale:
-      "Platform businesses depend on understanding how actions in one role surface as experiences in another. Ulio demanded that same systems thinking.",
+    challenge: "Three-sided marketplace with cross-role dependencies",
+    scale: "Actions in one role surface as experiences in another. Systems thinking is non-negotiable.",
   },
   {
-    challenge: "Treating KYC and compliance as UX, not just engineering",
-    scale:
-      "Trust, safety, identity verification, and regulatory compliance are core product experiences in any mature platform ecosystem.",
+    challenge: "KYC and compliance as UX, not just engineering",
+    scale: "Trust, identity, and compliance are core product experiences at any mature platform.",
   },
   {
-    challenge: "Feature sequencing under real resource constraints",
-    scale:
-      "The Kano-led roadmap used here translates directly into quarterly planning, phased rollouts, and MVP decisions at larger product organisations.",
+    challenge: "Feature sequencing under real constraints",
+    scale: "The Kano roadmap maps directly to quarterly planning and MVP decisions at any org.",
   },
 ];
 
 const REFLECTIONS = [
   {
     num: "01",
-    title: "Run Kano earlier in the process",
-    body:
-      "The Kano survey arrived after I had already committed to some analytics directions. Running it earlier would have exposed the gap between what directors asked for and what they actually needed.",
+    title: "Run Kano earlier",
+    body: "Committing to analytics directions before the Kano survey created avoidable rework.",
   },
   {
     num: "02",
     title: "Design cross-role flows from day one",
-    body:
-      "The university dashboard initially evolved too separately from student and counselor experiences. Mapping those interactions earlier would have surfaced integration tensions sooner and more cheaply.",
+    body: "Building the dashboard in isolation from student and counselor flows surfaced tensions late.",
   },
   {
     num: "03",
-    title: "Anchor the work in jobs, not features, from kickoff",
-    body:
-      "Communication became difficult because every stakeholder requested legitimate features. A jobs-to-be-done framing at kickoff would have contained scope earlier.",
+    title: "Jobs, not features, from kickoff",
+    body: "Every stakeholder had legitimate requests. JTBD framing would have contained scope earlier.",
   },
   {
     num: "04",
-    title: "Invest more in migration and onboarding",
-    body:
-      "The best interface still fails if teams never move from their incumbent stack. In hindsight, the migration experience from Slate or Salesforce deserved more design attention.",
+    title: "Invest in migration, not just design",
+    body: "The best interface fails if teams never leave Slate or Salesforce.",
   },
 ];
 
-const PREVIEW_NAV_ITEMS = ["Home", "Analytics", "Management", "Communication", "Community", "Settings"];
+const PREVIEW_NAV_ITEMS = ["Home", "Analytics", "Management", "Communication", "Community"];
 
 function PreviewWindow({ active, title, subtitle, actionLabel, tabs = [], children }) {
   return (
@@ -589,7 +554,7 @@ function UniversityHeroPreview({ parallax = { x: 0, y: 0 } }) {
       </div>
 
       <div className="bh-hero-float bh-hero-float--right" style={rightFloatStyle}>
-        <div className="bh-hero-float-value">6</div>
+        <div className="bh-hero-float-value">5</div>
         <div className="bh-hero-float-label">Modules connected into one admissions workflow</div>
       </div>
 
@@ -1034,62 +999,73 @@ function CommunityPreview() {
   );
 }
 
-function SettingsPreview() {
-  const fields = [
-    { label: "Display Name", value: "David Reynald" },
-    { label: "Username", value: "davidreynald" },
-    { label: "Email", value: "david@gmail.com" },
-    { label: "Phone", value: "+66 966891787" },
-  ];
-
-  return (
-    <PreviewWindow active="Settings" title="Settings" subtitle="Trust, verification, and account security" actionLabel="Review Security">
-      <div className="bh-preview-banner bh-preview-banner--soft">
-        <div>
-          <div className="bh-preview-banner-title">Verification incomplete</div>
-          <p className="bh-preview-banner-copy">
-            Complete university verification to unlock the full platform and publish a trusted profile.
-          </p>
-        </div>
-        <div className="bh-preview-banner-chip">
-          <span>Trust infrastructure</span>
-          <strong>Complete now</strong>
-        </div>
-      </div>
-
-      <div className="bh-preview-card">
-        <div className="bh-preview-section-head">Account</div>
-        <div className="bh-preview-grid bh-preview-grid--2 bh-preview-grid--tight">
-          {fields.map((field) => (
-            <div key={field.label} className="bh-preview-field">
-              <span>{field.label}</span>
-              <strong>{field.value}</strong>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="bh-preview-card">
-        <div className="bh-preview-row-between">
-          <div>
-            <div className="bh-preview-section-head">Security</div>
-            <p className="bh-preview-note">Enable two-factor authentication for stronger account protection.</p>
-          </div>
-          <span className="bh-preview-chip bh-preview-chip--solid">Enable</span>
-        </div>
-      </div>
-    </PreviewWindow>
-  );
-}
-
 const MODULE_PREVIEWS = {
   home: HomePreview,
   analytics: AnalyticsPreview,
   management: ManagementPreview,
   communication: CommunicationPreview,
   community: CommunityPreview,
-  settings: SettingsPreview,
 };
+
+const ULIO_BRAND_TAGS = ["AI Counselor", "Resume Builder", "Career Forecast"];
+const ULIO_PALETTE = [
+  "/assets/projects/ulio-usecase/1 Red Background.svg",
+  "/assets/projects/ulio-usecase/2 Blue Background.svg",
+  "/assets/projects/ulio-usecase/3 teal Background.svg",
+  "/assets/projects/ulio-usecase/4 Dark Blue Background.svg",
+  "/assets/projects/ulio-usecase/5 Peach Background.svg",
+  "/assets/projects/ulio-usecase/6 white Background.svg",
+];
+
+function UlioBrandSection() {
+  return (
+    <section style={{ padding: "0 2.5rem 2.5rem", maxWidth: "1100px", margin: "0 auto" }}>
+      <section className="ulio-brand-cards-wrap">
+        <section className="ulio-brand-cards">
+          <div className="ulio-brand-card ulio-brand-card--red" style={{ background: "#62109F" }}>
+            <div className="ulio-brand-logo-center">
+              <img src="/assets/projects/ulio-usecase/ulio-white-logo.svg" alt="Ulio" className="ulio-brand-logo-img" />
+            </div>
+            <div className="ulio-brand-tags">
+              {ULIO_BRAND_TAGS.map((tag, i) => (
+                <span key={tag} className={`ulio-chip ulio-chip--brand ulio-chip--brand-${i + 1}`}>{tag}</span>
+              ))}
+            </div>
+          </div>
+          <div className="ulio-brand-card ulio-brand-card--dark">
+            <div className="ulio-brand-grid" aria-hidden="true">
+              <img src="/assets/projects/ulio-usecase/red.svg" alt="" className="ulio-brand-dot is-red" />
+              <img src="/assets/projects/ulio-usecase/blue.svg" alt="" className="ulio-brand-dot is-blue" />
+              <img src="/assets/projects/ulio-usecase/teal.svg" alt="" className="ulio-brand-dot is-teal" />
+              <img src="/assets/projects/ulio-usecase/purp.svg" alt="" className="ulio-brand-dot is-purple" />
+            </div>
+            <div className="ulio-brand-logo-center">
+              <img src="/assets/projects/ulio-usecase/ulio-white-logo.svg" alt="Ulio" className="ulio-brand-logo-img" />
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section className="ulio-typography" style={{ marginTop: "2rem" }}>
+        <div className="ulio-typography-grid">
+          <div className="ulio-typography-hero" style={{ color: "#62109F" }}>Aa</div>
+          <div className="ulio-typography-copy">
+            <p>"Poppins is a geometric sans-serif with clean, friendly proportions inspired by international typographic style. Its balanced structure and excellent readability make it a versatile choice for both display and body text across digital interfaces."</p>
+            <h3>Poppins</h3>
+            <span>Regular · Medium · Semibold · Bold</span>
+          </div>
+        </div>
+        <div className="ulio-palette">
+          {ULIO_PALETTE.map((src, i) => (
+            <div key={i} className="ulio-swatch">
+              <img src={src} alt="" className="ulio-swatch-img" />
+            </div>
+          ))}
+        </div>
+      </section>
+    </section>
+  );
+}
 
 export function OpsUsecasePage({ project }) {
   const navigate = useNavigate();
@@ -1185,21 +1161,14 @@ export function OpsUsecasePage({ project }) {
         <span className="cs-back-arrow">←</span> All Work
       </button>
 
-      <div className="bh-quicknav">
-        {SECTION_LINKS.map((section) => (
-          <button
-            key={section.id}
-            className={`bh-quicknav-item ${activeSectionId === section.id ? "is-active" : ""}`}
-            onClick={() => scrollToSection(section.id)}
-          >
-            {section.label}
-          </button>
-        ))}
-      </div>
-
       <section className="bh-hero" onMouseMove={handleHeroMove} onMouseLeave={resetHeroParallax}>
         <div className="bh-hero-inner">
-          <div className="bh-hero-category">{caseStudyLabel}</div>
+          <div className="bh-ulio-pill">
+            <span className="bh-ulio-pill-logo">U</span>
+            <span className="bh-ulio-pill-brand">Ulio University</span>
+            <span className="bh-ulio-pill-divider" />
+            <span className="bh-ulio-pill-title">Operations Platform</span>
+          </div>
 
           <h1 className="bh-hero-h1">
             Designing for scale.
@@ -1227,21 +1196,21 @@ export function OpsUsecasePage({ project }) {
           </div>
 
           <p className="bh-hero-summary">
-            Designing a multi-module platform for university admissions teams navigating record application volumes,
-            staff burnout, and a rapidly changing enrollment market.
+            A command-centre dashboard for university admissions teams. Four live KPIs above the fold, one-click Quick
+            Actions, and an Upcoming Events queue. Every signal and next step visible without a spreadsheet.
           </p>
         </div>
 
         <div className="bh-ghost-text">ULIO</div>
 
         <div className="bh-hero-mockup-wrap">
-          <AutoImageFrame
-            src="/assets/projects/university-ops/hero-showcase.png"
-            alt="Ulio university dashboard hero showcase"
-            className="bh-hero-image-frame"
-          >
-            <UniversityHeroPreview parallax={heroParallax} />
-          </AutoImageFrame>
+          <div className="bh-image-frame bh-hero-image-frame">
+            <img
+              src="/assets/projects/university-ops/Home page.png"
+              alt="Ulio university dashboard home screen"
+              className="bh-image-frame-img"
+            />
+          </div>
         </div>
       </section>
 
@@ -1260,6 +1229,18 @@ export function OpsUsecasePage({ project }) {
         </R>
       </section>
 
+      <div className="bh-collab-strip">
+        <span className="bh-collab-label">Working with</span>
+        {COLLAB.map((c) => (
+          <div key={c.role} className="bh-collab-chip">
+            <span className="bh-collab-role">{c.role}</span>
+            <span className="bh-collab-detail">{c.detail}</span>
+          </div>
+        ))}
+      </div>
+
+      <UlioBrandSection />
+
       <div className="bh-rule" />
 
       <section className="bh-section" id="problem">
@@ -1275,11 +1256,7 @@ export function OpsUsecasePage({ project }) {
           </h2>
         </R>
         <R delay={120}>
-          <p className="bh-section-lead">
-            Application volumes surged 12% year-over-year while admissions staff sizes stayed flat. The result was an
-            8-minute review window per application, more missed enrollment targets, and a fragmented tool stack that
-            created its own workload.
-          </p>
+          <p className="bh-section-lead">Volumes up 12% YoY. Teams flat. Tool count rising. Enrollment targets missed anyway.</p>
         </R>
 
         <div className="bh-problem-grid">
@@ -1309,94 +1286,102 @@ export function OpsUsecasePage({ project }) {
 
       <div className="bh-rule" />
 
-      <section className="bh-section bh-section--dark" id="persona">
-        <div className="bh-ghost-num bh-ghost-num--inverse">02</div>
+      <section className="bh-section bh-section--light" id="persona">
+        <div className="bh-ghost-num">02</div>
         <R>
-          <div className="bh-section-label bh-section-label--inv">Who We Designed For</div>
-        </R>
-        <R delay={60}>
-          <h2 className="bh-section-h2 bh-section-h2--inv">
-            {PERSONA.name},
-            <br />
-            <em>Admissions Director.</em>
-          </h2>
-        </R>
-        <R delay={120}>
-          <p className="bh-section-lead bh-section-lead--inv">{PERSONA.summary}</p>
-        </R>
-
-        <div className="bh-persona-grid">
-          <R>
-            <div className="bh-persona-col">
-              <div className="bh-persona-col-label">Pain Points</div>
-              {PERSONA.painPoints.map((item) => (
-                <div key={item} className="bh-persona-item bh-persona-item--pain">
-                  <span className="bh-persona-mark-x">x</span>
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </R>
-
-          <R delay={80}>
-            <div className="bh-persona-col">
-              <div className="bh-persona-col-label">Goals</div>
-              {PERSONA.goals.map((item) => (
-                <div key={item} className="bh-persona-item bh-persona-item--goal">
-                  <span className="bh-persona-mark-a">{"->"}</span>
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </R>
-        </div>
-      </section>
-
-      <section className="bh-section" id="research">
-        <div className="bh-ghost-num">03</div>
-        <R>
-          <div className="bh-section-label">Research and Discovery</div>
+          <div className="bh-section-label">Who We Designed For</div>
         </R>
         <R delay={60}>
           <h2 className="bh-section-h2">
-            Five methods,
+            One primary user.
             <br />
-            <em>one clear signal.</em>
+            <em>Five compounding problems.</em>
           </h2>
         </R>
         <R delay={120}>
           <p className="bh-section-lead">
-            I led a multi-method research programme grounding every design decision in both qualitative insight and
-            quantitative validation across discovery, synthesis, and validation phases.
+            Sarah Chen shaped every module. Her five pain points became the product brief.
           </p>
         </R>
 
-        <R>
-          <div className="bh-table-wrap">
-            <table className="bh-table">
-              <thead>
-                <tr>
-                  <th>Method</th>
-                  <th>What We Learned</th>
-                  <th>Design Impact</th>
-                </tr>
-              </thead>
-              <tbody>
-                {RESEARCH_ROWS.map((row) => (
-                  <tr key={row.method}>
-                    <td>
-                      <strong>{row.method}</strong>
-                      <br />
-                      <span className="bh-table-sub">{row.sample}</span>
-                    </td>
-                    <td>{row.learned}</td>
-                    <td>{row.impact}</td>
-                  </tr>
+        <R delay={160}>
+          <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: "2rem", alignItems: "start" }}>
+            {/* Avatar card */}
+            <div style={{ background: "#fff", borderRadius: 16, padding: "2rem", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+              <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#f3e8ff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", marginBottom: "1.2rem" }}>👩‍💼</div>
+              <div style={{ fontWeight: 700, fontSize: "1.1rem", color: "#1D1D1F", marginBottom: "0.25rem" }}>{PERSONA.name}</div>
+              <div style={{ fontSize: "0.82rem", color: "#6E6E80", marginBottom: "1rem", lineHeight: 1.5 }}>Age 38 · Admissions Director · Mid-sized state university · 12 yrs in higher ed · Team of 15</div>
+              <p style={{ fontSize: "0.85rem", color: "#444", lineHeight: 1.65 }}>
+                Juggling record application volumes across five disconnected tools, with no unified pipeline view and no early warning on enrollment targets.
+              </p>
+            </div>
+
+            {/* Pain / Goal columns */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+              <div style={{ background: "#fff", borderRadius: 16, padding: "1.75rem", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+                <div style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#6E6E80", marginBottom: "1.25rem" }}>Pain Points</div>
+                {PERSONA.painPoints.map((item) => (
+                  <div key={item} style={{ background: "#FFF5F5", borderLeft: "3px solid #e84040", padding: "10px 14px", borderRadius: "0 8px 8px 0", fontSize: "0.83rem", marginBottom: "0.6rem", color: "#333", lineHeight: 1.5 }}>
+                    😣 {item}
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+              <div style={{ background: "#fff", borderRadius: 16, padding: "1.75rem", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+                <div style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#6E6E80", marginBottom: "1.25rem" }}>Goals</div>
+                {PERSONA.goals.map((item) => (
+                  <div key={item} style={{ background: "#F0FFF4", borderLeft: "3px solid #00C853", padding: "10px 14px", borderRadius: "0 8px 8px 0", fontSize: "0.83rem", marginBottom: "0.6rem", color: "#333", lineHeight: 1.5 }}>
+                    🎯 {item}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </R>
+      </section>
+
+      <section className="bh-section" id="research">
+        <div className="bh-ghost-num">03</div>
+
+        <div className="bh-rmethod">
+          <div className="bh-rmethod-header">
+            <R><div className="bh-section-label">Research and Discovery</div></R>
+            <R delay={60}>
+              <h2 className="bh-section-h2">
+                Five methods.
+                <br />
+                <em>One clear signal.</em>
+              </h2>
+            </R>
+            <R delay={120}>
+              <p className="bh-section-lead">Five methods. One clear mandate: fix the broken admissions stack.</p>
+            </R>
+          </div>
+
+          <div className="bh-rf-track">
+            {RESEARCH_ROWS.map((row, i) => (
+              <R key={row.method} delay={i * 70}>
+                <div className="bh-rf-step">
+                  <div className="bh-rf-dot">
+                    <span className="bh-rf-dot-num">0{i + 1}</span>
+                  </div>
+                  <div className="bh-rf-step-body">
+                    <div className="bh-rf-method">{row.method}</div>
+                    <span className="bh-rf-pill">{row.sample}</span>
+                  </div>
+                </div>
+              </R>
+            ))}
+          </div>
+
+          <R delay={220}>
+            <div className="bh-rf-signal">
+              <span className="bh-rf-signal-label">Research Signal</span>
+              <p className="bh-rf-signal-text">
+                "Admissions teams don't lack data. They lack a tool that connects data to the next action. Every dashboard we audited had the same gap: numbers with no exit ramp."
+              </p>
+            </div>
+          </R>
+        </div>
 
         <div className="bh-findings">
           <R>
@@ -1431,10 +1416,7 @@ export function OpsUsecasePage({ project }) {
           </h2>
         </R>
         <R delay={120}>
-          <p className="bh-section-lead">
-            I used the Kano Model to prioritise the feature set across three build phases so version one delivered real
-            value without overbuilding.
-          </p>
+          <p className="bh-section-lead">Kano sequenced the MVP so v1 delivered real value without overbuilding.</p>
         </R>
 
         <div className="bh-kano">
@@ -1461,17 +1443,17 @@ export function OpsUsecasePage({ project }) {
           <R>
             <div className="bh-principles-label">Four design principles</div>
           </R>
-          {PRINCIPLES.map((principle, index) => (
-            <R key={principle.num} delay={index * 60}>
-              <div className="bh-principle">
-                <div className="bh-principle-n">{principle.num}</div>
-                <div>
+          <div className="bh-principles-grid">
+            {PRINCIPLES.map((principle, index) => (
+              <R key={principle.num} delay={index * 60}>
+                <div className="bh-principle">
+                  <span className="bh-principle-n">{principle.num}</span>
                   <h3 className="bh-principle-t">{principle.title}</h3>
                   <p className="bh-principle-b">{principle.body}</p>
                 </div>
-              </div>
-            </R>
-          ))}
+              </R>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1490,10 +1472,7 @@ export function OpsUsecasePage({ project }) {
           </h2>
         </R>
         <R delay={120}>
-          <p className="bh-section-lead">
-            Each module solves a distinct operational problem. Together they form a unified command center that replaces
-            the fragmented admissions stack.
-          </p>
+          <p className="bh-section-lead">Six modules. One system. Everything the fragmented stack couldn't be.</p>
         </R>
 
         <R>
@@ -1525,7 +1504,7 @@ export function OpsUsecasePage({ project }) {
 
           <R delay={80} className="bh-mod-right">
             <AutoImageFrame
-              src={`/assets/projects/university-ops/module-${activeModule.id}.png`}
+              src={`/assets/projects/university-ops/${encodeURIComponent(activeModule.img)}`}
               alt={`${activeModule.label} module showcase`}
               className="bh-module-image-frame"
             >
@@ -1550,19 +1529,28 @@ export function OpsUsecasePage({ project }) {
           </h2>
         </R>
 
-        <div className="bh-challenges">
+        <div className="bh-chal-list">
           {CHALLENGES.map((item, index) => (
             <R key={item.num} delay={index * 70}>
-              <div className="bh-challenge">
-                <div className="bh-challenge-panel">
-                  <div className="bh-challenge-label">Challenge {item.num}</div>
-                  <h3 className="bh-challenge-title">{item.challengeTitle}</h3>
-                  <p className="bh-challenge-body">{item.challengeBody}</p>
+              <div className="bh-chal-row">
+                <div className="bh-chal-row-index">
+                  <span className="bh-chal-row-num">{item.num}</span>
                 </div>
-                <div className="bh-challenge-panel bh-challenge-panel--solution">
-                  <div className="bh-challenge-label">Solution</div>
-                  <h3 className="bh-challenge-title">{item.solutionTitle}</h3>
-                  <p className="bh-challenge-body">{item.solutionBody}</p>
+                <div className="bh-chal-row-problem">
+                  <span className="bh-chal-row-kicker">The Challenge</span>
+                  <h3 className="bh-chal-row-title">{item.challengeTitle}</h3>
+                  <p className="bh-chal-row-body">{item.challengeBody}</p>
+                </div>
+                <div className="bh-chal-row-divider">
+                  <span className="bh-chal-row-arrow">→</span>
+                </div>
+                <div className="bh-chal-row-solution">
+                  <span className="bh-chal-row-sol-kicker">How We Solved It</span>
+                  <h4 className="bh-chal-row-sol-title">{item.solutionTitle}</h4>
+                  <p className="bh-chal-row-sol-body">{item.solutionBody}</p>
+                  {item.rejected ? (
+                    <div className="bh-chal-row-killed">{item.rejected}</div>
+                  ) : null}
                 </div>
               </div>
             </R>
@@ -1579,51 +1567,65 @@ export function OpsUsecasePage({ project }) {
           <h2 className="bh-section-h2 bh-section-h2--inv">{caseStudyTitle}</h2>
         </R>
         <R delay={120}>
-          <p className="bh-section-lead bh-section-lead--inv">
-            Projected outcomes were based on usability testing, benchmarking against existing admissions tooling, and
-            pilot feedback from university partners during validation.
-          </p>
+          <p className="bh-section-lead bh-section-lead--inv">Measured against usability testing, benchmarked tooling, and pilot feedback from partner institutions.</p>
         </R>
 
-        <div className="bh-outcomes">
-          {OUTCOMES.map((outcome, index) => (
-            <R key={outcome.label} delay={index * 60}>
-              <div className="bh-outcome">
-                <div className="bh-outcome-num">{outcome.value}</div>
-                <div className="bh-outcome-label">{outcome.label}</div>
-              </div>
-            </R>
-          ))}
+        <div className="bh-outcomes-ks">
+          <div className="bh-oks-dots">
+            <span className="bh-oks-dot bh-oks-dot--purple" />
+            <span className="bh-oks-dot bh-oks-dot--light" />
+            <span className="bh-oks-dot bh-oks-dot--dim" />
+          </div>
+          <div className="bh-oks-intro">
+            <p className="bh-oks-heading">Design KPIs &amp; Validation</p>
+            <p className="bh-oks-sub">Validated through usability testing, benchmarked against incumbent tooling, confirmed in pilot with university partners.</p>
+          </div>
+          <div className="bh-oks-grid">
+            <div className="bh-oks-cell bh-oks-cell--stat">
+              <span className="bh-oks-value">{OUTCOMES[0].value}</span>
+              <span className="bh-oks-title">{OUTCOMES[0].label}</span>
+              <span className="bh-oks-label">{OUTCOMES[0].sub}</span>
+            </div>
+            <div className="bh-oks-cell" />
+            <div className="bh-oks-cell" />
+            <div className="bh-oks-cell" />
+            <div className="bh-oks-cell bh-oks-cell--stat">
+              <span className="bh-oks-value">{OUTCOMES[1].value}</span>
+              <span className="bh-oks-title">{OUTCOMES[1].label}</span>
+              <span className="bh-oks-label">{OUTCOMES[1].sub}</span>
+            </div>
+            <div className="bh-oks-cell" />
+            <div className="bh-oks-cell" />
+            <div className="bh-oks-cell" />
+            <div className="bh-oks-cell bh-oks-cell--stat">
+              <span className="bh-oks-value">{OUTCOMES[2].value}</span>
+              <span className="bh-oks-title">{OUTCOMES[2].label}</span>
+              <span className="bh-oks-label">{OUTCOMES[2].sub}</span>
+            </div>
+          </div>
         </div>
 
-        <div className="bh-scale-wrap">
-          <R>
-            <div className="bh-scale-label">Why this translates to large-scale products</div>
-          </R>
-          <R delay={60}>
-            <div className="bh-scale-table-wrap">
-              <table className="bh-scale-table">
-                <thead>
-                  <tr>
-                    <th>Ulio challenge</th>
-                    <th>Analogous at scale</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {SCALE_ROWS.map((row) => (
-                    <tr key={row.challenge}>
-                      <td>{row.challenge}</td>
-                      <td>{row.scale}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        <R delay={60}>
+          <div className="bh-oks-fourth">
+            <span className="bh-oks-fourth-value">{OUTCOMES[3].value}</span>
+            <div>
+              <div className="bh-oks-fourth-title">{OUTCOMES[3].label}</div>
+              <div className="bh-oks-fourth-sub">{OUTCOMES[3].sub}</div>
             </div>
-          </R>
-        </div>
+          </div>
+        </R>
+
+        <R delay={100}>
+          <div className="bh-scale-quote">
+            <span className="bh-scale-quote-label">Why this transfers</span>
+            <p className="bh-scale-quote-text">
+              "Multi-role systems design, actionable analytics, progressive disclosure, and trust infrastructure. These aren't EdTech problems. They are the problems every mature platform faces."
+            </p>
+          </div>
+        </R>
       </section>
 
-      <section className="bh-section" id="reflections">
+      <section className="bh-section bh-section--black" id="reflections">
         <div className="bh-ghost-num">08</div>
         <R>
           <div className="bh-section-label">Reflections</div>
@@ -1636,21 +1638,16 @@ export function OpsUsecasePage({ project }) {
           </h2>
         </R>
         <R delay={120}>
-          <p className="bh-section-lead">
-            Honest retrospectives are where the strongest design thinking lives. These are the four changes I would make
-            if I were starting this program again.
-          </p>
+          <p className="bh-section-lead">Four things I would do differently if I started this again.</p>
         </R>
 
-        <div className="bh-reflections">
+        <div className="bh-refl-strip">
           {REFLECTIONS.map((reflection, index) => (
-            <R key={reflection.num} delay={index * 60}>
-              <div className="bh-reflection">
-                <div className="bh-reflection-n">{reflection.num}</div>
-                <div>
-                  <h3 className="bh-reflection-t">{reflection.title}</h3>
-                  <p className="bh-reflection-b">{reflection.body}</p>
-                </div>
+            <R key={reflection.num} delay={index * 70}>
+              <div className="bh-refl-item">
+                <div className="bh-refl-item-num">{reflection.num}</div>
+                <h3 className="bh-refl-item-title">{reflection.title}</h3>
+                <p className="bh-refl-item-body">{reflection.body}</p>
               </div>
             </R>
           ))}
@@ -1660,12 +1657,34 @@ export function OpsUsecasePage({ project }) {
       <footer className="bh-footer">
         <div className="bh-footer-ghost">ULIO</div>
         <div className="bh-footer-inner">
-          <div className="bh-footer-label">{caseStudyLabel}</div>
-          <h2 className="bh-footer-h">Designing systems that reduce human friction.</h2>
-          <p className="bh-footer-meta">Senior UX Designer - 2025 - Confidential case study</p>
-          <button className="bh-footer-back" onClick={() => navigate("/?section=work")}>
-            <span>←</span> Back to Work
-          </button>
+          <div className="bh-footer-left">
+            <div className="bh-footer-label">{caseStudyLabel}</div>
+            <h2 className="bh-footer-h">Designing systems that reduce human friction.</h2>
+            <div className="bh-footer-tags">
+              <span className="bh-footer-tag">Associate UX Designer</span>
+              <span className="bh-footer-tag">2025</span>
+              <span className="bh-footer-tag">Confidential</span>
+            </div>
+          </div>
+          <div className="bh-footer-right">
+            <div className="bh-footer-stats">
+              <div className="bh-footer-stat">
+                <div className="bh-footer-stat-val">5</div>
+                <div className="bh-footer-stat-label">Modules designed</div>
+              </div>
+              <div className="bh-footer-stat">
+                <div className="bh-footer-stat-val">8+</div>
+                <div className="bh-footer-stat-label">Stakeholder interviews</div>
+              </div>
+              <div className="bh-footer-stat">
+                <div className="bh-footer-stat-val">40+</div>
+                <div className="bh-footer-stat-label">Admins surveyed</div>
+              </div>
+            </div>
+            <button className="bh-footer-back" onClick={() => navigate("/?section=work")}>
+              <span>←</span> Back to Work
+            </button>
+          </div>
         </div>
       </footer>
     </div>
