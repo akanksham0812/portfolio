@@ -266,7 +266,6 @@ main {
 .hero-right-lines {
   margin: 0;
   font-family: "Nunito Sans", sans-serif;
-
   line-height: 1.12;
   letter-spacing: 0.035em;
   font-size: clamp(0.75rem, 0.95vw, 1.02rem);
@@ -1973,24 +1972,29 @@ main {
 /* Back button */
 .cs-back {
   all: unset;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 200;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.78rem;
-
-  letter-spacing: 0.12em;
-  color: #888;
-  padding: 2rem 0 0;
-  transition: color 0.2s ease;
+  gap: 6px;
+  padding: 8px 18px;
+  background: rgba(13, 13, 15, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f0f0f2;
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s;
 }
 
 .cs-back:hover {
-  color: #ff4e14;
-}
-
-.cs-back:hover .cs-back-arrow {
-  transform: translateX(-3px);
+  background: #1a1a1e;
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .cs-back-arrow {

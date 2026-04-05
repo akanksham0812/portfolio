@@ -1157,7 +1157,7 @@ export function OpsUsecasePage({ project }) {
     <div className="bh-page">
       <div className="bh-progress" style={{ width: `${scrollPct}%` }} />
 
-      <button className="cs-back bh-back" onClick={() => navigate("/?section=work")}>
+      <button className="cs-back" onClick={() => navigate("/?section=work")}>
         <span className="cs-back-arrow">←</span> All Work
       </button>
 

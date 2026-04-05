@@ -595,9 +595,13 @@ function HomePage() {
             <span>Thinker</span>
           </h1>
           <p className="hero-right-lines">
-            TURNING IDEAS INTO POWERFUL
+            TURNING IDEAS
             <br />
-            VISUALS &amp; INTUITIVE DIGITAL
+            INTO POWERFUL
+            <br />
+            VISUALS &amp;
+            <br />
+            INTUITIVE DIGITAL
             <br />
             EXPERIENCES
           </p>
