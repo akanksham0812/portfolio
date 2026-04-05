@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import Spline from "@splinetool/react-spline";
 import { aboutContent, brandNames, heroObjects, resumeBlocks } from "./siteData";
 import {
   getProjectBySlug,
@@ -11,11 +10,13 @@ import {
 } from "./projects/runtime";
 import SafeImage from "./components/SafeImage";
 import { withBase } from "./utils/assetPaths";
-import { UlioUsecasePage } from "./projects/template/ulioUsecase";
-import { SainsburyUsecasePage } from "./projects/template/sainsburyUsecase";
-import { BusRouteUsecasePage } from "./projects/template/busrouteUsecase";
-import { OpsUsecasePage } from "./projects/template/opsUsecase";
-import { BusrouteBHPage } from "./projects/template/busrouteBH";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
+const UlioUsecasePage = lazy(() => import("./projects/template/ulioUsecase").then(m => ({ default: m.UlioUsecasePage })));
+const SainsburyUsecasePage = lazy(() => import("./projects/template/sainsburyUsecase").then(m => ({ default: m.SainsburyUsecasePage })));
+const BusRouteUsecasePage = lazy(() => import("./projects/template/busrouteUsecase").then(m => ({ default: m.BusRouteUsecasePage })));
+const OpsUsecasePage = lazy(() => import("./projects/template/opsUsecase").then(m => ({ default: m.OpsUsecasePage })));
+const BusrouteBHPage = lazy(() => import("./projects/template/busrouteBH").then(m => ({ default: m.BusrouteBHPage })));
 
 function MobileBlock() {
   return (
@@ -688,10 +689,12 @@ function HomePage() {
             </a>
           </div>
           <div className="contact-ball-field">
-            <Spline
-              className="contact-spline"
-              scene="https://prod.spline.design/ChcZUJkocrFOVMgi/scene.splinecode"
-            />
+            <Suspense fallback={null}>
+              <Spline
+                className="contact-spline"
+                scene="https://prod.spline.design/ChcZUJkocrFOVMgi/scene.splinecode"
+              />
+            </Suspense>
           </div>
         </div>
       </section>
@@ -762,6 +765,16 @@ function CaseStudyPage({ slug }) {
   }, [slug]);
 
   useEffect(() => {
+    const project = getProjectBySlug(slug);
+    if (project) {
+      document.title = `${project.shortTitle} – Akanksha Mahangare`;
+    }
+    return () => {
+      document.title = "Akanksha Mahangare – UX Designer & Researcher";
+    };
+  }, [slug]);
+
+  useEffect(() => {
     const onScroll = () => {
       const el = document.documentElement;
       const progress = el.scrollTop / (el.scrollHeight - el.clientHeight);
@@ -788,7 +801,10 @@ function CaseStudyPage({ slug }) {
   };
 
   if (!project) return <Navigate to="/" replace />;
-  const nextProject = projects.find((entry) => entry.slug !== slug);
+  const currentIndex = projects.findIndex((p) => p.slug === slug);
+  const nextProject = currentIndex >= 0 && currentIndex < projects.length - 1
+    ? projects[currentIndex + 1]
+    : null;
 
   if (isProtected && !isUnlocked) {
     return (
@@ -811,23 +827,23 @@ function CaseStudyPage({ slug }) {
   }
 
   if (project.template === "ulio-usecase") {
-    return <UlioUsecasePage project={project} />;
+    return <Suspense fallback={null}><UlioUsecasePage project={project} /></Suspense>;
   }
 
   if (project.template === "sainsbury-usecase") {
-    return <SainsburyUsecasePage project={project} />;
+    return <Suspense fallback={null}><SainsburyUsecasePage project={project} /></Suspense>;
   }
 
   if (project.template === "busroute-usecase") {
-    return <BusRouteUsecasePage project={project} />;
+    return <Suspense fallback={null}><BusRouteUsecasePage project={project} /></Suspense>;
   }
 
   if (project.template === "busroute-bh") {
-    return <BusrouteBHPage project={project} />;
+    return <Suspense fallback={null}><BusrouteBHPage project={project} /></Suspense>;
   }
 
   if (project.template === "ops-usecase") {
-    return <OpsUsecasePage project={project} />;
+    return <Suspense fallback={null}><OpsUsecasePage project={project} /></Suspense>;
   }
 
   if (project.template === "image-case-study") {

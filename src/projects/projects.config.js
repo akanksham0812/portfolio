@@ -1,7 +1,7 @@
-import { operationsDasboardProject } from "./data/operations-dasboard.project.js";
-import { plCaseStudyProject } from "./data/pl-case-study.project.js";
-import { ulioCaseStudyProject } from "./data/ulio-case-study.project.js";
-import { busrouteCaseStudyProject } from "./data/busroute-case-study.project.js";
+import { operationsDasboardProject } from "./data/designing-for-scale.project.js";
+import { plCaseStudyProject } from "./data/sainsburys-smart-basket.project.js";
+import { ulioCaseStudyProject } from "./data/career-mobile-app-design.project.js";
+import { busrouteCaseStudyProject } from "./data/zing.project.js";
 
 export const projectConfigs = [
   {
