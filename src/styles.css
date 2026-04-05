@@ -1972,10 +1972,10 @@ main {
 /* Back button */
 .cs-back {
   all: unset;
-  position: fixed;
+  position: absolute;
   top: 84px;
   left: 20px;
-  z-index: 200;
+  z-index: 10;
   cursor: pointer;
   display: inline-flex;
   align-items: center;

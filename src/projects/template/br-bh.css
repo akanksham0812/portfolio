@@ -95,7 +95,7 @@
 
 /* ── Back button ── */
 .bh-back {
-  position: fixed;
+  position: absolute;
   top: 84px; left: 20px;
   z-index: 200;
   display: inline-flex;
