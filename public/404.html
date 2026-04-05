@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Akanksha Mahangare</title>
+    <script>
+      // GitHub Pages SPA redirect: encode the path into a query param and
+      // send the browser to index.html, which will decode it and push the
+      // correct history entry so React Router sees the right pathname.
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        '/?p=' + encodeURIComponent(l.pathname + l.search) + l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

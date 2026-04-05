@@ -37,6 +37,15 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Decode the path that 404.html encoded into ?p=
+      (function () {
+        var p = new URLSearchParams(window.location.search).get('p');
+        if (p) {
+          window.history.replaceState(null, '', decodeURIComponent(p));
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
