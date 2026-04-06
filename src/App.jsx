@@ -1396,21 +1396,18 @@ function Layout() {
       <ScrollToTop />
       <TopNav />
       <main>
-        <MobileBlock />
-        <div className="desktop-only">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            {projectRoutes.map((route) => (
-              <Route
-                key={route.path}
-                path={`/${route.path}`}
-                element={<CaseStudyPage slug={route.canonicalSlug} />}
-              />
-            ))}
-            <Route path="/resume" element={<ResumePage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          {projectRoutes.map((route) => (
+            <Route
+              key={route.path}
+              path={`/${route.path}`}
+              element={<CaseStudyPage slug={route.canonicalSlug} />}
+            />
+          ))}
+          <Route path="/resume" element={<ResumePage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
       <footer className="site-footer">
         <p>Crafted with love and logic.</p>
