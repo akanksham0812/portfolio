@@ -1095,6 +1095,25 @@ const ABT_BOOKS = [
   { title: "The Long Game",            author: "Elena Armas",              genre: "Romance",               bg: "#1e5544", color: "#a8f0d8", w: 27, h: 138, summary: "Enemies-to-lovers slow burn between two people who are terrible at admitting they like each other. Sandwiched between serial killers and Kafka on this shelf, which honestly makes it more charming." },
 ];
 
+const WHAT_I_DO = [
+  { label: "UX Research & Strategy", color: "#A8E6CF", detail: "Mixed-methods research: interviews, diary studies, contextual inquiry, and competitive analysis. 47+ live transactions observed for Sainsbury's Smart Basket alone." },
+  { label: "Interaction Design", color: "#C9B8F0", detail: "Wireframes, flow diagrams, and high-fidelity prototypes that cut delivery cycles by 40%. I design fast and iterate with intent." },
+  { label: "Usability Testing", color: "#FFD3B6", detail: "Moderated and unmoderated testing, think-aloud protocols, task completion analysis. Real users, real insights, real improvements to things that matter." },
+  { label: "Information Architecture", color: "#D4F1A0", detail: "Card sorting, tree testing, navigation design. I build structures that feel intuitive, because getting lost in an app is a design failure." },
+  { label: "Design Systems & Handoff", color: "#FFAEC9", detail: "Component libraries in Figma, design tokens, and handoff documentation that developers actually want to read. Shipped 5 end-to-end systems." },
+];
+
+function TornEdge({ top, bottom }) {
+  const path = "M0,0 L1440,0 L1440,52 Q1400,72 1360,46 Q1320,24 1280,52 Q1240,72 1200,48 Q1160,26 1120,54 Q1080,74 1040,50 Q1000,28 960,56 Q920,76 880,52 Q840,30 800,58 Q760,78 720,54 Q680,32 640,60 Q600,80 560,56 Q520,34 480,62 Q440,82 400,58 Q360,36 320,64 Q280,84 240,60 Q200,38 160,66 Q120,86 80,62 Q40,40 0,68 Z";
+  return (
+    <div style={{ background: bottom, lineHeight: 0, position: "relative", zIndex: 2, marginTop: -1 }}>
+      <svg viewBox="0 0 1440 80" style={{ display: "block", width: "100%", height: 60 }} preserveAspectRatio="none">
+        <path fill={top} d={path} />
+      </svg>
+    </div>
+  );
+}
+
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll(".abt-reveal");
@@ -1170,25 +1189,21 @@ function DragScroll({ children, className }) {
 function ResumePage() {
   const [activeBook, setActiveBook] = useState(null);
   const [lightboxSrc, setLightboxSrc] = useState(null);
-  const [mouse, setMouse] = useState({ x: -999, y: -999 });
+  const [openAcc, setOpenAcc] = useState(null);
+  const [expandedCard, setExpandedCard] = useState(null);
   const detailRef = useRef(null);
   useReveal();
 
   useEffect(() => {
-    const onMove = (e) => setMouse({ x: e.clientX, y: e.clientY });
-    const onKey = (e) => { if (e.key === "Escape") setLightboxSrc(null); };
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("keydown", onKey);
-    };
+    const onKey = (e) => { if (e.key === 'Escape') setLightboxSrc(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
   function handleBookClick(i) {
     if (activeBook === i) { setActiveBook(null); return; }
     setActiveBook(i);
-    setTimeout(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50);
+    setTimeout(() => detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
   }
 
   const book = activeBook !== null ? ABT_BOOKS[activeBook] : null;
@@ -1196,134 +1211,166 @@ function ResumePage() {
   return (
     <section className="resume-page rp2">
 
-      {/* Cursor spotlight glow */}
-      <div className="rp2-cursor-glow" style={{ left: mouse.x, top: mouse.y }} />
-
-      {/* ── HERO ── */}
-      <div className="rp2-hero">
-        <div className="rp2-hero-text">
-          <span className="rp2-tag">UX Designer · MSc Goldsmiths' University of London · Pune</span>
-          <h1 className="rp2-name">
-            <span className="rp2-name-line">
-              {"Akanksha".split("").map((ch, i) => (
-                <span key={i} className="rp2-char" style={{ "--i": i }}>{ch}</span>
-              ))}
-            </span>
-            <span className="rp2-name-line">
-              {"Mahangare".split("").map((ch, i) => (
-                <span key={i} className="rp2-char" style={{ "--i": i + 9 }}>{ch}</span>
-              ))}
-            </span>
+      {/* DARK HERO */}
+      <div className="rp3-hero">
+        <div className="rp3-hero-inner">
+          <p className="rp3-eyebrow">UX Designer · Goldsmiths' London · Pune</p>
+          <h1 className="rp3-title">
+            Hi, I'm <em className="rp3-hl-lime">Akanksha.</em>
           </h1>
-          <p className="rp2-sub">I make things make sense.</p>
-          <div className="rp2-stats">
+          <p className="rp3-hero-body">
+            My <em className="rp3-hl-pink">research-led</em> design spans UX strategy, interaction design, and usability testing. Crafting experiences that speak to heads and hearts, and <em className="rp3-hl-lime">actually make sense.</em>
+          </p>
+          <p className="rp3-hero-edu">MSc User Experience Engineering · Goldsmiths' University of London</p>
+          <div className="rp3-stats">
             <AnimCounter to={30} suffix="%" label="user satisfaction ↑" />
             <AnimCounter to={40} suffix="%" label="delivery cycles ↓" />
             <AnimCounter to={5} suffix="+" label="products shipped" />
-            <AnimCounter to={2} suffix="" label="design + code" />
+            <AnimCounter to={47} suffix="" label="transactions observed" />
+          </div>
+          <div className="rp3-hero-actions">
+            <a href={RESUME_PDF_PATH} download className="rp3-btn rp3-btn--outline">Download Resume ↓</a>
+            <a href={CONTACT_MAILTO} className="rp3-btn rp3-btn--fill">Email Me ↗</a>
           </div>
         </div>
-        <div className="rp2-hero-photo">
-          <img src="/assets/resume/port/FullSizeRender.jpg" alt="Akanksha Mahangare" />
-        </div>
-        <div className="rp2-scroll-cue">
-          <div className="rp2-scroll-line" />
-          <span>scroll</span>
+        <div className="rp3-hero-photo">
+          <img src="/assets/resume/port/FullSizeRender.jpg" alt="Akanksha" />
         </div>
       </div>
 
-      {/* ── BODY ── */}
-      <div className="rp2-body">
+      <TornEdge top="#111111" bottom="#EDE8DC" />
 
-        {/* PHILOSOPHY */}
-        <div className="rp2-block abt-reveal">
-          <span className="rp2-label">Design philosophy</span>
-          <blockquote className="rp2-quote">
-            "Design isn't decoration. It's the difference between someone getting it on the first click — or rage-quitting forever. I'd rather be the reason they stayed."
+      {/* CREAM: WHAT I DO */}
+      <div className="rp3-cream">
+        <div className="rp3-whatido-wrap">
+          <div className="rp3-whatido-sidebar"><span>What I do</span></div>
+          <div className="rp3-accordion">
+            {WHAT_I_DO.map((item, i) => (
+              <div
+                key={i}
+                className={`rp3-acc-row${openAcc === i ? ' rp3-acc-row--open' : ''}`}
+                style={{ '--acc': item.color }}
+                onClick={() => setOpenAcc(openAcc === i ? null : i)}
+              >
+                <div className="rp3-acc-top">
+                  <span className="rp3-acc-label">{item.label}</span>
+                  <span className="rp3-acc-icon">{openAcc === i ? '−' : '+'}</span>
+                </div>
+                {openAcc === i && <p className="rp3-acc-detail">{item.detail}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <TornEdge top="#EDE8DC" bottom="#111111" />
+
+      {/* DARK: PHILOSOPHY + CAREER + TOOLS */}
+      <div className="rp3-dark">
+        <div className="rp3-dark-inner">
+
+          <blockquote className="rp3-bigquote abt-reveal">
+            "Design isn't decoration. It's the difference between someone getting it on the first click, or <em className="rp3-hl-lime">rage-quitting forever.</em> I'd rather be the reason they stayed."
           </blockquote>
-          <cite className="rp2-cite">— Akanksha, bluntly</cite>
-        </div>
-
-        {/* TIMELINE */}
-        <div className="rp2-block abt-reveal">
-          <span className="rp2-label">Career so far</span>
-          <DragScroll className="rp2-tl-track">
-            {ABT_TIMELINE.map((item, i) => (
-              <div key={item.year} className={`rp2-tl-card${i === 0 ? " rp2-tl-card--hot" : ""}`}>
-                <span className="rp2-tl-year">{item.year}</span>
-                <p className="rp2-tl-title">{item.title}</p>
-                <p className="rp2-tl-desc">{item.desc}</p>
-              </div>
-            ))}
-          </DragScroll>
-          <p className="rp2-drag-hint">← drag to explore →</p>
-        </div>
-
-        {/* TOOLS */}
-        <div className="rp2-block abt-reveal">
-          <span className="rp2-label">Tools of the trade</span>
-          <div className="rp2-tools">
-            {ABT_TOOLS.map((t, i) => (
-              <span key={t} className="rp2-tool" style={{ "--ti": i }}>{t}</span>
-            ))}
+          <div className="rp3-dark-section abt-reveal">
+            <p className="rp3-section-label">Career so far</p>
+            <DragScroll className="rp3-tl-track">
+              {ABT_TIMELINE.map((item, i) => {
+                const isOpen = expandedCard === i;
+                return (
+                  <div
+                    key={item.year}
+                    className={`rp3-tl-card${isOpen ? ' rp3-tl-card--open' : ''}`}
+                    style={{ '--ci': i }}
+                    onClick={() => setExpandedCard(isOpen ? null : i)}
+                  >
+                    <div className="rp3-tl-card-header">
+                      <span className="rp3-tl-year-pill">{item.year}</span>
+                      <span className="rp3-tl-arrow">{isOpen ? '×' : '↗'}</span>
+                    </div>
+                    <p className="rp3-tl-title">{item.title}</p>
+                    <p className="rp3-tl-desc">{item.desc}</p>
+                  </div>
+                );
+              })}
+            </DragScroll>
+            <p className="rp3-drag-hint">← drag to explore →</p>
           </div>
-        </div>
 
-        {/* PHOTOS */}
-        <div className="rp2-block abt-reveal">
-          <span className="rp2-label">My digital photo diary</span>
-          <div className="rp2-photo-grid">
-            {ABT_POL_PHOTOS.map((p, i) => (
-              <div key={i} className="rp2-photo-tile" onClick={() => setLightboxSrc(p.src)}>
-                <img src={p.src} alt="" loading="lazy" />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* BOOKSHELF */}
-        <div className="rp2-block abt-reveal">
-          <span className="rp2-label">Currently on my shelf</span>
-          {book && (
-            <div className="abt-book-detail rp2-book-detail" ref={detailRef}>
-              <button className="abt-detail-close" onClick={() => setActiveBook(null)}>close ✕</button>
-              <p className="abt-detail-genre">{book.genre}</p>
-              <p className="abt-detail-title">{book.title}</p>
-              <p className="abt-detail-author">{book.author}</p>
-              <p className="abt-detail-summary">{book.summary}</p>
+          <div className="rp3-dark-section abt-reveal">
+            <p className="rp3-section-label">Tools of the trade</p>
+            <div className="rp3-tags-cloud">
+              {ABT_TOOLS.map((t, i) => (
+                <span key={t} className="rp3-tag" style={{ '--ti': i }}>#{t}</span>
+              ))}
             </div>
-          )}
-          <div className="abt-shelf-unit rp2-shelf">
-            <div className="abt-shelf-row">
-              {ABT_BOOKS.map((b, i) => (
-                <div
-                  key={i}
-                  className={`abt-book${activeBook === i ? " abt-book-active" : ""}`}
-                  style={{ width: b.w, height: b.h, background: b.bg }}
-                  onClick={() => handleBookClick(i)}
-                >
-                  <div className="abt-book-top" />
-                  <div className="abt-book-highlight" />
-                  <span className="abt-book-spine" style={{ color: b.color }}>
-                    <span className="abt-spine-title">{b.title}</span>
-                    <span className="abt-spine-author">{b.author.split(" ").pop()}</span>
-                  </span>
+          </div>
+
+        </div>
+      </div>
+
+      <TornEdge top="#111111" bottom="#EDE8DC" />
+
+      {/* CREAM: PHOTOS + BOOKSHELF */}
+      <div className="rp3-cream rp3-cream--photos">
+        <div className="rp3-cream-inner">
+
+          <div className="abt-reveal">
+            <p className="rp3-cream-label">My digital photo diary</p>
+            <div className="rp3-photo-grid">
+              {ABT_POL_PHOTOS.map((p, i) => (
+                <div key={i} className="rp3-photo-tile" onClick={() => setLightboxSrc(p.src)}>
+                  <img src={p.src} alt="" loading={i < 4 ? "eager" : "lazy"} decoding="async" />
                 </div>
               ))}
             </div>
-            <div className="abt-shelf-plank" />
-            <p className="abt-shelf-footer">click any book · crime, marathi classics & one romance · zero regrets</p>
           </div>
-        </div>
 
-        {/* CTA */}
-        <div className="rp2-actions abt-reveal">
-          <a href={RESUME_PDF_PATH} download className="rp2-btn rp2-btn--primary">Download Resume PDF</a>
-          <a href={CONTACT_MAILTO} className="rp2-btn">Email Me</a>
-          <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="rp2-btn">LinkedIn</a>
-          <Link to="/?section=work" className="rp2-btn">View Work</Link>
-        </div>
+          <div className="abt-reveal">
+            <p className="rp3-cream-label">Currently on my shelf</p>
+            {book && (
+              <div className="abt-book-detail" ref={detailRef}>
+                <button className="abt-detail-close" onClick={() => setActiveBook(null)}>close ✕</button>
+                <p className="abt-detail-genre">{book.genre}</p>
+                <p className="abt-detail-title">{book.title}</p>
+                <p className="abt-detail-author">{book.author}</p>
+                <p className="abt-detail-summary">{book.summary}</p>
+              </div>
+            )}
+            <div className="abt-shelf-unit">
+              <div className="abt-shelf-row">
+                {ABT_BOOKS.map((b, i) => (
+                  <div key={i} className={`abt-book${activeBook === i ? ' abt-book-active' : ''}`}
+                    style={{ width: b.w, height: b.h, background: b.bg }}
+                    onClick={() => handleBookClick(i)}>
+                    <div className="abt-book-top" />
+                    <div className="abt-book-highlight" />
+                    <span className="abt-book-spine" style={{ color: b.color }}>
+                      <span className="abt-spine-title">{b.title}</span>
+                      <span className="abt-spine-author">{b.author.split(' ').pop()}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="abt-shelf-plank" />
+              <p className="abt-shelf-footer">click any book · crime, marathi classics & one romance · zero regrets</p>
+            </div>
+          </div>
 
+        </div>
+      </div>
+
+      <TornEdge top="#EDE8DC" bottom="#111111" />
+
+      {/* CTA */}
+      <div className="rp3-cta">
+        <h2 className="rp3-cta-title">Ready to work together?</h2>
+        <a href={CONTACT_MAILTO} className="rp3-cta-btn">Contact Me</a>
+        <div className="rp3-cta-links">
+          <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href={RESUME_PDF_PATH} download>Download Resume ↓</a>
+          <Link to="/?section=work">View Work →</Link>
+        </div>
       </div>
 
       {lightboxSrc && (
@@ -1335,6 +1382,7 @@ function ResumePage() {
     </section>
   );
 }
+
 
 function ScrollToTop() {
   const { pathname } = useLocation();
