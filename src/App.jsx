@@ -1107,16 +1107,82 @@ function useReveal() {
   }, []);
 }
 
+function AnimCounter({ to, suffix, label }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const started = useRef(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !started.current) {
+        started.current = true;
+        const duration = 1400;
+        const t0 = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - t0) / duration, 1);
+          setCount(Math.round((1 - Math.pow(1 - p, 3)) * to));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.5 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [to]);
+  return (
+    <div className="rp2-stat" ref={ref}>
+      <span className="rp2-stat-num">{count}{suffix}</span>
+      <span className="rp2-stat-label">{label}</span>
+    </div>
+  );
+}
+
+function DragScroll({ children, className }) {
+  const ref = useRef(null);
+  const dragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  return (
+    <div
+      ref={ref}
+      className={className}
+      onMouseDown={(e) => {
+        dragging.current = true;
+        startX.current = e.pageX - ref.current.offsetLeft;
+        scrollLeft.current = ref.current.scrollLeft;
+        ref.current.style.cursor = "grabbing";
+      }}
+      onMouseMove={(e) => {
+        if (!dragging.current) return;
+        e.preventDefault();
+        const x = e.pageX - ref.current.offsetLeft;
+        ref.current.scrollLeft = scrollLeft.current - (x - startX.current) * 1.2;
+      }}
+      onMouseUp={() => { dragging.current = false; if (ref.current) ref.current.style.cursor = "grab"; }}
+      onMouseLeave={() => { dragging.current = false; if (ref.current) ref.current.style.cursor = "grab"; }}
+    >
+      {children}
+    </div>
+  );
+}
+
 function ResumePage() {
   const [activeBook, setActiveBook] = useState(null);
   const [lightboxSrc, setLightboxSrc] = useState(null);
+  const [mouse, setMouse] = useState({ x: -999, y: -999 });
   const detailRef = useRef(null);
   useReveal();
 
   useEffect(() => {
+    const onMove = (e) => setMouse({ x: e.clientX, y: e.clientY });
     const onKey = (e) => { if (e.key === "Escape") setLightboxSrc(null); };
+    window.addEventListener("mousemove", onMove);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   function handleBookClick(i) {
@@ -1128,90 +1194,98 @@ function ResumePage() {
   const book = activeBook !== null ? ABT_BOOKS[activeBook] : null;
 
   return (
-    <section className="resume-page">
-      <div className="abt-inner">
+    <section className="resume-page rp2">
 
-        {/* HERO */}
-        <div className="abt-hero-layout abt-reveal">
-          <div className="abt-hero-text">
-            <span className="abt-hero-tag">UX Designer · MSc Goldsmiths' University of London · Pune</span>
-            <h1 className="abt-hero-name">Hi, I'm Akanksha.</h1>
-            <p className="abt-hero-sub">I make things make sense.</p>
-            <p className="abt-body">MSc in User Experience Engineering from Goldsmiths' University of London. My mission: design things people don't hate. High bar, I know.</p>
-            <p className="abt-body">I've helped teams boost user satisfaction by 30% and cut delivery cycles by 40% - all while keeping Figma files organised and cross-functional collaboration drama-free. I also vibe-code now, so I'm basically a designer who can break things in two languages.</p>
-            <div className="abt-origin-block">
-              <p>It started with a Japanese refrigerator. I saw it, couldn't stop thinking about how something so ordinary could be so considered, and promptly fell into a rabbit hole of product design I've never climbed out of.</p>
-              <span>- how it actually started</span>
-            </div>
-          </div>
-          <div className="abt-hero-photo-col">
-            <div className="abt-hero-photo">
-              <img src="/assets/resume/port/FullSizeRender.jpg" alt="Akanksha Mahangare" />
-            </div>
+      {/* Cursor spotlight glow */}
+      <div className="rp2-cursor-glow" style={{ left: mouse.x, top: mouse.y }} />
+
+      {/* ── HERO ── */}
+      <div className="rp2-hero">
+        <div className="rp2-hero-text">
+          <span className="rp2-tag">UX Designer · MSc Goldsmiths' University of London · Pune</span>
+          <h1 className="rp2-name">
+            <span className="rp2-name-line">
+              {"Akanksha".split("").map((ch, i) => (
+                <span key={i} className="rp2-char" style={{ "--i": i }}>{ch}</span>
+              ))}
+            </span>
+            <span className="rp2-name-line">
+              {"Mahangare".split("").map((ch, i) => (
+                <span key={i} className="rp2-char" style={{ "--i": i + 9 }}>{ch}</span>
+              ))}
+            </span>
+          </h1>
+          <p className="rp2-sub">I make things make sense.</p>
+          <div className="rp2-stats">
+            <AnimCounter to={30} suffix="%" label="user satisfaction ↑" />
+            <AnimCounter to={40} suffix="%" label="delivery cycles ↓" />
+            <AnimCounter to={5} suffix="+" label="products shipped" />
+            <AnimCounter to={2} suffix="" label="design + code" />
           </div>
         </div>
+        <div className="rp2-hero-photo">
+          <img src="/assets/resume/port/FullSizeRender.jpg" alt="Akanksha Mahangare" />
+        </div>
+        <div className="rp2-scroll-cue">
+          <div className="rp2-scroll-line" />
+          <span>scroll</span>
+        </div>
+      </div>
 
-        <div className="abt-divider" />
+      {/* ── BODY ── */}
+      <div className="rp2-body">
 
         {/* PHILOSOPHY */}
-        <div className="abt-reveal">
-          <span className="abt-label">Design philosophy</span>
-          <div className="abt-philosophy">
-            <p>"Design isn't decoration. It's the difference between someone getting it on the first click - or rage-quitting forever. I'd rather be the reason they stayed."</p>
-            <span>- Akanksha, bluntly</span>
-          </div>
+        <div className="rp2-block abt-reveal">
+          <span className="rp2-label">Design philosophy</span>
+          <blockquote className="rp2-quote">
+            "Design isn't decoration. It's the difference between someone getting it on the first click — or rage-quitting forever. I'd rather be the reason they stayed."
+          </blockquote>
+          <cite className="rp2-cite">— Akanksha, bluntly</cite>
         </div>
-
-        <div className="abt-divider" />
 
         {/* TIMELINE */}
-        <div className="abt-reveal">
-          <span className="abt-label">Career so far</span>
-          <div className="abt-timeline">
+        <div className="rp2-block abt-reveal">
+          <span className="rp2-label">Career so far</span>
+          <DragScroll className="rp2-tl-track">
             {ABT_TIMELINE.map((item, i) => (
-              <div key={item.year} className="abt-tl-item abt-reveal" style={{ "--abt-delay": `${i * 0.1}s` }}>
-                <div className="abt-tl-year">{item.year}</div>
-                <div className="abt-tl-content">
-                  <div className="abt-tl-title">{item.title}</div>
-                  <div className="abt-tl-desc">{item.desc}</div>
-                </div>
+              <div key={item.year} className={`rp2-tl-card${i === 0 ? " rp2-tl-card--hot" : ""}`}>
+                <span className="rp2-tl-year">{item.year}</span>
+                <p className="rp2-tl-title">{item.title}</p>
+                <p className="rp2-tl-desc">{item.desc}</p>
               </div>
             ))}
-          </div>
+          </DragScroll>
+          <p className="rp2-drag-hint">← drag to explore →</p>
         </div>
-
-        <div className="abt-divider" />
 
         {/* TOOLS */}
-        <div className="abt-reveal">
-          <span className="abt-label">Tools of the trade</span>
-          <div className="abt-tools">
-            {ABT_TOOLS.map((t) => <span key={t} className="abt-tool">{t}</span>)}
+        <div className="rp2-block abt-reveal">
+          <span className="rp2-label">Tools of the trade</span>
+          <div className="rp2-tools">
+            {ABT_TOOLS.map((t, i) => (
+              <span key={t} className="rp2-tool" style={{ "--ti": i }}>{t}</span>
+            ))}
           </div>
         </div>
 
-        <div className="abt-divider" />
-
         {/* PHOTOS */}
-        <div className="abt-reveal">
-          <span className="abt-label">My digital photo diary</span>
-          <div className="abt-photo-grid">
+        <div className="rp2-block abt-reveal">
+          <span className="rp2-label">My digital photo diary</span>
+          <div className="rp2-photo-grid">
             {ABT_POL_PHOTOS.map((p, i) => (
-              <div key={i} className="abt-photo-tile" onClick={() => setLightboxSrc(p.src)}>
-                <img src={p.src} alt="" />
+              <div key={i} className="rp2-photo-tile" onClick={() => setLightboxSrc(p.src)}>
+                <img src={p.src} alt="" loading="lazy" />
               </div>
             ))}
           </div>
         </div>
 
-        <div className="abt-divider" />
-
         {/* BOOKSHELF */}
-        <div className="abt-reveal">
-          <span className="abt-label">Currently on my shelf</span>
-
+        <div className="rp2-block abt-reveal">
+          <span className="rp2-label">Currently on my shelf</span>
           {book && (
-            <div className="abt-book-detail" ref={detailRef}>
+            <div className="abt-book-detail rp2-book-detail" ref={detailRef}>
               <button className="abt-detail-close" onClick={() => setActiveBook(null)}>close ✕</button>
               <p className="abt-detail-genre">{book.genre}</p>
               <p className="abt-detail-title">{book.title}</p>
@@ -1219,8 +1293,7 @@ function ResumePage() {
               <p className="abt-detail-summary">{book.summary}</p>
             </div>
           )}
-
-          <div className="abt-shelf-unit">
+          <div className="abt-shelf-unit rp2-shelf">
             <div className="abt-shelf-row">
               {ABT_BOOKS.map((b, i) => (
                 <div
@@ -1243,21 +1316,12 @@ function ResumePage() {
           </div>
         </div>
 
-        <div className="abt-divider" />
-
-        {/* FUN FACT */}
-        <div className="abt-reveal">
-          <div className="abt-fun-fact">
-            <p className="abt-fun-fact-text"><strong>One fun fact:</strong> If you've ever struggled with a confusing checkout flow at 11pm, there's a decent chance I've quietly judged it and mentally fixed it too.</p>
-          </div>
-        </div>
-
-        {/* ACTIONS */}
-        <div className="resume-actions abt-reveal" style={{ marginTop: "2.5rem" }}>
-          <a href={RESUME_PDF_PATH} download>Download Resume PDF</a>
-          <a href={CONTACT_MAILTO}>Contact</a>
-          <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn</a>
-          <Link to="/?section=work">View Work</Link>
+        {/* CTA */}
+        <div className="rp2-actions abt-reveal">
+          <a href={RESUME_PDF_PATH} download className="rp2-btn rp2-btn--primary">Download Resume PDF</a>
+          <a href={CONTACT_MAILTO} className="rp2-btn">Email Me</a>
+          <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="rp2-btn">LinkedIn</a>
+          <Link to="/?section=work" className="rp2-btn">View Work</Link>
         </div>
 
       </div>
