@@ -1,0 +1,140 @@
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE — mobile & tablet
+   Breakpoints: 900px · 768px · 600px · 480px
+   ═══════════════════════════════════════════════════ */
+
+/* Always show content — remove old mobile gate */
+.mobile-block  { display: none !important; }
+.desktop-only  { display: block !important; }
+
+/* ── 768px: tablet / small laptop ───────────────── */
+@media (max-width: 768px) {
+
+  /* Nav */
+  .top-nav-inner { min-height: 56px; }
+  .brand-button  { font-size: 1rem; }
+  .top-links     { gap: 0.55rem; }
+  .top-links button { font-size: 0.88rem; }
+
+  /* Homepage hero — shrink text, hide decorative clutter */
+  .hero { min-height: auto; padding-bottom: 2.5rem; }
+  .hero-title-wrap h1 { font-size: clamp(2rem, 9vw, 3.2rem); }
+  .hero-left-lines,
+  .hero-right-lines { display: none; }
+  /* Let JS still control transforms on hero objects; just fade them */
+  .hero-object    { opacity: 0.25; }
+  .hero-ring-item { opacity: 0.25; }
+
+  /* Section containers */
+  .work-section,
+  .about-section { width: calc(100% - 2rem); padding: 2.5rem 0; }
+  .case-page      { width: calc(100% - 2rem); }
+
+  /* Project grid: 1 column */
+  .project-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+
+  /* About grid: stack */
+  .about-grid { grid-template-columns: 1fr; }
+  .about-ani-wrap { min-height: 200px; }
+
+  /* Contact */
+  .contact-panel  { padding: 2rem 1.2rem 1.5rem; }
+  .contact-panel h2 { font-size: clamp(1.5rem, 6vw, 2.4rem); }
+  .contact-ball-field { display: none; }
+
+  /* Footer */
+  .site-footer {
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: center;
+    padding: 1rem 1.2rem;
+  }
+}
+
+/* ── 480px: small phones ─────────────────────────── */
+@media (max-width: 480px) {
+  .top-links button { font-size: 0.8rem; }
+  .project-image-wrap { aspect-ratio: 4 / 3; }
+  .about-actions { flex-direction: column; }
+  .about-actions a { text-align: center; }
+  .contact-ticker { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE — About / Resume page (rp3)
+   ═══════════════════════════════════════════════════ */
+
+/* ── 900px ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  /* Hero: single column, photo below */
+  .rp3-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 80px 2rem 2.5rem;
+    gap: 2rem;
+  }
+  .rp3-hero-photo {
+    width: 55%;
+    max-height: 320px;
+    margin: 0 auto;
+  }
+  .rp3-title { font-size: clamp(2.4rem, 7vw, 3.8rem); }
+  .rp3-stats { gap: 1.6rem; }
+  .rp2-stat-num { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+
+  /* What I do */
+  .rp3-whatido-wrap { width: calc(100% - 2rem); }
+  .rp3-whatido-sidebar { width: 52px; }
+  .rp3-whatido-sidebar span { font-size: 13px; }
+
+  /* Dark sections */
+  .rp3-dark-inner  { width: calc(100% - 3rem); padding: 3rem 0; }
+  .rp3-bigquote    { font-size: clamp(1rem, 3vw, 1.4rem); }
+  .rp3-cream-inner { width: calc(100% - 3rem); }
+
+  /* Photo grid: 3 columns */
+  .rp3-photo-grid  { grid-template-columns: repeat(3, 1fr); }
+
+  /* CTA */
+  .rp3-cta       { padding: 4rem 2rem 5rem; }
+  .rp3-cta-title { font-size: clamp(1.6rem, 5vw, 2.5rem); }
+  .rp3-cta-links { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+}
+
+/* ── 600px ───────────────────────────────────────── */
+@media (max-width: 600px) {
+  /* Hero */
+  .rp3-hero { padding: 72px 1.2rem 2rem; gap: 1.5rem; }
+  .rp3-hero-photo { width: 78%; max-height: 260px; }
+  .rp3-title { font-size: clamp(1.9rem, 9vw, 2.8rem); }
+  .rp3-stats { gap: 1rem; flex-wrap: wrap; }
+  .rp3-hero-actions { flex-direction: column; }
+  .rp3-btn { text-align: center; }
+
+  /* What I do accordion */
+  .rp3-whatido-wrap    { padding: 1.5rem 0; }
+  .rp3-whatido-sidebar { width: 38px; }
+  .rp3-whatido-sidebar span { font-size: 10px; }
+  .rp3-acc-label  { font-size: 12.5px; }
+  .rp3-acc-top    { padding: 0.9rem 1rem; }
+  .rp3-acc-detail { padding: 0 1rem 1rem; }
+
+  /* Timeline */
+  .rp3-tl-card  { flex: 0 0 195px; min-height: 170px; padding: 1rem; }
+  .rp3-tl-title { font-size: 15px; }
+
+  /* Tags */
+  .rp3-tags-cloud { gap: 6px; }
+  .rp3-tag        { font-size: 11.5px; padding: 6px 13px; }
+
+  /* Photo grid: 2 columns */
+  .rp3-photo-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Widths */
+  .rp3-dark-inner,
+  .rp3-cream-inner { width: calc(100% - 2rem); }
+  .rp3-body        { width: calc(100% - 2rem); }
+
+  /* Bookshelf */
+  .abt-shelf-row { gap: 2px; }
+}
