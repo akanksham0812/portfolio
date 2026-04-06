@@ -22,10 +22,10 @@
    HOME PAGE
 ════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  /* Hero */
-  .hero { min-height: auto; padding-bottom: 2.5rem; }
-  .hero-title-wrap { padding: 0 1rem; }
-  .hero-title-wrap h1 { font-size: clamp(2rem, 9vw, 3.2rem); }
+  /* Hero — keep a proper height so the absolutely-positioned title is visible */
+  .hero { min-height: min(92svh, 560px); padding-bottom: 0; }
+  .hero-title-wrap { grid-template-columns: 1fr; padding: 0 1rem; text-align: center; }
+  .hero-title-wrap h1 { font-size: clamp(2.2rem, 10vw, 3.4rem); }
   .hero-left-lines, .hero-right-lines { display: none; }
   .hero-object { opacity: 0.2; }
   .hero-ring-item { opacity: 0.2; }
@@ -41,9 +41,9 @@
   .filter-row { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 0.5rem; }
 
   /* About section: stack */
-  .about-grid { grid-template-columns: 1fr; }
-  .about-ani-wrap { min-height: 200px; }
-  .about-actions { flex-wrap: wrap; }
+  .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .about-ani-wrap { min-height: 280px; border-radius: 16px; }
+  .about-actions { flex-wrap: wrap; gap: 0.5rem; }
 
   /* Contact */
   .contact-section { overflow: hidden; }
@@ -54,25 +54,33 @@
 }
 
 @media (max-width: 480px) {
+  .hero { min-height: min(88svh, 500px); }
+  .hero-title-wrap h1 { font-size: clamp(2rem, 11vw, 3rem); }
   .top-links button { font-size: 0.8rem; }
   .project-image-wrap { aspect-ratio: 4 / 3; }
+  .about-ani-wrap { min-height: 240px; }
   .about-actions { flex-direction: column; }
   .about-actions a { text-align: center; }
   .contact-ticker { display: none; }
 }
 
 /* ════════════════════════════════════════════════════
-   SAINSBURY CASE STUDY
+   SAINSBURY / BUS ROUTE CASE STUDY
 ════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .sb-intro-mid   { grid-template-columns: 1fr; }
-  .sb-intro-bottom { grid-template-columns: 1fr; }
-  .sb-problem-header { grid-template-columns: 1fr; }
-  .sb-problem-row { grid-template-columns: 1fr; }
-  .sb-solutions   { grid-template-columns: 1fr; }
-  .sb-dp-body     { grid-template-columns: 1fr; }
-  .sb-dp-phase5   { grid-template-columns: 1fr; }
-  .sb-meta-row    { grid-template-columns: 80px 1fr; }
+  .sb-intro           { padding: 1.8rem 1.4rem 1.6rem; border-radius: 14px; }
+  .sb-intro-ghost     { display: none; }          /* white-space:nowrap was causing overflow */
+  .sb-intro-mid       { grid-template-columns: 1fr; }
+  .sb-intro-bottom    { grid-template-columns: 1fr; }
+  .sb-problem-header  { grid-template-columns: 1fr; }
+  .sb-problem-row     { grid-template-columns: 1fr; }
+  .sb-solutions       { grid-template-columns: 1fr; }
+  .sb-dp-body         { grid-template-columns: 1fr; }
+  .sb-dp-phase5       { grid-template-columns: 1fr; }
+  .sb-meta-row        { grid-template-columns: 80px 1fr; }
+  .sb-proto           { padding: 2rem 1.2rem; border-radius: 14px; }
+  .sb-retro-bottom    { grid-template-columns: 1fr; }
+  .sb-section         { padding: 1.4rem; border-radius: 12px; }
 }
 
 @media (max-width: 480px) {
@@ -84,6 +92,14 @@
    ULIO / CAREER CASE STUDY
 ════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
+  .ulio-hero-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 14px;
+    gap: 0.3rem;
+    padding: 0.8rem 1rem;
+  }
   .ulio-research-grid  { grid-template-columns: 1fr; }
   .ulio-pain-grid      { grid-template-columns: 1fr; }
   .ulio-pain-divider   { display: none; }
@@ -95,7 +111,6 @@
 
 @media (max-width: 480px) {
   .ulio-palette  { grid-template-columns: 1fr; }
-  .ulio-hero-pill { flex-direction: column; align-items: flex-start; }
 }
 
 /* ════════════════════════════════════════════════════
