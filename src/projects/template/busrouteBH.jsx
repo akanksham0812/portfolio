@@ -404,7 +404,7 @@ function ProcessGrid() {
     { n:"04", title:"Design", body:"3 prototype iterations, moderated testing n=10, hypothesis sign-off. Every screen justified by a specific research finding." },
   ];
   return (
-    <div ref={ref} style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr 1fr", gap:0}}>
+    <div ref={ref} className="br-process-grid" style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr 1fr", gap:0}}>
       {phases.map(({n, title, body}, i) => (
         <div key={n} className={`bh-process-card${on ? " bh-process-card--on" : ""}`} style={{
           borderTop: "2px solid rgba(255,255,255,0.15)",
@@ -531,7 +531,7 @@ export function BusrouteBHPage({ project }) {
         </div>
 
         {/* Stats row */}
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:12, marginTop:12 }}>
+        <div className="br-stats-3col" style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:12, marginTop:12 }}>
           {[
             { to:70, suffix:"M+", label:"Daily bus riders in India with no usable real-time app" },
             { to:34, suffix:" min", label:"Average daily wait time wasted per commuter" },
@@ -578,7 +578,7 @@ export function BusrouteBHPage({ project }) {
         </div>
 
         {/* /1 Problem  /2 Solution  /3 Impact */}
-        <div style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:48, borderTop:"1px solid rgba(255,255,255,0.07)", paddingTop:40}}>
+        <div className="br-psi-grid" style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:48, borderTop:"1px solid rgba(255,255,255,0.07)", paddingTop:40}}>
           {[
             {
               n:"/1", label:"Problem",
@@ -636,7 +636,7 @@ export function BusrouteBHPage({ project }) {
         </div>
 
         {/* Staggered stat cards - open layout, no borders/shadows */}
-        <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0 48px", alignItems:"start", marginBottom:12}}>
+        <div className="br-stagger-2col" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0 48px", alignItems:"start", marginBottom:12}}>
 
           {/* LEFT column - card 1 top, card 3 below */}
           <div style={{display:"flex", flexDirection:"column", gap:64}}>
@@ -812,7 +812,7 @@ export function BusrouteBHPage({ project }) {
               desc:"The trip summary breaks cost by leg (walk, transit, walk), mirroring how experienced commuters mentally account for their journey. Showing ₹40 vs a ₹220 cab fare directly on the completion screen reinforces the value proposition at the moment of highest recall. The 4-star rating with an optional note captures quality signal with near-zero friction, feeding future route-ranking model training.",
             },
           ].map(({ img, n, title, titleBold, desc }) => (
-            <div key={n} style={{display:"grid", gridTemplateColumns:"auto 1fr", gap:64, alignItems:"center"}}>
+            <div key={n} className="br-feature-row" style={{display:"grid", gridTemplateColumns:"auto 1fr", gap:64, alignItems:"center"}}>
 
               {/* LEFT - phone mockup */}
               <div style={{flexShrink:0}}>

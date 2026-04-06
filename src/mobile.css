@@ -65,9 +65,30 @@
 }
 
 /* ════════════════════════════════════════════════════
+   INLINE-STYLE GRID OVERRIDES
+   These grids use style={} in JSX, so !important is
+   required to override inline styles at mobile.
+════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Bus Route BH */
+  .br-feature-row   { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .br-process-grid  { grid-template-columns: 1fr 1fr !important; }
+  .br-stats-3col    { grid-template-columns: 1fr !important; }
+  .br-psi-grid      { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .br-stagger-2col  { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  /* Ulio Ops persona */
+  .ops-persona-grid   { grid-template-columns: 1fr !important; }
+  .ops-pain-goal-grid { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px) {
+  .br-process-grid  { grid-template-columns: 1fr !important; }
+}
+
+/* ════════════════════════════════════════════════════
    SAINSBURY / BUS ROUTE CASE STUDY
 ════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
+  .sb-constraints-grid { grid-template-columns: 1fr !important; }
   .sb-intro           { padding: 1.8rem 1.4rem 1.6rem; border-radius: 14px; }
   .sb-intro-ghost     { display: none; }          /* white-space:nowrap was causing overflow */
   .sb-intro-mid       { grid-template-columns: 1fr; }

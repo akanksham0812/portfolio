@@ -568,7 +568,7 @@ function ShippingSection({ section }) {
       </div>
 
       {/* Constraint cards */}
-      <div style={{
+      <div className="sb-constraints-grid" style={{
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
         gap: "1rem",

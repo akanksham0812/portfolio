@@ -1305,7 +1305,7 @@ export function OpsUsecasePage({ project }) {
         </R>
 
         <R delay={160}>
-          <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: "2rem", alignItems: "start" }}>
+          <div className="ops-persona-grid" style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: "2rem", alignItems: "start" }}>
             {/* Avatar card */}
             <div style={{ background: "#fff", borderRadius: 16, padding: "2rem", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
               <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#f3e8ff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", marginBottom: "1.2rem" }}>👩‍💼</div>
@@ -1317,7 +1317,7 @@ export function OpsUsecasePage({ project }) {
             </div>
 
             {/* Pain / Goal columns */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+            <div className="ops-pain-goal-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
               <div style={{ background: "#fff", borderRadius: 16, padding: "1.75rem", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
                 <div style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#6E6E80", marginBottom: "1.25rem" }}>Pain Points</div>
                 {PERSONA.painPoints.map((item) => (
