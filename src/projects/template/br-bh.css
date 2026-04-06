@@ -621,3 +621,20 @@
   .bh-footer        { padding: 60px 24px; }
   .bh-twin-panel    { padding: 28px 24px 36px; }
 }
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+  .bh-slide { padding: 20px 16px 48px; }
+  .bh-cs > .bh-slide:first-of-type { padding-top: 72px; }
+  .bh-h2 { font-size: clamp(1.4rem, 6vw, 2rem); }
+  .bh-stat-big { font-size: clamp(40px, 12vw, 70px); }
+  .bh-steps { grid-template-columns: 1fr; }
+  .bh-outcomes-grid { grid-template-columns: 1fr; }
+  .bh-pgctr-bar { width: 44px; }
+}
+
+/* ── Small phones (≤480px) ── */
+@media (max-width: 480px) {
+  .bh-slide { padding: 16px 12px 40px; }
+  .bh-lede { font-size: clamp(0.95rem, 4vw, 1.1rem); }
+}

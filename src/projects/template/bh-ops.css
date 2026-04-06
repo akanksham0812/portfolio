@@ -3357,3 +3357,28 @@
   border-left: 2px solid rgba(255,255,255,0.15);
   font-style: italic;
 }
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+  .bh-page { padding-top: 56px; }
+  .bh-hero { padding: 24px 16px 32px; }
+  .bh-section { padding: 40px 16px; }
+  .bh-kpi-row { grid-template-columns: 1fr 1fr; }
+  .bh-mod-kpis { grid-template-columns: 1fr 1fr; }
+  .bh-stats-row { grid-template-columns: 1fr 1fr; }
+  .bh-outcomes { grid-template-columns: 1fr; }
+  .bh-preview-grid--4 { grid-template-columns: 1fr 1fr; }
+  .bh-preview-grid--2 { grid-template-columns: 1fr; }
+  .bh-3col { grid-template-columns: 1fr; }
+  .bh-interview-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Small phones (≤480px) ── */
+@media (max-width: 480px) {
+  .bh-hero { padding: 16px 12px 24px; }
+  .bh-section { padding: 32px 12px; }
+  .bh-kpi-row { grid-template-columns: 1fr; }
+  .bh-mod-kpis { grid-template-columns: 1fr; }
+  .bh-stats-row { grid-template-columns: 1fr; }
+  .bh-preview-grid--4 { grid-template-columns: 1fr; }
+}
