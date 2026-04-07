@@ -27,8 +27,8 @@
   .hero-title-wrap { grid-template-columns: 1fr; padding: 0 1rem; text-align: center; }
   .hero-title-wrap h1 { font-size: clamp(2.2rem, 10vw, 3.4rem); }
   .hero-left-lines, .hero-right-lines { display: none; }
-  .hero-object { opacity: 0.2; }
-  .hero-ring-item { opacity: 0.2; }
+  .hero-object { opacity: 0.55; }
+  .hero-ring-item { opacity: 0.55; }
 
   /* Sections */
   .work-section,
