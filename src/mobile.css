@@ -70,13 +70,17 @@
    required to override inline styles at mobile.
 ════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  /* Bus Route BH */
+  /* Bus Route BH (busrouteBH.jsx) */
   .br-feature-row   { grid-template-columns: 1fr !important; gap: 2rem !important; }
   .br-process-grid  { grid-template-columns: 1fr 1fr !important; }
   .br-stats-3col    { grid-template-columns: 1fr !important; }
   .br-psi-grid      { grid-template-columns: 1fr !important; gap: 2rem !important; }
   .br-stagger-2col  { grid-template-columns: 1fr !important; gap: 2rem !important; }
-  /* Ulio Ops persona */
+  /* Bus Route Use Case (busrouteUsecase.jsx) */
+  .br-uc-2col { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .br-uc-3col { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+  .br-uc-hmw  { grid-template-columns: 1fr !important; padding: 2rem 1.4rem !important; gap: 1.5rem !important; }
+  /* Ulio Ops (opsUsecase.jsx) */
   .ops-persona-grid   { grid-template-columns: 1fr !important; }
   .ops-pain-goal-grid { grid-template-columns: 1fr !important; }
 }

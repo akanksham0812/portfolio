@@ -239,7 +239,7 @@ function ContextSection() {
     <section className="sb-section">
       <div className="sb-section-label">01: Context</div>
       <h2 className="sb-section-heading">The gap hiding in plain sight</h2>
-      <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "3.5rem", alignItems: "start" }}>
+      <div className="br-uc-2col" style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "3.5rem", alignItems: "start" }}>
         <div>
           <p className="sb-section-body">India runs the world's largest public bus network. BEST in Mumbai alone operates 3,200 buses. Delhi's DTC runs 4,600. Bengaluru, Hyderabad, Chennai, Pune, all run thousands of routes that millions depend on every single day.</p>
           <p className="sb-section-body">Yet there is no Citymapper, no Transit App, no Moovit equivalent for the Indian bus commuter. Google Maps gives routes, not live bus positions. Official apps exist but are buried, unreliable, or require registration just to see a schedule.</p>
@@ -416,7 +416,7 @@ function ResearchSection() {
       </div>
 
       {/* Insight quote blocks */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem", marginTop: "3rem" }}>
+      <div className="br-uc-3col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem", marginTop: "3rem" }}>
         {[
           { quote: "\"I don't trust apps to tell me about buses. They're always wrong. I call my friend who lives near the terminus.\"", source: "Interview · Domestic worker, Mumbai", dark: true },
           { quote: "\"If it's within 2 stops of me, I'll run. But I need to KNOW it's actually coming.\"", source: "Survey open-text · IT professional, Bengaluru", dark: false },
@@ -430,7 +430,7 @@ function ResearchSection() {
       </div>
 
       {/* Key findings grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem", marginTop: "1.5rem" }}>
+      <div className="br-uc-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem", marginTop: "1.5rem" }}>
         {[
           { icon: "📡", title: "The data gap is overstated", text: "BMTC and BEST both have GPS data feeds. The problem isn't missing infrastructure, it's inaccessible APIs and no standardised data format. A civic data partnership model solves this." },
           { icon: "🤳", title: "Low-end Android first", text: "78% of surveyed commuters used Android devices with <3 GB RAM. Data cost sensitivity is real. The app must be lightweight, fast on 4G, and work partially offline, a key constraint Citymapper fails." },
@@ -504,7 +504,7 @@ function DefineSection() {
       <p className="sb-section-body" style={{ maxWidth: 640 }}>From my interviews and survey data, I synthesised three core personas that represent the breadth of the Indian bus commuter, each with distinct needs, mental models, and failure points.</p>
 
       {/* Personas */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2rem", marginTop: "2.5rem" }}>
+      <div className="br-uc-3col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2rem", marginTop: "2.5rem" }}>
         {[
           {
             avatar: "👩‍💼", avatarBg: "#FFF0E8", name: "Priya, 28",
@@ -591,7 +591,7 @@ function DefineSection() {
       </div>
 
       {/* HMW strip */}
-      <div style={{ background: "#F06C00", borderRadius: 20, padding: "3rem 3.5rem", marginTop: "3rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", alignItems: "center" }}>
+      <div className="br-uc-hmw" style={{ background: "#F06C00", borderRadius: 20, padding: "3rem 3.5rem", marginTop: "3rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", alignItems: "center" }}>
         <div>
           <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)", color: "#fff", lineHeight: 1.2, margin: "0 0 0.5rem" }}>How Might We...</h2>
           <p style={{ color: "rgba(255,255,255,0.75)", margin: 0, fontSize: "0.9rem" }}>The design challenges that emerged from synthesis</p>
@@ -618,7 +618,7 @@ function DesignSection() {
       <h2 className="sb-section-heading">Design principles that drove every decision</h2>
 
       {/* 5 Principles - 2 col grid, 5th wraps */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem", marginTop: "2.5rem" }}>
+      <div className="br-uc-2col" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem", marginTop: "2.5rem" }}>
         {BR_PRINCIPLES.map(({ icon, title, text }) => (
           <div key={title} style={{ ...researchCard, display: "flex", gap: "1.2rem", alignItems: "flex-start", padding: "2.2rem" }}>
             <div style={{ width: 44, height: 44, background: "#FFF3EC", borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.3rem", flexShrink: 0 }}>{icon}</div>
@@ -632,7 +632,7 @@ function DesignSection() {
 
       {/* 4 Key screens */}
       <h2 className="sb-section-heading" style={{ marginTop: "4rem" }}>4 key screens &amp; design decisions</h2>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem", marginTop: "1.5rem" }}>
+      <div className="br-uc-2col" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem", marginTop: "1.5rem" }}>
         {BR_SCREENS.map(({ label, features }) => (
           <div key={label} style={{ background: "#fff", borderRadius: 20, overflow: "hidden", border: "1px solid #e8e8e8", boxShadow: "0 8px 24px rgba(0,0,0,0.05)" }}>
             <div style={{ background: "#111", padding: "1.2rem 1.5rem", color: "#fff", fontWeight: 700, fontSize: "0.82rem", letterSpacing: "0.05em" }}>{label}</div>
