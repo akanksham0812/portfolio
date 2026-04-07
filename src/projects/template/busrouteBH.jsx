@@ -715,10 +715,10 @@ export function BusrouteBHPage({ project }) {
         </div>
 
         {/* Persona card */}
-        <div style={{display:"flex", borderRadius:16, overflow:"hidden", border:"1px solid var(--dark-border)", marginTop:36, minHeight:420}}>
+        <div className="bh-persona-card-wrap" style={{display:"flex", borderRadius:16, overflow:"hidden", border:"1px solid var(--dark-border)", marginTop:36, minHeight:420}}>
 
           {/* Left - photo fills full card height */}
-          <div style={{width:260, flexShrink:0, position:"relative"}}>
+          <div className="bh-persona-card-photo" style={{width:260, flexShrink:0, position:"relative"}}>
             <img src="/assets/projects/persona.jpg" alt="Priya" style={{width:"100%", height:"100%", objectFit:"cover", objectPosition:"top center", display:"block", position:"absolute", inset:0}} />
           </div>
 
