@@ -5219,7 +5219,7 @@ main {
     display: none;
   }
   .hero-ring {
-    opacity: 0.55;
+    opacity: 1;
   }
 
   /* Section label + heading */
