@@ -450,7 +450,7 @@ export function BusrouteBHPage({ project }) {
         <div className="bh-intro-wrap">
           <div className="bh-intro-kicker">Independent Mobile Design Study · Pune · 2026</div>
           <div className="bh-h" style={{maxWidth:680, animation:"bh-fadeup 0.9s cubic-bezier(0.22,1,0.36,1) both", animationDelay:"0.2s"}}>
-            <span className="b">India has 70M+ daily bus riders.</span><br />
+            <span className="b">India has 10M+ daily bus riders.</span><br />
             <span className="g">No usable real-time product exists for them.</span>
           </div>
           <p className="bh-body" style={{maxWidth:580}}>
@@ -469,7 +469,7 @@ export function BusrouteBHPage({ project }) {
           <div>
             <div className="bh-3col-label">Problem</div>
             <div className="bh-3col-title">Zero visibility</div>
-            <div className="bh-3col-body">70M+ daily bus riders in India's major cities have no usable real-time product. The GPS infrastructure exists. The consumer layer does not.</div>
+            <div className="bh-3col-body">10M+ daily bus riders in India's major cities have no usable real-time product. The GPS infrastructure exists. The consumer layer does not.</div>
           </div>
           <div>
             <div className="bh-3col-label">Solution</div>
