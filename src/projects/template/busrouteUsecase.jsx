@@ -913,7 +913,7 @@ export function BusRouteUsecasePage({ project }) {
 
           {/* 4 - Orange stat card */}
           <div className="sb-bento-card sb-bento-stat">
-            <span className="sb-bento-stat-num"><PopIn>70M+</PopIn></span>
+            <span className="sb-bento-stat-num"><PopIn>10M+</PopIn></span>
             <p className="sb-bento-stat-desc">daily bus commuters in India's top 10 cities with zero real-time tracking</p>
           </div>
 
